@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 
 function Content() {
   const { themeMode, setThemeMode, handleSongs } = useAppContext();
+
   const handleTheme = () => {
     setThemeMode(!themeMode);
   };

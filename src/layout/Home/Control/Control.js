@@ -6,6 +6,12 @@ import icon from "~/assets/icon";
 
 const cx = classNames.bind(styles);
 
+const formatTime = (timeInSeconds) => {
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+};
+
 function Control() {
   const { play, isPlaying, setIsPlaying } = useAppContext();
 
@@ -28,7 +34,7 @@ function Control() {
     setIsPlaying(!isPlaying);
   };
 
-  const handleSeek = (value) => {
+  const handleRange = (value) => {
     audioRef.current.currentTime = value;
     setCurrentTime(value);
   };
@@ -56,15 +62,18 @@ function Control() {
             {isPlaying ? <img src={icon.pause} /> : <img src={icon.play} />}
           </button>
         </div>
-        <input
-          className={cx("range")}
-          type="range"
-          value={currentTime}
-          step="1"
-          min="0"
-          max={duration}
-          onChange={(e) => handleSeek(e.target.value)}
-        />
+        <div className={cx("range")}>
+          <p>{formatTime(currentTime)}</p>
+          <input
+            type="range"
+            value={currentTime}
+            step="1"
+            min="0"
+            max={duration}
+            onChange={(e) => handleRange(e.target.value)}
+          />
+          <p>{formatTime(duration)}</p>
+        </div>
         <audio
           ref={audioRef}
           src={play.lyric}

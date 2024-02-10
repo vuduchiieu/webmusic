@@ -18,6 +18,7 @@ const Contexts = ({ children }) => {
   }, [themeMode]);
 
   const [play, setPlay] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleSongs = (item) => {
     setPlay(item);
@@ -26,8 +27,6 @@ const Contexts = ({ children }) => {
       setIsPlaying(true);
     }, 100);
   };
-
-  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <AppContext.Provider
