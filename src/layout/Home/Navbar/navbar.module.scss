@@ -1,0 +1,32 @@
+.navbar {
+  width: 19.7vw;
+  height: 100vh;
+  margin-right: 0.3vw;
+  .control {
+    padding: 1vh 1.5vw;
+    height: 14vh;
+    margin-bottom: 1vh;
+    border-radius: 10px;
+    background-color: var(--secondary-background);
+    .home,
+    .search {
+      display: flex;
+      align-items: center;
+      height: 50%;
+      h2 {
+        font-size: 16px;
+        margin-left: 1vw;
+      }
+      img {
+        filter: var(--filter-color);
+        width: 22px;
+        height: 22px;
+      }
+    }
+  }
+  .list {
+    background-color: var(--secondary-background);
+    height: 85vh;
+    border-radius: 10px;
+  }
+}

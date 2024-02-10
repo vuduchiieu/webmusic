@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --main-background: #fff;
+  --secondary-background: #eee;
+  --text-color: #1a162e;
+  --range-color: #121212;
+  --songs-color: #f8f8f8;
+  --filter-color: brightness(0) saturate(100%) invert(4%) sepia(68%)
+    saturate(2548%) hue-rotate(239deg) brightness(99%) contrast(90%);
+}
+
+.dark {
+  --main-background: #000;
+  --secondary-background: #121212;
+  --text-color: #fff;
+  --range-color: #eee;
+  --songs-color: #181818;
+  --filter-color: brightness(0) saturate(100%) invert(99%) sepia(100%)
+    saturate(1%) hue-rotate(157deg) brightness(105%) contrast(100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  overflow-y: overlay;
+  overflow-x: hidden;
+}
+
+p,
+h1,
+h2,
+h3 {
+  font-family: "Open Sans", sans-serif;
+  color: var(--text-color);
+}
+
+html *::-webkit-scrollbar {
+  height: 6px;
+  width: 0px;
+}
+html *::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(22, 24, 35, 0.06);
+}
+html *::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+textarea {
+  font-family: "Tinos", serif;
+  resize: none;
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+iframe,
+textarea,
+[tabindex] {
+  border: none;
+  outline: none;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+textarea {
+  font-size: 16px;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+p {
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}

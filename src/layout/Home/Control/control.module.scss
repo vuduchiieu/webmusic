@@ -1,0 +1,71 @@
+.control {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--main-background);
+  padding: 1vh 1vw;
+  width: 100vw;
+  height: 8vh;
+  .info {
+    display: flex;
+    width: 10%;
+    img {
+      object-fit: cover;
+      width: 35%;
+      height: 100%;
+      border-radius: 12px;
+      margin-right: 10px;
+    }
+    .title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 60%;
+      h3 {
+        font-size: 14px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+  .control-audio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    .control-bar {
+      button {
+        cursor: pointer;
+        background-color: transparent;
+        img {
+          width: 32px;
+          height: 32px;
+          filter: var(--filter-color);
+        }
+      }
+    }
+    .range {
+      width: 80%;
+      -webkit-appearance: none;
+      height: 6px;
+      background: var(--range-color);
+      border-radius: 999px;
+      outline: none;
+      opacity: 0.7;
+      cursor: pointer;
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 2%;
+        height: 6px;
+        background-color: #04aa6d;
+        cursor: pointer;
+      }
+    }
+  }
+  .more {
+    width: 10%;
+  }
+}
