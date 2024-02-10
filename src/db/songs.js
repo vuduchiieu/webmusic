@@ -1,27 +1,9 @@
 import img from "~/assets/img";
 import mp3 from "~/assets/mp3";
 
-const again = [
-  {
-    id: 0,
-    title: "Luôn yêu đời",
-    name: "Low G",
-    view: "24tr",
-    img: img.luonyeudoi,
-    lyric: mp3.luonyeudoi,
-  },
-];
+const again = [];
 
-const treding = [
-  {
-    id: 0,
-    title: "Anh sẽ ổn thôi",
-    name: "Anh Tú",
-    view: "10tr",
-    img: img.anhseonthoi,
-    lyric: mp3.anhseonthoi,
-  },
-];
+const treding = [];
 
 const recommend = [
   {
@@ -31,6 +13,30 @@ const recommend = [
     view: "15tr",
     img: img.caooc20,
     lyric: mp3.caooc20,
+  },
+  {
+    id: 0,
+    title: "Anh sẽ ổn thôi",
+    name: "Anh Tú",
+    view: "10tr",
+    img: img.anhseonthoi,
+    lyric: mp3.anhseonthoi,
+  },
+  {
+    id: 0,
+    title: "Luôn yêu đời remix",
+    name: "Low G",
+    view: "1.5tr",
+    img: img.luonyeudoiremix,
+    lyric: mp3.luonyeudoiremix,
+  },
+  {
+    id: 0,
+    title: "Luôn yêu đời",
+    name: "Đen vâu",
+    view: "24tr",
+    img: img.luonyeudoi,
+    lyric: mp3.luonyeudoi,
   },
 ];
 

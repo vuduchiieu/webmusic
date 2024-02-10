@@ -1,16 +1,15 @@
 .control {
   display: flex;
-  justify-content: space-between;
   background-color: var(--main-background);
   padding: 1vh 1vw;
   width: 100vw;
   height: 8vh;
   .info {
     display: flex;
-    width: 10%;
+    width: 20%;
     img {
       object-fit: cover;
-      width: 35%;
+      width: 20%;
       height: 100%;
       border-radius: 12px;
       margin-right: 10px;
@@ -33,17 +32,31 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 50%;
+    width: 65%;
     height: 100%;
     .control-bar {
+      display: flex;
+      justify-content: space-between;
+      width: 20%;
       button {
-        cursor: pointer;
         background-color: transparent;
+        img {
+          width: 24px;
+          height: 24px;
+          filter: var(--filter-color);
+          cursor: pointer;
+        }
+      }
+      .play {
         img {
           width: 32px;
           height: 32px;
           filter: var(--filter-color);
         }
+      }
+      .active {
+        filter: brightness(0) saturate(100%) invert(69%) sepia(25%)
+          saturate(3530%) hue-rotate(329deg) brightness(101%) contrast(105%);
       }
     }
     .range {
@@ -65,13 +78,49 @@
           appearance: none;
           width: 2%;
           height: 6px;
-          background-color: #04aa6d;
+          background-color: var(--main-color);
           cursor: pointer;
         }
       }
     }
   }
   .more {
-    width: 10%;
+    display: flex;
+    align-items: center;
+    width: 15%;
+    .volume {
+      display: flex;
+      align-items: center;
+      margin-top: 14px;
+      img {
+        width: 24px;
+        height: 24px;
+        filter: var(--filter-color);
+        margin-right: 10px;
+      }
+      input {
+        width: 70%;
+        -webkit-appearance: none;
+        height: 6px;
+        background: linear-gradient(
+          to right,
+          var(--main-color) 0%,
+          var(--main-color) var(--volume),
+          var(--range-color) var(--volume),
+          var(--range-color) 100%
+        );
+        border-radius: 999px;
+        outline: none;
+        opacity: 0.7;
+        cursor: pointer;
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 20%;
+          height: 6px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

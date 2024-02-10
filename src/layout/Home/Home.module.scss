@@ -2,6 +2,7 @@
   background-color: var(--main-background);
   .main {
     display: flex;
+    position: relative;
   }
   .control {
     position: fixed;

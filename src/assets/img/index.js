@@ -1,5 +1,6 @@
 const img = {
-  luonyeudoi: require("./luongyeudoi.png"),
+  luonyeudoiremix: require("./luongyeudoiremix.png"),
+  luonyeudoi: require("./luonyeudoi.jpeg"),
   anhseonthoi: require("./anhseonthoi.jpeg"),
   caooc20: require("./caooc20.jpeg"),
 };

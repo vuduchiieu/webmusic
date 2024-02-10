@@ -9,6 +9,13 @@ const icon = {
   login: require("./login.svg").default,
   play: require("./play.svg").default,
   pause: require("./pause.svg").default,
+  backward: require("./backward.svg").default,
+  forward: require("./forward.svg").default,
+  random: require("./random.svg").default,
+  rectangle: require("./rectangle.svg").default,
+  speaker: require("./speaker.svg").default,
+  google: require("./google.svg").default,
+  facebook: require("./facebook.svg").default,
 };
 
 export default icon;

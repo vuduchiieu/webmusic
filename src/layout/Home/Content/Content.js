@@ -3,11 +3,12 @@ import styles from "./content.module.scss";
 import { useAppContext } from "~/component/context/AppContext";
 import icon from "~/assets/icon";
 import { again, treding, recommend } from "~/db/songs";
+import Login from "./Login/Login";
 
 const cx = classNames.bind(styles);
 
 function Content() {
-  const { themeMode, setThemeMode, handleSongs } = useAppContext();
+  const { themeMode, setThemeMode, handleSongs, avatar } = useAppContext();
 
   const handleTheme = () => {
     setThemeMode(!themeMode);
@@ -27,14 +28,15 @@ function Content() {
               <img src={icon.en} />
             </div>
           </div>
-          {/* <div className={cx("account")}>
-            <img src={img.luonyeudoi} />
-          </div> */}
-          <div className={cx("login")}>
-            <button>
-              <p>Login</p>
-            </button>
-          </div>
+          {avatar ? (
+            <div className={cx("account")}>
+              <img src={avatar} />
+            </div>
+          ) : (
+            <div className={cx("login")}>
+              <Login />
+            </div>
+          )}
         </div>
       </div>
       <div className={cx("main")}>

@@ -28,6 +28,10 @@ const Contexts = ({ children }) => {
     }, 100);
   };
 
+  const [avatar, setAvatart] = useState(
+    parseInt(localStorage.getItem("photoURL")) || ""
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -37,6 +41,8 @@ const Contexts = ({ children }) => {
         play,
         isPlaying,
         setIsPlaying,
+        avatar,
+        setAvatart,
       }}
     >
       {children}
