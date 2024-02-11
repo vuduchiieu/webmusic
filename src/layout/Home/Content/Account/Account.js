@@ -24,7 +24,7 @@ function Account() {
             <p>Hồ sơ</p>
           </button>
           <button>
-            <p>Đăng xuất</p>
+            <p>Cài đặt</p>
           </button>
           <button onClick={handleLogOut}>
             <p>Đăng xuất</p>
