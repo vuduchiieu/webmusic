@@ -83,7 +83,7 @@ function Content() {
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
-                    <p>{item.view} lượt xem</p>
+                    <p>{item.view} view</p>
                   </div>
                 </div>
               ))}
@@ -102,7 +102,10 @@ function Content() {
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
-                    <p>{item.view} lượt xem</p>
+                    <div className={cx("view")}>
+                      <span>{item.view}</span>
+                      <img src={icon.view} />
+                    </div>
                   </div>
                 </div>
               ))}

@@ -90,23 +90,39 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 100%;
-            margin-top: 16px;
-            margin-left: 16px;
+            width: 90%;
+            margin: 16px 0 0 16px;
           }
           .info {
             display: flex;
-            margin-top: 16px;
-            margin-left: 16px;
+            align-items: center;
+            margin: 16px 0 0 16px;
+            width: 100%;
             p {
+              width: 50%;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
               width: 50%;
               height: 20%;
             }
-            p:first-child {
-              margin-right: 10px;
+
+            .view {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 50%;
+              span {
+                color: var(--text-color);
+                width: 100%;
+                margin-left: 20px;
+              }
+              img {
+                margin: 0 25px 0 0;
+                width: 40%;
+                height: 40%;
+                filter: var(--filter-color);
+              }
             }
           }
         }

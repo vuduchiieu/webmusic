@@ -17,6 +17,7 @@ const icon = {
   mute: require("./volume-mute.svg").default,
   google: require("./google.svg").default,
   facebook: require("./facebook.svg").default,
+  view: require("./view.svg").default,
 };
 
 export default icon;
