@@ -28,9 +28,7 @@ const Contexts = ({ children }) => {
     }, 100);
   };
 
-  const [avatar, setAvatart] = useState(
-    parseInt(localStorage.getItem("photoURL")) || ""
-  );
+  const [avatar, setAvatart] = useState(localStorage.getItem("photoURL") || "");
 
   return (
     <AppContext.Provider
