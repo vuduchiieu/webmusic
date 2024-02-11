@@ -15,7 +15,7 @@ const recommend = [
     lyric: mp3.caooc20,
   },
   {
-    id: 0,
+    id: 1,
     title: "Anh sẽ ổn thôi",
     name: "Anh Tú",
     view: "10tr",
@@ -23,7 +23,7 @@ const recommend = [
     lyric: mp3.anhseonthoi,
   },
   {
-    id: 0,
+    id: 2,
     title: "Luôn yêu đời remix",
     name: "Low G",
     view: "1.5tr",
@@ -31,7 +31,7 @@ const recommend = [
     lyric: mp3.luonyeudoiremix,
   },
   {
-    id: 0,
+    id: 3,
     title: "Luôn yêu đời",
     name: "Đen vâu",
     view: "24tr",

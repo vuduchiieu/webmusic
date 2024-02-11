@@ -30,6 +30,9 @@
         width: 40%;
       }
       .account {
+        width: 35%;
+        height: 100%;
+        margin-right: 10px;
         img {
           border-radius: 50%;
           object-fit: cover;
@@ -41,7 +44,7 @@
       .login {
         background-color: var(--main-color);
         margin: 0 0 6% 1%;
-        padding: 6px 12px;
+        padding: 6px 4px;
         border-radius: 10px;
         cursor: pointer;
       }

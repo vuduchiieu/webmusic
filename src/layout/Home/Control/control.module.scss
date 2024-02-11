@@ -38,6 +38,10 @@
       display: flex;
       justify-content: space-between;
       width: 20%;
+      .active {
+        filter: brightness(0) saturate(100%) invert(69%) sepia(25%)
+          saturate(3530%) hue-rotate(329deg) brightness(101%) contrast(105%);
+      }
       button {
         background-color: transparent;
         img {
@@ -53,10 +57,6 @@
           height: 32px;
           filter: var(--filter-color);
         }
-      }
-      .active {
-        filter: brightness(0) saturate(100%) invert(69%) sepia(25%)
-          saturate(3530%) hue-rotate(329deg) brightness(101%) contrast(105%);
       }
     }
     .range {
@@ -91,15 +91,20 @@
     .volume {
       display: flex;
       align-items: center;
+      position: relative;
       margin-top: 14px;
       img {
         width: 24px;
         height: 24px;
         filter: var(--filter-color);
         margin-right: 10px;
+        cursor: pointer;
       }
       input {
-        width: 70%;
+        position: absolute;
+        right: 35px;
+        transform: rotate(180deg);
+        width: 8vw;
         -webkit-appearance: none;
         height: 6px;
         background: linear-gradient(

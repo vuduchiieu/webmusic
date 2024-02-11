@@ -14,6 +14,7 @@ const icon = {
   random: require("./random.svg").default,
   rectangle: require("./rectangle.svg").default,
   speaker: require("./speaker.svg").default,
+  mute: require("./volume-mute.svg").default,
   google: require("./google.svg").default,
   facebook: require("./facebook.svg").default,
 };

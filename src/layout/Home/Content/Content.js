@@ -46,9 +46,7 @@ function Content() {
             {again.map((item, i) => (
               <div
                 key={i}
-                onClick={() => {
-                  handleSongs(item);
-                }}
+                onClick={() => handleSongs(item)}
                 className={cx("song")}
               >
                 <img src={item.img} />

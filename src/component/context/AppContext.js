@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createContext, useContext } from "react";
+import { recommend } from "~/db/songs";
 
 const AppContext = createContext();
 
@@ -28,6 +29,32 @@ const Contexts = ({ children }) => {
     }, 100);
   };
 
+  const [isRandom, setIsRandom] = useState(false);
+
+  const handleNext = () => {
+    const nextSongIndex = isRandom
+      ? Math.floor(Math.random() * recommend.length)
+      : (recommend.indexOf(play) + 1) % recommend.length;
+    const nextSong = recommend[nextSongIndex];
+    setPlay(nextSong);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 100);
+  };
+
+  const handleBackWard = () => {
+    const prevSongIndex = isRandom
+      ? Math.floor(Math.random() * recommend.length)
+      : (recommend.indexOf(play) - 1 + recommend.length) % recommend.length;
+    const prevSong = recommend[prevSongIndex];
+    setPlay(prevSong);
+    setIsPlaying(false);
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 100);
+  };
+
   const [avatar, setAvatart] = useState(localStorage.getItem("photoURL") || "");
 
   return (
@@ -41,6 +68,10 @@ const Contexts = ({ children }) => {
         setIsPlaying,
         avatar,
         setAvatart,
+        handleNext,
+        isRandom,
+        setIsRandom,
+        handleBackWard,
       }}
     >
       {children}
