@@ -158,7 +158,7 @@ function Control() {
   return (
     <div className={cx("control")}>
       <div className={cx("info")}>
-        {play.img && <img src={play.img} />}
+        {play.img && <img src={play.img} alt="" />}
         <div className={cx("title")}>
           <h3>{play.title}</h3>
           <p>{play.name}</p>
@@ -167,19 +167,27 @@ function Control() {
       <div className={cx("control-audio")}>
         <div className={cx("control-bar")}>
           <button onClick={handleRandom}>
-            <img className={cx({ active: isRandom })} src={icon.random} />
+            <img
+              className={cx({ active: isRandom })}
+              src={icon.random}
+              alt=""
+            />
           </button>
           <button onClick={handleBackWard}>
-            <img src={icon.backward} />
+            <img src={icon.backward} alt="" />
           </button>
           <button className={cx("play")} onClick={handlePlayPause}>
-            {isPlaying ? <img src={icon.pause} /> : <img src={icon.play} />}
+            {isPlaying ? (
+              <img src={icon.pause} alt="" />
+            ) : (
+              <img src={icon.play} alt="" />
+            )}
           </button>
           <button onClick={handleNext}>
-            <img src={icon.forward} />
+            <img src={icon.forward} alt="" />
           </button>
           <button className={cx({ active: isLooping })} onClick={handleLoop}>
-            <img src={icon.rectangle} />
+            <img src={icon.rectangle} alt="" />
           </button>
         </div>
         <div className={cx("range")}>
@@ -218,6 +226,7 @@ function Control() {
             onMouseLeave={handleMouseLeave}
             onClick={handleMute}
             src={volume > 0 ? icon.speaker : icon.mute}
+            alt=""
           />
         </div>
       </div>

@@ -34,7 +34,7 @@ function Account() {
       onClickOutside={() => setSettingAcc(!settingAcc)}
     >
       <div className={cx("login")}>
-        <img onClick={() => setSettingAcc(!settingAcc)} src={avatar} />
+        <img onClick={() => setSettingAcc(!settingAcc)} src={avatar} alt="" />
       </div>
     </Tippy>
   );

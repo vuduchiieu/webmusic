@@ -30,6 +30,23 @@ const Contexts = ({ children }) => {
     }, 100);
   };
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (isPlaying) {
+        const message =
+          "Bạn đang nghe một bài hát. Bạn có chắc muốn rời khỏi trang?";
+        event.returnValue = message;
+        return message;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isPlaying]);
+
   const [avatar, setAvatart] = useState(localStorage.getItem("photoURL") || "");
 
   return (

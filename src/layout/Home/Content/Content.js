@@ -20,7 +20,7 @@ function Content() {
     <div className={cx("content")}>
       <div className={cx("header")}>
         <div onClick={() => setSearch(false)} className={cx("back")}>
-          <img src={icon.back} />
+          <img src={icon.back} alt="" />
         </div>
         {search && (
           <div className={cx("search-input")}>
@@ -30,10 +30,10 @@ function Content() {
         <div className={cx("wrap")}>
           <div className={cx("action")}>
             <div onClick={handleTheme} className={cx("theme")}>
-              <img src={themeMode ? icon.light : icon.dark} />
+              <img src={themeMode ? icon.light : icon.dark} alt="" />
             </div>
             <div className={cx("language")}>
-              <img src={icon.en} />
+              <img src={icon.en} alt="" />
             </div>
           </div>
           {avatar ? (
@@ -60,7 +60,7 @@ function Content() {
                   onClick={() => handleSongs(item)}
                   className={cx("song")}
                 >
-                  <img src={item.img} />
+                  <img src={item.img} alt="" />
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}.</p>
@@ -79,7 +79,7 @@ function Content() {
                   onClick={() => handleSongs(item)}
                   className={cx("song")}
                 >
-                  <img src={item.img} />
+                  <img src={item.img} alt="" />
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
@@ -98,13 +98,13 @@ function Content() {
                   onClick={() => handleSongs(item)}
                   className={cx("song")}
                 >
-                  <img src={item.img} />
+                  <img src={item.img} alt="" />
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
                     <div className={cx("view")}>
                       <span>{item.view}</span>
-                      <img src={icon.view} />
+                      <img src={icon.view} alt="" />
                     </div>
                   </div>
                 </div>
