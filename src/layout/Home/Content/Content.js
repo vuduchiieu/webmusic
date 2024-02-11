@@ -4,11 +4,14 @@ import { useAppContext } from "~/component/context/AppContext";
 import icon from "~/assets/icon";
 import { again, treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
+import Search from "./Search/Search";
+import Account from "./Account/Account";
 
 const cx = classNames.bind(styles);
 
 function Content() {
-  const { themeMode, setThemeMode, handleSongs, avatar } = useAppContext();
+  const { themeMode, setThemeMode, handleSongs, avatar, search, setSearch } =
+    useAppContext();
 
   const handleTheme = () => {
     setThemeMode(!themeMode);
@@ -16,9 +19,14 @@ function Content() {
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>
-        <div className={cx("back")}>
+        <div onClick={() => setSearch(false)} className={cx("back")}>
           <img src={icon.back} />
         </div>
+        {search && (
+          <div className={cx("search-input")}>
+            <input type="text" />
+          </div>
+        )}
         <div className={cx("wrap")}>
           <div className={cx("action")}>
             <div onClick={handleTheme} className={cx("theme")}>
@@ -30,7 +38,7 @@ function Content() {
           </div>
           {avatar ? (
             <div className={cx("account")}>
-              <img src={avatar} />
+              <Account />
             </div>
           ) : (
             <div className={cx("login")}>
@@ -39,65 +47,69 @@ function Content() {
           )}
         </div>
       </div>
-      <div className={cx("main")}>
-        <div className={cx("again")}>
-          <h2>Nghe lại</h2>
-          <div className={cx("wrap")}>
-            {again.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => handleSongs(item)}
-                className={cx("song")}
-              >
-                <img src={item.img} />
-                <h3>{item.title}</h3>
-                <div className={cx("info")}>
-                  <p>{item.name}.</p>
-                  <p>{item.view} lượt xem</p>
+      {search ? (
+        <Search />
+      ) : (
+        <div className={cx("main")}>
+          <div className={cx("again")}>
+            <h2>Nghe lại</h2>
+            <div className={cx("wrap")}>
+              {again.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => handleSongs(item)}
+                  className={cx("song")}
+                >
+                  <img src={item.img} />
+                  <h3>{item.title}</h3>
+                  <div className={cx("info")}>
+                    <p>{item.name}.</p>
+                    <p>{item.view} lượt xem</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+          <div className={cx("treding")}>
+            <h2>Thịnh hành</h2>
+            <div className={cx("wrap")}>
+              {treding.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => handleSongs(item)}
+                  className={cx("song")}
+                >
+                  <img src={item.img} />
+                  <h3>{item.title}</h3>
+                  <div className={cx("info")}>
+                    <p>{item.name}</p>
+                    <p>{item.view} lượt xem</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={cx("recommend")}>
+            <h2>Có thể bạn sẽ thích</h2>
+            <div className={cx("wrap")}>
+              {recommend.map((item, i) => (
+                <div
+                  key={i}
+                  onClick={() => handleSongs(item)}
+                  className={cx("song")}
+                >
+                  <img src={item.img} />
+                  <h3>{item.title}</h3>
+                  <div className={cx("info")}>
+                    <p>{item.name}</p>
+                    <p>{item.view} lượt xem</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <div className={cx("treding")}>
-          <h2>Thịnh hành</h2>
-          <div className={cx("wrap")}>
-            {treding.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => handleSongs(item)}
-                className={cx("song")}
-              >
-                <img src={item.img} />
-                <h3>{item.title}</h3>
-                <div className={cx("info")}>
-                  <p>{item.name}</p>
-                  <p>{item.view} lượt xem</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className={cx("recommend")}>
-          <h2>Có thể bạn sẽ thích</h2>
-          <div className={cx("wrap")}>
-            {recommend.map((item, i) => (
-              <div
-                key={i}
-                onClick={() => handleSongs(item)}
-                className={cx("song")}
-              >
-                <img src={item.img} />
-                <h3>{item.title}</h3>
-                <div className={cx("info")}>
-                  <p>{item.name}</p>
-                  <p>{item.view} lượt xem</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

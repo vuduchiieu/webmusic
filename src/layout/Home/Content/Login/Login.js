@@ -35,6 +35,9 @@ function Login() {
           {signUp ? (
             <div className={cx("signUp")}>
               <h1>Đăng ký...</h1>
+              <div className={cx("normally")}>
+                <h1>CHƯA LÀM CÁI NÀY!!!!!!</h1>
+              </div>
               <div className={cx("forward")}>
                 <p>
                   Bạn đã có tài khoản?
@@ -62,14 +65,20 @@ function Login() {
               <div className={cx("normally")}>
                 <div className={cx("email")}>
                   <p>Email hoặc tên người dùng</p>
-                  <input type="email" />
+                  <input placeholder="email hoặc tên người dùng" type="email" />
                 </div>
                 <div className={cx("password")}>
-                  <input type="password" />
                   <p>Mật khẩu</p>
+                  <input placeholder="Mật khẩu" type="password" />
                 </div>
-                <button>Đặng nhập</button>
-                <button>Quên mật khẩu</button>
+                <div className={cx("action")}>
+                  <button>
+                    <p>Đặng nhập</p>
+                  </button>
+                  <button>
+                    <p>Quên mật khẩu</p>
+                  </button>
+                </div>
               </div>
               <div className={cx("forward")}>
                 <p>

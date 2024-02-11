@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext, useContext } from "react";
-import { recommend } from "~/db/songs";
 
 const AppContext = createContext();
 
 const Contexts = ({ children }) => {
+  const [search, setSearch] = useState(false);
+
   const themeModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   const saveTheme = localStorage.getItem("themeMode");
@@ -19,36 +20,10 @@ const Contexts = ({ children }) => {
   }, [themeMode]);
 
   const [play, setPlay] = useState([]);
-  const [isPlaying, setIsPlaying] = useState(false);
 
+  const [isPlaying, setIsPlaying] = useState(false);
   const handleSongs = (item) => {
     setPlay(item);
-    setIsPlaying(false);
-    setTimeout(() => {
-      setIsPlaying(true);
-    }, 100);
-  };
-
-  const [isRandom, setIsRandom] = useState(false);
-
-  const handleNext = () => {
-    const nextSongIndex = isRandom
-      ? Math.floor(Math.random() * recommend.length)
-      : (recommend.indexOf(play) + 1) % recommend.length;
-    const nextSong = recommend[nextSongIndex];
-    setPlay(nextSong);
-    setIsPlaying(false);
-    setTimeout(() => {
-      setIsPlaying(true);
-    }, 100);
-  };
-
-  const handleBackWard = () => {
-    const prevSongIndex = isRandom
-      ? Math.floor(Math.random() * recommend.length)
-      : (recommend.indexOf(play) - 1 + recommend.length) % recommend.length;
-    const prevSong = recommend[prevSongIndex];
-    setPlay(prevSong);
     setIsPlaying(false);
     setTimeout(() => {
       setIsPlaying(true);
@@ -64,14 +39,13 @@ const Contexts = ({ children }) => {
         setThemeMode,
         handleSongs,
         play,
+        setPlay,
         isPlaying,
         setIsPlaying,
         avatar,
         setAvatart,
-        handleNext,
-        isRandom,
-        setIsRandom,
-        handleBackWard,
+        search,
+        setSearch,
       }}
     >
       {children}

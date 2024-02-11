@@ -1,11 +1,22 @@
 .login-model {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 40vw;
   height: 70vh;
   border-radius: 15px;
   padding: 20px 40px;
+  margin-top: 20px;
   background-color: var(--main-background);
+  &::after {
+    content: "";
+    position: absolute;
+    top: -2%;
+    right: 2%;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid var(--main-background);
+  }
   h1 {
     height: 5vh;
   }
@@ -33,12 +44,13 @@
         justify-content: space-between;
         width: 15vw;
         background-color: transparent;
-        padding: 10px 40px;
+        padding: 10px 30px;
         border: 1px solid var(--range-color);
         border-radius: 999px;
+        transition: 0.4s;
         &:hover {
           cursor: pointer;
-          opacity: 0.8;
+          transform: scale(105%);
         }
         img {
           filter: none;
@@ -47,10 +59,76 @@
     }
   }
   .normally {
+    display: flex;
+    flex-direction: column;
     height: 30vh;
     margin-top: 5vh;
+    .email,
+    .password {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 35%;
+      p {
+        width: 40%;
+      }
+      input {
+        font-weight: 500;
+        font-size: 0.8vw;
+        color: var(--text-color);
+        background-color: var(--songs-color);
+        box-shadow: var(--box-shadow);
+        border: none;
+        outline: none;
+        padding: 0.4vw;
+        width: 40%;
+        height: 50%;
+        transition: 0.4s;
+        &:hover {
+          box-shadow: 0 0 0 0.15vw rgba(135, 207, 235, 0.186);
+        }
+        &:focus {
+          box-shadow: 0 0 0 0.15vw skyblue;
+        }
+      }
+    }
+
+    .action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 5%;
+      height: 25%;
+      button:first-child {
+        height: 50%;
+        width: 40%;
+        border-radius: 999px;
+        background-color: var(--main-color);
+        transition: 0.4s;
+        &:hover {
+          cursor: pointer;
+          transform: scale(105%);
+        }
+        p {
+          font-weight: 700;
+        }
+      }
+      button:last-child {
+        cursor: pointer;
+        background-color: transparent;
+        p {
+          font-size: 12px;
+          text-decoration: underline;
+        }
+      }
+    }
   }
   .forward {
+    display: flex;
+    align-items: end;
+    justify-content: end;
     height: 5vh;
     span {
       margin-left: 5px;
