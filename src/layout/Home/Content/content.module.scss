@@ -42,11 +42,13 @@
         }
       }
       .login {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: var(--main-color);
         margin: 0 0 6% 1%;
-        padding: 8px 10px;
         width: 100px;
-        height: 40px;
+        height: 30px;
         border-radius: 10px;
       }
     }

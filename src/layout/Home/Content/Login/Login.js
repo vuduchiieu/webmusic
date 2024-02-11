@@ -94,7 +94,7 @@ function Login() {
     >
       <div className={cx("login")}>
         <button onClick={() => setLogin(!login)}>
-          <h2>Đăng nhập</h2>
+          <p>Đăng nhập</p>
         </button>
       </div>
     </Tippy>
