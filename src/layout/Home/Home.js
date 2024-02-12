@@ -1,3 +1,5 @@
+import React from "react";
+
 import Content from "./Content/Content";
 import Navbar from "./Navbar/Navbar";
 import classNames from "classnames/bind";
