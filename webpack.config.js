@@ -56,11 +56,11 @@ module.exports = {
         test: /\.mp3$/i,
         use: [
           {
-            loader: "file-loader",
+            loader: "url-loader",
             options: {
+              limit: 8192,
               name: "[path][name].[ext]",
               outputPath: "mp3/",
-              esModule: true,
             },
           },
         ],
