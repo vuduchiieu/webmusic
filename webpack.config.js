@@ -57,8 +57,9 @@ module.exports = {
         use: {
           loader: "file-loader",
           options: {
-            name: "[name].[ext]",
-            outputPath: "assets/mp3/",
+            name: "[path][name].[ext]",
+            outputPath: "mp3/",
+            esModule: true,
           },
         },
       },
