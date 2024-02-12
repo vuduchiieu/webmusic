@@ -53,15 +53,17 @@ module.exports = {
         ],
       },
       {
-        test: /\.mp3$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[path][name].[ext]",
-            outputPath: "mp3/",
-            esModule: true,
+        test: /\.mp3$/i,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[path][name].[ext]",
+              outputPath: "mp3/",
+              esModule: true,
+            },
           },
-        },
+        ],
       },
     ],
   },
