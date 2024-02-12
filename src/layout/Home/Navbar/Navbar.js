@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./navbar.module.scss";
 import icon from "~/assets/icon";

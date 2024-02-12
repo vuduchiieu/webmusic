@@ -1,5 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./control.module.scss";
+import React from "react";
 import { useAppContext } from "~/component/context/AppContext";
 import React, { useEffect, useRef, useState } from "react";
 import icon from "~/assets/icon";
