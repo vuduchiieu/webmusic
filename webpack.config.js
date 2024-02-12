@@ -27,40 +27,14 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(svg)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|ogg|mp3|wav)$/i,
         use: [
           {
             loader: "file-loader",
             options: {
               name: "[path][name].[ext]",
-              outputPath: "images/",
-              esModule: true,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[path][name].[ext]",
-              outputPath: "images/",
+              outputPath: "asset/",
               esModule: false,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.mp3$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              limit: 8192,
-              name: "[path][name].[ext]",
-              outputPath: "mp3/",
             },
           },
         ],
