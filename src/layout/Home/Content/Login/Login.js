@@ -101,7 +101,11 @@ function Login() {
     >
       <div className={cx("login")}>
         <button onClick={() => setLogin(!login)}>
-          <p>Đăng nhập</p>
+          <img
+            style={{ width: "100%", height: "100%" }}
+            src={icon.login}
+            alt=""
+          />
         </button>
       </div>
     </Tippy>

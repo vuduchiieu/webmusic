@@ -48,7 +48,7 @@
       .action {
         display: flex;
         justify-content: space-between;
-        width: 35%;
+        width: 40%;
       }
       .account {
         width: 35%;
@@ -65,12 +65,12 @@
 
       .login {
         display: flex;
-        justify-content: center;
         align-items: center;
-        background-color: var(--main-color);
-        width: 100px;
+        width: 35%;
         height: 100%;
-        border-radius: 10px;
+        img {
+          filter: none;
+        }
       }
     }
   }
