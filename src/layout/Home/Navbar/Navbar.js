@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <div className={cx("navbar")}>
       <div className={cx("control")}>
-        <div className={cx("home")}>
+        <div onClick={() => setSearch(false)} className={cx("home")}>
           <img src={icon.home} alt="" />
           <h2>Trang chủ</h2>
         </div>

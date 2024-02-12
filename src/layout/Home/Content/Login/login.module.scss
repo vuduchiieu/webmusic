@@ -18,6 +18,8 @@
     border-bottom: 20px solid var(--main-background);
   }
   h1 {
+    cursor: default;
+
     height: 5vh;
   }
   .social {
@@ -133,12 +135,14 @@
     span {
       margin-left: 5px;
       text-decoration: underline;
+      cursor: pointer;
     }
   }
 }
 
 .login {
   button {
+    cursor: pointer;
     background-color: transparent;
     p {
       font-weight: 700;

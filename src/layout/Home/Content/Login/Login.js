@@ -14,13 +14,19 @@ function Login() {
   const [login, setLogin] = useState(false);
 
   const handleLoginGG = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      const { displayName, email, photoURL } = data.user;
-      setAvatart(photoURL);
-      localStorage.setItem("displayName", displayName);
-      localStorage.setItem("email", email);
-      localStorage.setItem("photoURL", photoURL);
-    });
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        const { displayName, email, photoURL } = data.user;
+        setAvatart(photoURL);
+        localStorage.setItem("displayName", displayName);
+        localStorage.setItem("email", email);
+        localStorage.setItem("photoURL", photoURL);
+      })
+      .catch((error) => {
+        console.error("Đăng nhập không thành công:", error.message);
+
+        alert("Đăng nhập không thành công. Vui lòng thử lại.");
+      });
   };
 
   const [signUp, setSignUp] = useState(false);

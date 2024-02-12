@@ -6,12 +6,15 @@ import { again, treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
 function Content() {
   const { themeMode, setThemeMode, handleSongs, avatar, search, setSearch } =
     useAppContext();
+
+  const [searchValue, setSearchValue] = useState("");
 
   const handleTheme = () => {
     setThemeMode(!themeMode);
@@ -24,7 +27,12 @@ function Content() {
         </div>
         {search && (
           <div className={cx("search-input")}>
-            <input type="text" />
+            <input
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="Bạn muốn nghe gì?"
+              type="text"
+            />
           </div>
         )}
         <div className={cx("wrap")}>
@@ -48,7 +56,7 @@ function Content() {
         </div>
       </div>
       {search ? (
-        <Search />
+        <Search searchValue={searchValue} />
       ) : (
         <div className={cx("main")}>
           <div className={cx("again")}>
@@ -63,8 +71,7 @@ function Content() {
                   <img src={item.img} alt="" />
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
-                    <p>{item.name}.</p>
-                    <p>{item.view} lượt xem</p>
+                    <p>{item.name}</p>
                   </div>
                 </div>
               ))}
@@ -83,7 +90,6 @@ function Content() {
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
-                    <p>{item.view} view</p>
                   </div>
                 </div>
               ))}
@@ -102,10 +108,6 @@ function Content() {
                   <h3>{item.title}</h3>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
-                    <div className={cx("view")}>
-                      <span>{item.view}</span>
-                      <img src={icon.view} alt="" />
-                    </div>
                   </div>
                 </div>
               ))}

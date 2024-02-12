@@ -3,6 +3,8 @@ import { useAppContext } from "~/component/context/AppContext";
 import classNames from "classnames/bind";
 import styles from "./account.module.scss";
 import { useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../Login/LoginGG/config";
 
 const cx = classNames.bind(styles);
 
@@ -10,6 +12,9 @@ function Account() {
   const { avatar, setAvatart } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const handleLogOut = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {});
     setAvatart(null);
     localStorage.removeItem("photoURL");
   };
