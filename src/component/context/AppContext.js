@@ -22,6 +22,7 @@ const Contexts = ({ children }) => {
   const [play, setPlay] = useState([]);
 
   const [isPlaying, setIsPlaying] = useState(false);
+
   const handleSongs = (item) => {
     setPlay(item);
     setIsPlaying(false);
