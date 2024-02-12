@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./search.module.scss";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { allSong } from "~/db/songs";
 import { useAppContext } from "~/component/context/AppContext";
 

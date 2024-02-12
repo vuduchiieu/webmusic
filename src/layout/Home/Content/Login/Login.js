@@ -1,7 +1,8 @@
+import React, { useState } from "react";
+
 import Tippy from "@tippyjs/react/headless";
 import classNames from "classnames/bind";
 import styles from "./login.module.scss";
-import { useState } from "react";
 import { auth, provider } from "./LoginGG/config";
 import { signInWithPopup } from "firebase/auth";
 import icon from "~/assets/icon";

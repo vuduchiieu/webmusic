@@ -1,8 +1,8 @@
+import React, { useState } from "react";
 import Tippy from "@tippyjs/react/headless";
 import { useAppContext } from "~/component/context/AppContext";
 import classNames from "classnames/bind";
 import styles from "./account.module.scss";
-import { useState } from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../Login/LoginGG/config";
 

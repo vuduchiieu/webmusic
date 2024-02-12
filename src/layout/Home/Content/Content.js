@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import classNames from "classnames/bind";
 import styles from "./content.module.scss";
 import { useAppContext } from "~/component/context/AppContext";
@@ -6,7 +8,6 @@ import { again, treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
-import { useState } from "react";
 
 const cx = classNames.bind(styles);
 
