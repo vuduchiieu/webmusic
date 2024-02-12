@@ -56,7 +56,7 @@ module.exports = {
         test: /\.mp3$/i,
         use: [
           {
-            loader: "url-loader",
+            loader: "file-loader",
             options: {
               limit: 8192,
               name: "[path][name].[ext]",
