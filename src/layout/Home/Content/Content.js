@@ -114,7 +114,10 @@ function Content() {
                   key={i}
                   className={cx("song", { active: play.title === item.title })}
                 >
-                  <div onClick={() => handleSongs(item)}>
+                  <div
+                    className={cx("title")}
+                    onClick={() => handleSongs(item)}
+                  >
                     <img src={item.img} alt="" />
                     <h3>{item.title}</h3>
                   </div>
