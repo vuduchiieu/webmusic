@@ -76,7 +76,9 @@ function Content() {
               {again.map((item, i) => (
                 <div
                   key={i}
-                  className={cx("song", { active: play.title === item.title })}
+                  className={cx("song", {
+                    active: play.title === item.title,
+                  })}
                 >
                   <div
                     className={cx("title")}

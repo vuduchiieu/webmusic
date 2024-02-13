@@ -15,19 +15,20 @@ function Navbar() {
   ]);
 
   const handleaddLibrary = () => {
-    if (addLibrary === "") {
-      setAddLibrary(null);
-      return;
+    const trimmedLibrary = addLibrary.trim();
+
+    if (trimmedLibrary !== "") {
+      const newLibraryItem = {
+        title: trimmedLibrary,
+        data: [{}],
+      };
+
+      setDataLibrary((prevDataLibrary) => [...prevDataLibrary, newLibraryItem]);
+
+      setAddLibrary("");
+    } else {
+      setAddLibrary("");
     }
-
-    const newLibraryItem = {
-      title: addLibrary,
-      data: [{}],
-    };
-
-    setDataLibrary((prevDataLibrary) => [...prevDataLibrary, newLibraryItem]);
-
-    setAddLibrary("");
   };
 
   const handleDeleteLibrary = (libraryItem) => {
