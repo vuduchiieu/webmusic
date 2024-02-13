@@ -7,7 +7,7 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Search({ searchValue }) {
-  const { handleSongs } = useAppContext();
+  const { handleSongs, play } = useAppContext();
   const [result, setResult] = useState([]);
   useEffect(() => {
     if (!searchValue) {
@@ -22,7 +22,11 @@ function Search({ searchValue }) {
   return (
     <div className={cx("search")}>
       {result.map((item, i) => (
-        <div key={i} onClick={() => handleSongs(item)} className={cx("song")}>
+        <div
+          key={i}
+          onClick={() => handleSongs(item)}
+          className={cx("song", { active: play.title === item.title })}
+        >
           <img src={item.img} alt="" />
           <h3>{item.title}</h3>
           <div className={cx("info")}>

@@ -12,8 +12,15 @@ import Account from "./Account/Account";
 const cx = classNames.bind(styles);
 
 function Content() {
-  const { themeMode, setThemeMode, handleSongs, avatar, search, setSearch } =
-    useAppContext();
+  const {
+    themeMode,
+    setThemeMode,
+    handleSongs,
+    avatar,
+    search,
+    setSearch,
+    play,
+  } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -103,7 +110,7 @@ function Content() {
                 <div
                   key={i}
                   onClick={() => handleSongs(item)}
-                  className={cx("song")}
+                  className={cx("song", { active: play.title === item.title })}
                 >
                   <img src={item.img} alt="" />
                   <h3>{item.title}</h3>

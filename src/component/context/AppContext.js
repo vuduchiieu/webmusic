@@ -63,6 +63,7 @@ const Contexts = ({ children }) => {
         setAvatart,
         search,
         setSearch,
+        play,
       }}
     >
       {children}
