@@ -12,38 +12,53 @@
     height: 34vh;
     border-radius: 16px;
     background-color: var(--songs-color);
-    margin: 1% 3% 0 0;
+    margin-right: 3%;
     box-shadow: var(--box-shadow);
-    &:hover {
-      cursor: pointer;
-      opacity: 0.8;
-    }
-    img {
-      padding: 10px;
-      object-fit: cover;
-      width: 100%;
-      height: 20vh;
-      border-radius: 16px;
-    }
-    h3 {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 90%;
-      margin: 16px 0 0 16px;
+    padding: 10px;
+    margin-bottom: 20px;
+    .title {
+      height: 80%;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 20vh;
+        border-radius: 16px;
+      }
+      h3 {
+        margin-top: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 90%;
+      }
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
     }
     .info {
       display: flex;
       align-items: center;
-      margin: 16px 0 0 16px;
-      width: 100%;
+      justify-content: space-between;
+      margin-top: 10px;
+      height: 10%;
       p {
         width: 50%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 100%;
-        height: 20%;
+        width: 70%;
+      }
+      button {
+        width: 30%;
+        height: 100%;
+        background-color: transparent;
+        img {
+          filter: var(--filter-color);
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+        }
       }
     }
   }
