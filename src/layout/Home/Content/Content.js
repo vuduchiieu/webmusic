@@ -20,6 +20,8 @@ function Content() {
     search,
     setSearch,
     play,
+    like,
+    handleLikeToggle,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -27,6 +29,7 @@ function Content() {
   const handleTheme = () => {
     setThemeMode(!themeMode);
   };
+
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>
@@ -109,13 +112,25 @@ function Content() {
               {recommend.map((item, i) => (
                 <div
                   key={i}
-                  onClick={() => handleSongs(item)}
                   className={cx("song", { active: play.title === item.title })}
                 >
-                  <img src={item.img} alt="" />
-                  <h3>{item.title}</h3>
+                  <div onClick={() => handleSongs(item)}>
+                    <img src={item.img} alt="" />
+                    <h3>{item.title}</h3>
+                  </div>
                   <div className={cx("info")}>
                     <p>{item.name}</p>
+                    <button onClick={() => handleLikeToggle(item.title)}>
+                      {like[item.title] ? (
+                        <img
+                          src={icon.heartActive}
+                          style={{ filter: "none" }}
+                          alt=""
+                        />
+                      ) : (
+                        <img src={icon.heart} alt="" />
+                      )}
+                    </button>
                   </div>
                 </div>
               ))}

@@ -17,6 +17,11 @@ const icon = {
   mute: require("./volume-mute.svg").default,
   google: require("./google.svg").default,
   facebook: require("./facebook.svg").default,
+  add: require("./add.svg").default,
+  library: require("./library.svg").default,
+  delete: require("./delete.svg").default,
+  heart: require("./heart.svg").default,
+  heartActive: require("./heart-active.svg").default,
 };
 
 export default icon;

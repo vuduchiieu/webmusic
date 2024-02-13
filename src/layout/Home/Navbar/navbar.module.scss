@@ -29,5 +29,97 @@
     background-color: var(--secondary-background);
     height: 85vh;
     border-radius: 10px;
+    padding: 2vh 1.5vw;
+    .header {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 10%;
+      .wrap {
+        display: flex;
+        justify-content: space-between;
+        .title {
+          display: flex;
+          justify-content: space-between;
+          width: 38%;
+          h2 {
+            font-size: 18px;
+          }
+        }
+        img {
+          width: 22px;
+          filter: var(--filter-color);
+          cursor: pointer;
+        }
+      }
+      .input-add {
+        display: flex;
+        justify-content: space-between;
+        input {
+          border-radius: 10px;
+          padding: 6px 26px;
+          width: 80%;
+          background-color: var(--songs-color);
+          color: var(--text-color);
+          transition: 0.4s;
+          box-shadow: var(--box-shadow);
+          &:focus {
+            box-shadow: 0 0 0 0.15vw #a8a5a5;
+          }
+          &::placeholder {
+            font-size: 12px;
+          }
+        }
+        button {
+          padding: 0 18px;
+          border-radius: 10px;
+          background-color: var(--main-color);
+          &:hover {
+            cursor: pointer;
+            transform: scale(110%);
+          }
+        }
+      }
+    }
+    .list-library {
+      display: flex;
+      flex-direction: column;
+      height: 80%;
+      overflow: scroll;
+      .library {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 10%;
+        background-color: var(--songs-color);
+        padding: 10px 20px;
+        margin-top: 10px;
+        border-radius: 10px;
+        &:hover {
+          cursor: pointer;
+          opacity: 0.8;
+        }
+        h3 {
+          font-size: 16px;
+        }
+        img {
+          width: 22px;
+          filter: var(--filter-color);
+
+          &:hover {
+            cursor: pointer;
+            animation: spin 1s infinite alternate;
+            @keyframes spin {
+              0% {
+                transform: rotate(10deg);
+              }
+              100% {
+                transform: rotate(-10deg);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

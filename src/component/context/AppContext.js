@@ -49,6 +49,14 @@ const Contexts = ({ children }) => {
 
   const [avatar, setAvatart] = useState(localStorage.getItem("photoURL") || "");
 
+  const [like, setLike] = useState(false);
+  const handleLikeToggle = (title) => {
+    setLike((prev) => ({
+      ...prev,
+      [title]: !prev[title],
+    }));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -63,7 +71,9 @@ const Contexts = ({ children }) => {
         setAvatart,
         search,
         setSearch,
-        play,
+        like,
+        setLike,
+        handleLikeToggle,
       }}
     >
       {children}
