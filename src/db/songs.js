@@ -1,11 +1,7 @@
 import img from "~/assets/img";
 import mp3 from "~/assets/mp3";
 
-const again = [];
-
-const treding = [];
-
-const recommend = [
+const again = [
   {
     id: 0,
     title: "Cao ốc 20",
@@ -234,5 +230,9 @@ const allSong = [
     lyric: mp3.wn3107,
   },
 ];
+
+const treding = [];
+
+const recommend = [];
 
 export { again, treding, recommend, allSong };
