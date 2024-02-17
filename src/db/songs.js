@@ -114,6 +114,14 @@ const again = [
     img: img.wn3107,
     lyric: mp3.wn3107,
   },
+  {
+    id: 14,
+    title: "Sau lời từ khướt",
+    name: "Phan Mạnh Quỳnh",
+    view: "24tr",
+    img: img.sauloitukhuot,
+    lyric: mp3.sauloitukhuot,
+  },
 ];
 
 const allSong = [
@@ -228,6 +236,14 @@ const allSong = [
     view: "24tr",
     img: img.wn3107,
     lyric: mp3.wn3107,
+  },
+  {
+    id: 14,
+    title: "Sau lời từ khướt",
+    name: "Phan Mạnh Quỳnh",
+    view: "24tr",
+    img: img.sauloitukhuot,
+    lyric: mp3.sauloitukhuot,
   },
 ];
 

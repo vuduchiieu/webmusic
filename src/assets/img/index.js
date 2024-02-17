@@ -13,6 +13,7 @@ const img = {
   nguoidibao: require("./nguoidibao.jpeg"),
   votan: require("./votan.jpeg"),
   wn3107: require("./wn3107.jpeg"),
+  sauloitukhuot: require("./sauloitukhuoc.jpeg"),
 };
 
 export default img;

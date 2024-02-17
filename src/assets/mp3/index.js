@@ -13,6 +13,7 @@ const mp3 = {
   nguoidibao: require("./nguoidibao.mp3"),
   votan: require("./votan.mp3"),
   wn3107: require("./Wn  3107 full album.mp3"),
+  sauloitukhuot: require("./sauloitukhuot.mp3"),
 };
 
 export default mp3;
