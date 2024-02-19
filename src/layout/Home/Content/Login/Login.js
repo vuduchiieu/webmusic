@@ -7,12 +7,40 @@ import { auth, provider } from "./LoginGG/config";
 import { signInWithPopup } from "firebase/auth";
 import icon from "~/assets/icon";
 import { useAppContext } from "~/component/context/AppContext";
+import { loginUser, registerUser } from "~/redux/apiRequest";
+import { useDispatch } from "react-redux";
+
 const cx = classNames.bind(styles);
 
 function Login() {
   const { setAvatart } = useAppContext();
 
   const [login, setLogin] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const newUser = {
+      username: username,
+      password: password,
+    };
+    loginUser(newUser, dispatch);
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const newUser = {
+      email: email,
+      password: password,
+      username: username,
+    };
+    registerUser(newUser, dispatch);
+  };
 
   const handleLoginGG = () => {
     signInWithPopup(auth, provider)
@@ -42,9 +70,54 @@ function Login() {
           {signUp ? (
             <div className={cx("signUp")}>
               <h1>Đăng ký...</h1>
-              <div className={cx("normally")}>
-                <h1>CHƯA LÀM CÁI NÀY!!!!!!</h1>
+              <div className={cx("social")}>
+                <div onClick={handleLoginGG} className={cx("loginGG")}>
+                  <button>
+                    <img src={icon.google} alt="" />
+                    <p>Tiếp tục bằng Google</p>
+                  </button>
+                </div>
+                <div className={cx("loginFB")}>
+                  <button>
+                    <img src={icon.facebook} alt="" />
+                    <p>Tiếp tục bằng Facebook</p>
+                  </button>
+                </div>
               </div>
+              <form onSubmit={handleRegister} className={cx("normally")}>
+                <div className={cx("email")}>
+                  <p>Email</p>
+                  <input
+                    placeholder="email"
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className={cx("email")}>
+                  <p>Tên người dùng</p>
+                  <input
+                    placeholder=" tên người dùng"
+                    type="text"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <div className={cx("password")}>
+                  <p>Mật khẩu</p>
+                  <input
+                    placeholder="Mật khẩu"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <div className={cx("action")}>
+                  <button type="submit">
+                    <p>Đặng ký</p>
+                  </button>
+                  <button>
+                    <p>Quên mật khẩu</p>
+                  </button>
+                </div>
+              </form>
               <div className={cx("forward")}>
                 <p>
                   Bạn đã có tài khoản?
@@ -69,24 +142,32 @@ function Login() {
                   </button>
                 </div>
               </div>
-              <div className={cx("normally")}>
+              <form onSubmit={handleLogin} className={cx("normally")}>
                 <div className={cx("email")}>
                   <p>Email hoặc tên người dùng</p>
-                  <input placeholder="email hoặc tên người dùng" type="email" />
+                  <input
+                    placeholder="email hoặc tên người dùng"
+                    type="text"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </div>
                 <div className={cx("password")}>
                   <p>Mật khẩu</p>
-                  <input placeholder="Mật khẩu" type="password" />
+                  <input
+                    placeholder="Mật khẩu"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
                 <div className={cx("action")}>
-                  <button>
+                  <button type="submit">
                     <p>Đặng nhập</p>
                   </button>
                   <button>
                     <p>Quên mật khẩu</p>
                   </button>
                 </div>
-              </div>
+              </form>
               <div className={cx("forward")}>
                 <p>
                   Bạn chưa có tài khoản?

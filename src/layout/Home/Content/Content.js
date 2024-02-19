@@ -8,6 +8,7 @@ import { again, treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
+import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,6 @@ function Content() {
     themeMode,
     setThemeMode,
     handleSongs,
-    avatar,
     search,
     setSearch,
     play,
@@ -29,6 +29,8 @@ function Content() {
   const handleTheme = () => {
     setThemeMode(!themeMode);
   };
+
+  const user = useSelector((state) => state.auth.login.currentUser);
 
   return (
     <div className={cx("content")}>
@@ -55,7 +57,7 @@ function Content() {
               <img src={icon.en} alt="" />
             </div>
           </div>
-          {avatar ? (
+          {user ? (
             <div className={cx("account")}>
               <Account />
             </div>
