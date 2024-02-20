@@ -7,7 +7,6 @@ const fetchData = async () => {
     const res = await axios.get("https://be-song.vercel.app/v1/songs/upload");
     const treding = res.data.allSong;
     const allSong = res.data.allSong;
-    console.log(treding);
     return { treding, allSong };
   } catch (err) {
     console.error(err);
