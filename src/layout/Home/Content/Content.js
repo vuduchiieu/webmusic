@@ -78,19 +78,17 @@ function Content() {
               {again.map((item, i) => (
                 <div
                   key={i}
-                  className={cx("song", {
-                    active: play.title === item.title,
-                  })}
+                  className={cx("song", { active: play.title === item.title })}
                 >
                   <div
                     className={cx("title")}
                     onClick={() => handleSongs(item)}
                   >
-                    <img src={item.img} alt="" />
+                    <img src={item.image} alt="" />
                     <h3>{item.title}</h3>
                   </div>
                   <div className={cx("info")}>
-                    <p>{item.name}</p>
+                    <p>{item.author}</p>
                     <button onClick={() => handleLikeToggle(item.title)}>
                       {like[item.title] ? (
                         <img
@@ -119,11 +117,11 @@ function Content() {
                     className={cx("title")}
                     onClick={() => handleSongs(item)}
                   >
-                    <img src={item.img} alt="" />
+                    <img src={item.image} alt="" />
                     <h3>{item.title}</h3>
                   </div>
                   <div className={cx("info")}>
-                    <p>{item.name}</p>
+                    <p>{item.author}</p>
                     <button onClick={() => handleLikeToggle(item.title)}>
                       {like[item.title] ? (
                         <img
@@ -152,11 +150,11 @@ function Content() {
                     className={cx("title")}
                     onClick={() => handleSongs(item)}
                   >
-                    <img src={item.img} alt="" />
+                    <img src={item.image} alt="" />
                     <h3>{item.title}</h3>
                   </div>
                   <div className={cx("info")}>
-                    <p>{item.name}</p>
+                    <p>{item.author}</p>
                     <button onClick={() => handleLikeToggle(item.title)}>
                       {like[item.title] ? (
                         <img

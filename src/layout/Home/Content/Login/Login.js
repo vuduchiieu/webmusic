@@ -8,12 +8,14 @@ import { signInWithPopup } from "firebase/auth";
 import icon from "~/assets/icon";
 import { useAppContext } from "~/component/context/AppContext";
 import { loginUser, registerUser } from "~/redux/apiRequest";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
 function Login() {
   const { setAvatart } = useAppContext();
+
+  const loading = useSelector((state) => state.auth.login.isFetching);
 
   const [login, setLogin] = useState(false);
 
@@ -23,23 +25,24 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const newUser = {
+    email: email,
+    password: password,
+    username: username,
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
-    const newUser = {
-      username: username,
-      password: password,
-    };
     loginUser(newUser, dispatch);
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const newUser = {
-      email: email,
-      password: password,
-      username: username,
-    };
-    registerUser(newUser, dispatch);
+    await registerUser(newUser, dispatch);
+    const registrationSuccessful = true;
+    if (registrationSuccessful) {
+      await handleLogin(e);
+    }
   };
 
   const handleLoginGG = () => {
@@ -52,8 +55,6 @@ function Login() {
         localStorage.setItem("photoURL", photoURL);
       })
       .catch((error) => {
-        console.error("Đăng nhập không thành công:", error.message);
-
         alert("Đăng nhập không thành công. Vui lòng thử lại.");
       });
   };
@@ -161,7 +162,7 @@ function Login() {
                 </div>
                 <div className={cx("action")}>
                   <button type="submit">
-                    <p>Đặng nhập</p>
+                    {loading ? <p>Loading</p> : <p>Đăng nhập</p>}
                   </button>
                   <button>
                     <p>Quên mật khẩu</p>

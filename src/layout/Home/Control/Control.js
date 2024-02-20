@@ -158,10 +158,10 @@ function Control() {
   return (
     <div className={cx("control")}>
       <div className={cx("info")}>
-        {play.img && <img src={play.img} alt="" />}
+        {play.image && <img src={play.image} alt="" />}
         <div className={cx("title")}>
           <h3>{play.title}</h3>
-          <p>{play.name}</p>
+          <p>{play.author}</p>
         </div>
       </div>
       <div className={cx("control-audio")}>
@@ -204,7 +204,7 @@ function Control() {
         </div>
         <audio
           ref={audioRef}
-          src={play.lyric}
+          src={play.song}
           onTimeUpdate={handleTimeUpdate}
           onLoadedData={handleLoadedData}
         ></audio>

@@ -28,6 +28,7 @@ const registerUser = async (user, dispatch) => {
     await axios.post("https://be-song.vercel.app/v1/auth/register", user);
     dispatch(registerSuccess());
   } catch (error) {
+    console.error("Đăng ký thất bại:", error);
     dispatch(registerFailed());
   }
 };
