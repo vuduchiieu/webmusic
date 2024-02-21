@@ -4,7 +4,7 @@ import mp3 from "~/assets/mp3";
 
 const fetchData = async () => {
   try {
-    const res = await axios.get("https://be-song.vercel.app/v1/songs/upload");
+    const res = await axios.get("https://be-song.vercel.app/v1/songs/");
     const treding = res.data.allSong;
     const allSong = res.data.allSong;
     return { treding, allSong };

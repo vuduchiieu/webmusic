@@ -46,7 +46,7 @@ function Account() {
       <div className={cx("login")}>
         <img
           onClick={() => setSettingAcc(!settingAcc)}
-          src={user.avatar === undefined ? icon.avatar : user.avatar}
+          src={user.avatar === null ? icon.avatar : user.avatar}
           alt=""
         />
       </div>
