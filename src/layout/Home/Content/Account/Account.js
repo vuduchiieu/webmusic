@@ -6,11 +6,12 @@ import styles from "./account.module.scss";
 import { logoutUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "~/redux/authSlide";
+import icon from "~/assets/icon";
 
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { avatar, createAxios } = useAppContext();
+  const { createAxios } = useAppContext();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
   const assessToken = user?.accessToken;
@@ -43,7 +44,11 @@ function Account() {
       onClickOutside={() => setSettingAcc(!settingAcc)}
     >
       <div className={cx("login")}>
-        <img onClick={() => setSettingAcc(!settingAcc)} src={avatar} alt="" />
+        <img
+          onClick={() => setSettingAcc(!settingAcc)}
+          src={user.avatar === undefined ? icon.avatar : user.avatar}
+          alt=""
+        />
       </div>
     </Tippy>
   );

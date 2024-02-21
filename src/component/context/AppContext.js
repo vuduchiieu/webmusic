@@ -49,8 +49,6 @@ const Contexts = ({ children }) => {
     };
   }, [isPlaying]);
 
-  const [avatar, setAvatart] = useState(localStorage.getItem("photoURL") || "");
-
   const [like, setLike] = useState(false);
   const handleLikeToggle = (title) => {
     setLike((prev) => ({
@@ -107,8 +105,6 @@ const Contexts = ({ children }) => {
         setPlay,
         isPlaying,
         setIsPlaying,
-        avatar,
-        setAvatart,
         search,
         setSearch,
         like,

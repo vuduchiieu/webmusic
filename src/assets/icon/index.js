@@ -23,6 +23,7 @@ const icon = {
   heart: require("./heart.svg").default,
   heartActive: require("./heart-active.svg").default,
   loading: require("./loading.svg").default,
+  avatar: require("./avatar.svg").default,
 };
 
 export default icon;
