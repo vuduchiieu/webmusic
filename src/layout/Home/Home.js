@@ -12,8 +12,6 @@ const cx = classNames.bind(styles);
 function Home() {
   const { play } = useAppContext();
 
-  console.log(play.length == 0);
-
   return (
     <div className={cx("home")}>
       <div className={cx("main")}>
@@ -22,7 +20,7 @@ function Home() {
       </div>
       <div
         className={cx("control")}
-        style={play.length == 0 ? { display: "none" } : { display: "block" }}
+        style={play.length === 0 ? { display: "none" } : { display: "block" }}
       >
         <Control />
       </div>
