@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { allSong } from "~/db/songs";
 import { useAppContext } from "~/component/context/AppContext";
 import icon from "~/assets/icon";
+import Songs from "~/component/Songs/Songs";
 
 const cx = classNames.bind(styles);
 
@@ -22,27 +23,7 @@ function Search({ searchValue }) {
   }, [searchValue]);
   return (
     <div className={cx("search")}>
-      {result.map((item, i) => (
-        <div
-          key={i}
-          className={cx("song", { active: play.title === item.title })}
-        >
-          <div className={cx("title")} onClick={() => handleSongs(item)}>
-            <img src={item.image} alt="" />
-            <h3>{item.title}</h3>
-          </div>
-          <div className={cx("info")}>
-            <p>{item.author}</p>
-            <button onClick={() => handleLikeToggle(item.title)}>
-              {like[item.title] ? (
-                <img src={icon.heartActive} style={{ filter: "none" }} alt="" />
-              ) : (
-                <img src={icon.heart} alt="" />
-              )}
-            </button>
-          </div>
-        </div>
-      ))}
+      <Songs songs={result} />
     </div>
   );
 }

@@ -9,20 +9,12 @@ import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
 import { useSelector } from "react-redux";
+import Songs from "~/component/Songs/Songs";
 
 const cx = classNames.bind(styles);
 
 function Content() {
-  const {
-    themeMode,
-    setThemeMode,
-    handleSongs,
-    search,
-    setSearch,
-    play,
-    like,
-    handleLikeToggle,
-  } = useAppContext();
+  const { themeMode, setThemeMode, search, setSearch } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -74,90 +66,15 @@ function Content() {
         <div className={cx("main")}>
           <div className={cx("again")}>
             <h2>Nghe lại</h2>
-            <div className={cx("wrap")}>
-              {again.map((item, i) => (
-                <div
-                  key={i}
-                  className={cx("song", { active: play.title === item.title })}
-                >
-                  <div
-                    className={cx("title")}
-                    onClick={() => handleSongs(item)}
-                  >
-                    <img src={item.image} alt="" />
-                    <h3>{item.title}</h3>
-                  </div>
-                  <div className={cx("info")}>
-                    <p>{item.author}</p>
-                    <button onClick={() => handleLikeToggle(item.title)}>
-                      {like[item.title] ? (
-                        <img src={icon.heartActive} alt="" />
-                      ) : (
-                        <img src={icon.heart} alt="" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Songs songs={again} />
           </div>
           <div className={cx("treding")}>
             <h2>Thịnh hành</h2>
-            <div className={cx("wrap")}>
-              {treding.map((item, i) => (
-                <div
-                  key={i}
-                  className={cx("song", { active: play.title === item.title })}
-                >
-                  <div
-                    className={cx("title")}
-                    onClick={() => handleSongs(item)}
-                  >
-                    <img src={item.image} alt="" />
-                    <h3>{item.title}</h3>
-                  </div>
-                  <div className={cx("info")}>
-                    <p>{item.author}</p>
-                    <button onClick={() => handleLikeToggle(item.title)}>
-                      {like[item.title] ? (
-                        <img src={icon.heartActive} alt="" />
-                      ) : (
-                        <img src={icon.heart} alt="" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Songs songs={treding} />
           </div>
           <div className={cx("recommend")}>
             <h2>Có thể bạn sẽ thích</h2>
-            <div className={cx("wrap")}>
-              {recommend.map((item, i) => (
-                <div
-                  key={i}
-                  className={cx("song", { active: play.title === item.title })}
-                >
-                  <div
-                    className={cx("title")}
-                    onClick={() => handleSongs(item)}
-                  >
-                    <img src={item.image} alt="" />
-                    <h3>{item.title}</h3>
-                  </div>
-                  <div className={cx("info")}>
-                    <p>{item.author}</p>
-                    <button onClick={() => handleLikeToggle(item.title)}>
-                      {like[item.title] ? (
-                        <img src={icon.heartActive} alt="" />
-                      ) : (
-                        <img src={icon.heart} alt="" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Songs songs={recommend} />
           </div>
         </div>
       )}
