@@ -6,16 +6,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import GlobalStyles from "~/component/GlobalStyles/";
 import { Contexts } from "./component/context/AppContext";
-import store from "./redux/store";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+export const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <Contexts>
-      <GlobalStyles>
-        <App />
-      </GlobalStyles>
-    </Contexts>
+    <PersistGate loading={null} persistor={persistor}>
+      <Contexts>
+        <GlobalStyles>
+          <App />
+        </GlobalStyles>
+      </Contexts>
+    </PersistGate>
   </Provider>
 );
 

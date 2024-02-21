@@ -3,8 +3,6 @@ import Tippy from "@tippyjs/react/headless";
 import { useAppContext } from "~/component/context/AppContext";
 import classNames from "classnames/bind";
 import styles from "./account.module.scss";
-import { signOut } from "firebase/auth";
-import { auth } from "../Login/LoginGG/config";
 import { logoutUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "~/redux/authSlide";
@@ -12,20 +10,16 @@ import { logoutSuccess } from "~/redux/authSlide";
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { avatar, setAvatart, createAxios } = useAppContext();
+  const { avatar, createAxios } = useAppContext();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
   const assessToken = user?.accessToken;
   const id = user?._id;
   const [settingAcc, setSettingAcc] = useState(false);
   let axiosJWT = createAxios(user, dispatch, logoutSuccess);
+
   const handleLogOut = () => {
-    signOut(auth)
-      .then(() => {})
-      .catch((error) => {});
-    setAvatart(null);
-    localStorage.removeItem("photoURL");
-    logoutUser(dispatch, assessToken, id, axiosJWT);
+    logoutUser(dispatch, id, assessToken, axiosJWT);
   };
 
   return (

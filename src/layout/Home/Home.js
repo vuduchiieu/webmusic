@@ -5,17 +5,25 @@ import Navbar from "./Navbar/Navbar";
 import classNames from "classnames/bind";
 import styles from "./Home.module.scss";
 import Control from "./Control/Control";
+import { useAppContext } from "~/component/context/AppContext";
 
 const cx = classNames.bind(styles);
 
 function Home() {
+  const { play } = useAppContext();
+
+  console.log(play.length == 0);
+
   return (
     <div className={cx("home")}>
       <div className={cx("main")}>
         <Navbar />
         <Content />
       </div>
-      <div className={cx("control")}>
+      <div
+        className={cx("control")}
+        style={play.length == 0 ? { display: "none" } : { display: "block" }}
+      >
         <Control />
       </div>
     </div>

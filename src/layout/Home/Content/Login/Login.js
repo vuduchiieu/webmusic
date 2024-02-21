@@ -16,6 +16,9 @@ function Login() {
   const { setAvatart } = useAppContext();
 
   const loading = useSelector((state) => state.auth.login.isFetching);
+  const loadingRegister = useSelector(
+    (state) => state.auth.register.isFetching
+  );
 
   const [login, setLogin] = useState(false);
 
@@ -89,7 +92,7 @@ function Login() {
                 <div className={cx("email")}>
                   <p>Email</p>
                   <input
-                    placeholder="email"
+                    placeholder="Email"
                     type="text"
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -97,7 +100,7 @@ function Login() {
                 <div className={cx("email")}>
                   <p>Tên người dùng</p>
                   <input
-                    placeholder=" tên người dùng"
+                    placeholder="Tên người dùng"
                     type="text"
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -112,11 +115,13 @@ function Login() {
                 </div>
                 <div className={cx("action")}>
                   <button type="submit">
-                    <p>Đặng ký</p>
+                    {loadingRegister ? (
+                      <img src={icon.loading} alt="" />
+                    ) : (
+                      <p>Đăng ký</p>
+                    )}
                   </button>
-                  <button>
-                    <p>Quên mật khẩu</p>
-                  </button>
+                  <button></button>
                 </div>
               </form>
               <div className={cx("forward")}>
@@ -162,7 +167,11 @@ function Login() {
                 </div>
                 <div className={cx("action")}>
                   <button type="submit">
-                    {loading ? <p>Loading</p> : <p>Đăng nhập</p>}
+                    {loading ? (
+                      <img src={icon.loading} alt="" />
+                    ) : (
+                      <p>Đăng nhập</p>
+                    )}
                   </button>
                   <button>
                     <p>Quên mật khẩu</p>

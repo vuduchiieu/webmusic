@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import classNames from "classnames/bind";
 import styles from "./content.module.scss";
@@ -91,11 +91,7 @@ function Content() {
                     <p>{item.author}</p>
                     <button onClick={() => handleLikeToggle(item.title)}>
                       {like[item.title] ? (
-                        <img
-                          src={icon.heartActive}
-                          style={{ filter: "none" }}
-                          alt=""
-                        />
+                        <img src={icon.heartActive} alt="" />
                       ) : (
                         <img src={icon.heart} alt="" />
                       )}
@@ -124,11 +120,7 @@ function Content() {
                     <p>{item.author}</p>
                     <button onClick={() => handleLikeToggle(item.title)}>
                       {like[item.title] ? (
-                        <img
-                          src={icon.heartActive}
-                          style={{ filter: "none" }}
-                          alt=""
-                        />
+                        <img src={icon.heartActive} alt="" />
                       ) : (
                         <img src={icon.heart} alt="" />
                       )}
@@ -157,11 +149,7 @@ function Content() {
                     <p>{item.author}</p>
                     <button onClick={() => handleLikeToggle(item.title)}>
                       {like[item.title] ? (
-                        <img
-                          src={icon.heartActive}
-                          style={{ filter: "none" }}
-                          alt=""
-                        />
+                        <img src={icon.heartActive} alt="" />
                       ) : (
                         <img src={icon.heart} alt="" />
                       )}

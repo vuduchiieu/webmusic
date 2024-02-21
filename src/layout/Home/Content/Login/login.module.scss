@@ -109,12 +109,24 @@
         border-radius: 999px;
         background-color: var(--main-color);
         transition: 0.4s;
+        img {
+          filter: var(--filter-color);
+          animation: spin 2s infinite;
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+        }
         &:hover {
           cursor: pointer;
           transform: scale(105%);
         }
         p {
-          font-weight: 700;
+          font-weight: 500;
         }
       }
       button:last-child {

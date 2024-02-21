@@ -3,6 +3,9 @@ import {
   loginFailed,
   loginStart,
   loginSuccess,
+  logoutFailed,
+  logoutStart,
+  logoutSuccess,
   registerFailed,
   registerStart,
   registerSuccess,
@@ -34,14 +37,14 @@ const registerUser = async (user, dispatch) => {
 };
 
 const logoutUser = async (dispatch, id, assessToken, axiosJWT) => {
-  dispatch(loginStart());
+  dispatch(logoutStart());
   try {
     await axiosJWT.post("https://be-song.vercel.app/v1/auth/logout", id, {
       header: { token: `Bearer ${assessToken}` },
     });
-    dispatch(loginSuccess());
+    dispatch(logoutSuccess());
   } catch (error) {
-    dispatch(loginFailed());
+    dispatch(logoutFailed());
   }
 };
 
