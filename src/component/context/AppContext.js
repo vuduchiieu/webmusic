@@ -26,10 +26,15 @@ const Contexts = ({ children }) => {
 
   const handleSongs = (item) => {
     setPlay(item);
-    setIsPlaying(false);
-    setTimeout(() => {
-      setIsPlaying(true);
-    }, 100);
+    if (item === play) {
+      setIsPlaying(!isPlaying);
+    }
+    if (item !== play) {
+      setIsPlaying(false);
+      setTimeout(() => {
+        setIsPlaying(true);
+      }, 100);
+    }
   };
 
   useEffect(() => {
