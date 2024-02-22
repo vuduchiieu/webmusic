@@ -58,10 +58,12 @@
     }
   }
   .active {
-    &:hover {
-      cursor: default;
-      opacity: 1;
+    .title {
+      &:hover {
+        opacity: 1;
+      }
     }
+
     h3,
     p {
       color: var(--main-color);

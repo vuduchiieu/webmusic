@@ -153,13 +153,6 @@ function Control() {
     audioRef.current.loop = isLooping;
   }, [isLooping]);
 
-  // Chuyển bài khi kết thúc bài hiện tại
-  useEffect(() => {
-    if (currentTime === duration) {
-      handleNext();
-    }
-  }, [currentTime, duration]);
-
   return (
     <div className={cx("control")}>
       <div className={cx("info")}>
