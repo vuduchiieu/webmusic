@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import classNames from "classnames/bind";
 import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
@@ -8,8 +8,31 @@ const cx = classNames.bind(styles);
 
 function Songs({ songs, search }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
+
+  function useHorizontalScroll() {
+    const elRef = useRef();
+    useEffect(() => {
+      const el = elRef.current;
+      if (el) {
+        const onWheel = (e) => {
+          if (e.deltaY === 0) return;
+          e.preventDefault();
+          console.log(el.scrollLeft + e.deltaY);
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY * 13.5,
+            behavior: "smooth",
+          });
+        };
+        el.addEventListener("wheel", onWheel);
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, []);
+    return elRef;
+  }
+  const elRef = useHorizontalScroll();
   return (
     <div
+      ref={elRef}
       className={cx("songs")}
       style={
         search && {
