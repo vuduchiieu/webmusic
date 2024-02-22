@@ -4,9 +4,10 @@ const fetchData = async () => {
   try {
     const res = await axios.get("https://be-song.vercel.app/v1/songs/");
     const allSong = res.data.allSong;
-    const again = res.data.allSong;
-    const treding = res.data.allSong;
-    const recommend = res.data.allSong;
+    allSong.sort((a, b) => a.title.localeCompare(b.title));
+    const again = allSong.slice();
+    const treding = allSong.slice();
+    const recommend = allSong.slice();
     return { allSong, again, treding, recommend };
   } catch (err) {
     console.error(err);
