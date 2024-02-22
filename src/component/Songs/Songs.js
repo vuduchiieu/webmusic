@@ -6,14 +6,30 @@ import icon from "~/assets/icon";
 
 const cx = classNames.bind(styles);
 
-function Songs({ songs }) {
+function Songs({ songs, search }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
   return (
-    <div className={cx("songs")}>
+    <div
+      className={cx("songs")}
+      style={
+        search && {
+          flexWrap: "wrap",
+          overflow: "scroll",
+          height: "100%",
+          width: "78vw",
+          padding: 20,
+        }
+      }
+    >
       {songs.map((item, i) => (
         <div
           key={i}
           className={cx("song", { active: play.title === item.title })}
+          style={
+            search && {
+              marginBottom: 20,
+            }
+          }
         >
           <div className={cx("title")} onClick={() => handleSongs(item)}>
             <img src={item.image[0].url} alt="" />

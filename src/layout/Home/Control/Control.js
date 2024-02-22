@@ -132,6 +132,11 @@ function Control() {
     }
   };
 
+  // Xử lý sự kiện khi bài hát kết thúc
+  const handleAudioEnded = () => {
+    handleNext();
+  };
+
   // Xử lý phát hoặc dừng nhạc khi thay đổi trạng thái
   useEffect(() => {
     if (audioRef.current) {
@@ -207,6 +212,7 @@ function Control() {
           src={play.song?.[0].url}
           onTimeUpdate={handleTimeUpdate}
           onLoadedData={handleLoadedData}
+          onEnded={handleAudioEnded}
         ></audio>
       </div>
       <div className={cx("more")}>

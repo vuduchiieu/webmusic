@@ -2,15 +2,13 @@ import classNames from "classnames/bind";
 import styles from "./search.module.scss";
 import React, { useEffect, useState } from "react";
 import { allSong } from "~/db/songs";
-import { useAppContext } from "~/component/context/AppContext";
-import icon from "~/assets/icon";
 import Songs from "~/component/Songs/Songs";
 
 const cx = classNames.bind(styles);
 
 function Search({ searchValue }) {
-  const { handleSongs, play, handleLikeToggle, like } = useAppContext();
   const [result, setResult] = useState([]);
+  const search = true;
   useEffect(() => {
     if (!searchValue) {
       setResult([]);
@@ -23,7 +21,7 @@ function Search({ searchValue }) {
   }, [searchValue]);
   return (
     <div className={cx("search")}>
-      <Songs songs={result} />
+      <Songs songs={result} search={search} />
     </div>
   );
 }
