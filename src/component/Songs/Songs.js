@@ -3,13 +3,13 @@ import classNames from "classnames/bind";
 import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
 import icon from "~/assets/icon";
-import { useHorizontalScroll } from "../useHorizontalScroll/useHorizontalScroll";
+import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
 
 const cx = classNames.bind(styles);
 
 function Songs({ songs, search }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
-  const elRef = useHorizontalScroll();
+  const elRef = useWheelScroll();
   return (
     <div
       ref={elRef}

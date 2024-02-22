@@ -1,14 +1,17 @@
 import { useEffect, useRef } from "react";
 
-export function useHorizontalScroll() {
+export function useWheelScroll() {
   const elRef = useRef();
   useEffect(() => {
     const el = elRef.current;
     if (el) {
       const onWheel = (e) => {
+        const isMouseWheel = Math.abs(e.wheelDeltaY) !== 120;
+        if (isMouseWheel) {
+          return;
+        }
         if (e.deltaY === 0) return;
         e.preventDefault();
-        console.log(el.scrollLeft + e.deltaY);
         el.scrollTo({
           left: el.scrollLeft + e.deltaY * 13.5,
           behavior: "smooth",
