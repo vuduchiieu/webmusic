@@ -9,10 +9,12 @@ const cx = classNames.bind(styles);
 
 function Songs({ songs, search }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
+
   const elRef = useWheelScroll();
+
   return (
     <div
-      ref={elRef}
+      ref={search ? null : elRef}
       className={cx("songs")}
       style={
         search && {

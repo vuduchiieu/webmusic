@@ -13,7 +13,7 @@ export function useWheelScroll() {
         if (e.deltaY === 0) return;
         e.preventDefault();
         el.scrollTo({
-          left: el.scrollLeft + e.deltaY * 13.5,
+          left: el.scrollLeft + e.deltaY * 5,
           behavior: "smooth",
         });
       };

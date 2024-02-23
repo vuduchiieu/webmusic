@@ -16,9 +16,7 @@ function Control() {
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
-  const [volume, setVolume] = useState(
-    parseInt(localStorage.getItem("volume")) || 100
-  );
+  const [volume, setVolume] = useState(100);
 
   // Lấy mảng hiện tại
   const currentArray = [treding, recommend, again].find((array) =>
@@ -55,7 +53,6 @@ function Control() {
 
   // Xử lý thay đổi âm lượng
   const handleVolumeChange = (value) => {
-    localStorage.setItem("volume", value);
     audioRef.current.volume = value / 100;
     setIsForcus(true);
     setVolume(value);
@@ -66,8 +63,7 @@ function Control() {
     audioRef.current.volume = 0;
     setVolume(0);
     if (volume === 0) {
-      audioRef.current.volume = parseInt(localStorage.getItem("volume")) / 100;
-      setVolume(parseInt(localStorage.getItem("volume")));
+      audioRef.current.volume = volume / 100;
     }
   };
 
