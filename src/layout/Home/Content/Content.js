@@ -90,11 +90,13 @@ function Content() {
         <Search searchValue={searchValue} />
       ) : (
         <div className={cx("main")}>
-          {again.length > 0 && (
+          {again.length > 0 ? (
             <div className={cx("again")}>
               <h2>Nghe lại</h2>
               <Songs songs={again} />
             </div>
+          ) : (
+            <div></div>
           )}
           <div className={cx("treding")}>
             <h2>Thịnh hành</h2>
