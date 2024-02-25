@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import classNames from "classnames/bind";
 import styles from "./content.module.scss";
 import { useAppContext } from "~/component/context/AppContext";
 import icon from "~/assets/icon";
-import { again, treding, recommend } from "~/db/songs";
+import { treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
 import { useSelector } from "react-redux";
 import Songs from "~/component/Songs/Songs";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 function Content() {
-  const { themeMode, setThemeMode, search, setSearch } = useAppContext();
+  const {
+    themeMode,
+    setThemeMode,
+    search,
+    setSearch,
+    again,
+    setAgain,
+    refreshData,
+    setRefreshData,
+  } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -23,6 +33,22 @@ function Content() {
   };
 
   const user = useSelector((state) => state.auth.login.currentUser);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resAgain = await axios.get(
+          `https://be-song.vercel.app/v1/songs/listened/${user._id}`
+        );
+        setAgain(resAgain.data.listenAgain);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setRefreshData(false);
+      }
+    };
+
+    fetchData();
+  }, [refreshData, user._id, setRefreshData, setAgain]);
 
   return (
     <div className={cx("content")}>
@@ -64,10 +90,12 @@ function Content() {
         <Search searchValue={searchValue} />
       ) : (
         <div className={cx("main")}>
-          <div className={cx("again")}>
-            <h2>Nghe lại</h2>
-            <Songs songs={again} />
-          </div>
+          {again.length > 0 && (
+            <div className={cx("again")}>
+              <h2>Nghe lại</h2>
+              <Songs songs={again} />
+            </div>
+          )}
           <div className={cx("treding")}>
             <h2>Thịnh hành</h2>
             <Songs songs={treding} />

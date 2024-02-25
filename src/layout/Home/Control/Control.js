@@ -3,12 +3,23 @@ import styles from "./control.module.scss";
 import { useAppContext } from "~/component/context/AppContext";
 import React, { useEffect, useRef, useState } from "react";
 import icon from "~/assets/icon";
-import { again, recommend, treding } from "~/db/songs";
+import { recommend, treding } from "~/db/songs";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
 function Control() {
-  const { play, setPlay, isPlaying, setIsPlaying } = useAppContext();
+  const {
+    play,
+    setPlay,
+    isPlaying,
+    setIsPlaying,
+    again,
+    setRefreshData,
+    apiCalled,
+    setApiCalled,
+  } = useAppContext();
   const audioRef = useRef(null);
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -132,6 +143,29 @@ function Control() {
   const handleAudioEnded = () => {
     handleNext();
   };
+
+  const user = useSelector((state) => state.auth.login.currentUser);
+
+  const idUser = user?._id;
+  const idSong = play?._id;
+  const handleSongProgress = () => {
+    const percentageListened = Math.floor((currentTime / duration) * 100);
+    if (percentageListened >= 50 && !apiCalled) {
+      axios
+        .put(`https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`)
+        .then(() => {
+          setRefreshData(true);
+          setApiCalled(true);
+        })
+        .catch((error) => {
+          console.error("Error adding song to listen again list:", error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    handleSongProgress();
+  }, [currentTime, duration, idSong, idUser, apiCalled]);
 
   // Xử lý phát hoặc dừng nhạc khi thay đổi trạng thái
   useEffect(() => {

@@ -4,6 +4,9 @@ const AppContext = createContext();
 
 const Contexts = ({ children }) => {
   const [search, setSearch] = useState(false);
+  const [again, setAgain] = useState([]);
+  const [refreshData, setRefreshData] = useState(true);
+  const [apiCalled, setApiCalled] = useState(false);
 
   const themeModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -29,6 +32,7 @@ const Contexts = ({ children }) => {
     }
     if (item !== play) {
       setIsPlaying(false);
+      setApiCalled(false);
       setTimeout(() => {
         setIsPlaying(true);
       }, 100);
@@ -75,6 +79,12 @@ const Contexts = ({ children }) => {
         like,
         setLike,
         handleLikeToggle,
+        again,
+        setAgain,
+        refreshData,
+        setRefreshData,
+        apiCalled,
+        setApiCalled,
       }}
     >
       {children}

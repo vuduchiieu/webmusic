@@ -48,7 +48,7 @@ function Login() {
   const handleLoginGG = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      // const user = result.user;
       // const response = await axios.post(
       //   "http://localhost:3001/v1/auth/logingoogle",
       //   {
