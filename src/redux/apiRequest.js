@@ -36,13 +36,14 @@ const registerUser = async (user, dispatch) => {
   }
 };
 
-const logoutUser = async (dispatch, id, assessToken, axiosJWT) => {
+const logoutUser = async (dispatch, id, assessToken, axiosJWT, setAgain) => {
   dispatch(logoutStart());
   try {
     // await axiosJWT.post("https://be-song.vercel.app/v1/auth/logout", id, {
     //   header: { token: `Bearer ${assessToken}` },
     // });
     dispatch(logoutSuccess());
+    setAgain([]);
   } catch (error) {
     dispatch(logoutFailed());
   }

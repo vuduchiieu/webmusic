@@ -8,10 +8,12 @@ import { logoutUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import icon from "~/assets/icon";
 import { loginSuccess } from "~/redux/authSlide";
+import { useAppContext } from "~/component/context/AppContext";
 
 const cx = classNames.bind(styles);
 
 function Account() {
+  const { setAgain } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -55,7 +57,7 @@ function Account() {
   );
 
   const handleLogOut = () => {
-    logoutUser(dispatch, id, assessToken, axiosJWT);
+    logoutUser(dispatch, id, assessToken, axiosJWT, setAgain);
   };
 
   return (

@@ -34,21 +34,23 @@ function Content() {
 
   const user = useSelector((state) => state.auth.login.currentUser);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resAgain = await axios.get(
-          `https://be-song.vercel.app/v1/songs/listened/${user._id}`
-        );
-        setAgain(resAgain.data.listenAgain);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setRefreshData(false);
-      }
-    };
+    if (user != null) {
+      const fetchData = async () => {
+        try {
+          const resAgain = await axios.get(
+            `https://be-song.vercel.app/v1/songs/listened/${user._id}`
+          );
+          setAgain(resAgain.data.listenAgain);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setRefreshData(false);
+        }
+      };
 
-    fetchData();
-  }, [refreshData, user._id, setRefreshData, setAgain]);
+      fetchData();
+    }
+  }, [refreshData, user?._id, setRefreshData, setAgain]);
 
   return (
     <div className={cx("content")}>
@@ -90,13 +92,11 @@ function Content() {
         <Search searchValue={searchValue} />
       ) : (
         <div className={cx("main")}>
-          {again.length > 0 ? (
+          {again.length > 0 && (
             <div className={cx("again")}>
               <h2>Nghe lại</h2>
               <Songs songs={again} />
             </div>
-          ) : (
-            <div></div>
           )}
           <div className={cx("treding")}>
             <h2>Thịnh hành</h2>
