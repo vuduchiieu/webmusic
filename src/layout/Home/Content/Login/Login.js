@@ -6,15 +6,13 @@ import styles from "./login.module.scss";
 import { auth, provider } from "./LoginGG/config";
 import { signInWithPopup } from "firebase/auth";
 import icon from "~/assets/icon";
-import { useAppContext } from "~/component/context/AppContext";
 import { loginUser, registerUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 function Login() {
-  const { setAvatart } = useAppContext();
-
   const loading = useSelector((state) => state.auth.login.isFetching);
   const loadingRegister = useSelector(
     (state) => state.auth.register.isFetching
@@ -48,18 +46,23 @@ function Login() {
     }
   };
 
-  const handleLoginGG = () => {
-    signInWithPopup(auth, provider)
-      .then((data) => {
-        const { displayName, email, photoURL } = data.user;
-        setAvatart(photoURL);
-        localStorage.setItem("displayName", displayName);
-        localStorage.setItem("email", email);
-        localStorage.setItem("photoURL", photoURL);
-      })
-      .catch((error) => {
-        alert("Đăng nhập không thành công. Vui lòng thử lại.");
-      });
+  const handleLoginGG = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      // const response = await axios.post(
+      //   "http://localhost:3001/v1/auth/logingoogle",
+      //   {
+      //     email: user.email,
+      //     username: user.displayName,
+      //   }
+      // );
+      // console.log(response.data);
+      loginUser({ email: user.email, username: user.displayName }, dispatch);
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+      alert("Đăng nhập không thành công. Vui lòng thử lại.");
+    }
   };
 
   const [signUp, setSignUp] = useState(false);
