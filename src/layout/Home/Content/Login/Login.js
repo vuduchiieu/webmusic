@@ -8,7 +8,6 @@ import { signInWithPopup } from "firebase/auth";
 import icon from "~/assets/icon";
 import { loginUser, registerUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 const cx = classNames.bind(styles);
 
@@ -58,7 +57,7 @@ function Login() {
       //   }
       // );
       // console.log(response.data);
-      loginUser({ email: user.email, username: user.displayName }, dispatch);
+      // loginUser({ email: user.email, username: user.displayName }, dispatch);
     } catch (error) {
       console.error("Error signing in with Google:", error);
       alert("Đăng nhập không thành công. Vui lòng thử lại.");

@@ -1,23 +1,58 @@
 import React, { useState } from "react";
 import Tippy from "@tippyjs/react/headless";
-import { useAppContext } from "~/component/context/AppContext";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import classNames from "classnames/bind";
 import styles from "./account.module.scss";
 import { logoutUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutSuccess } from "~/redux/authSlide";
 import icon from "~/assets/icon";
+import { loginSuccess } from "~/redux/authSlide";
 
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { createAxios } = useAppContext();
+  const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
   const assessToken = user?.accessToken;
   const id = user?._id;
-  const [settingAcc, setSettingAcc] = useState(false);
-  let axiosJWT = createAxios(user, dispatch, logoutSuccess);
+
+  const refreshToken = async () => {
+    try {
+      const res = await axios.post(
+        "https://be-song.vercel.app/v1/auth/refresh",
+        {
+          withCredentials: true,
+        }
+      );
+      return res.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+
+  let axiosJWT = axios.create();
+  axiosJWT.interceptors.request.use(
+    async (config) => {
+      let date = new Date();
+      const decoedToken = jwtDecode(user?.accessToken);
+      if (decoedToken.exp < date.getTime() / 1000) {
+        const data = await refreshToken();
+        const refreshUser = {
+          ...user,
+          accessToken: data.accessToken,
+        };
+        dispatch(loginSuccess(refreshUser));
+        config.headers["token"] = "Bearer " + data.accessToken;
+      }
+      return config;
+    },
+    (err) => {
+      return Promise.reject(err);
+    }
+  );
 
   const handleLogOut = () => {
     logoutUser(dispatch, id, assessToken, axiosJWT);
