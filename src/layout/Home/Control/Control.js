@@ -30,8 +30,8 @@ function Control() {
   const [volume, setVolume] = useState(100);
 
   // Lấy mảng hiện tại
-  const currentArray = [treding, recommend, again].find((array) =>
-    array.some((song) => song.title === play.title)
+  const currentArray = [treding, recommend, again].find(
+    (array) => array && array.some((song) => song.title === play.title)
   );
 
   // Hàm định dạng thời gian
