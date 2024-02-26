@@ -20,7 +20,7 @@ const loginUser = async (user, dispatch) => {
     );
     dispatch(loginSuccess(res.data));
   } catch (error) {
-    console.error("Đăng nhập thất bại:", error);
+    alert("Đăng nhập thất bại:");
     dispatch(loginFailed());
   }
 };
@@ -31,7 +31,7 @@ const registerUser = async (user, dispatch) => {
     await axios.post("https://be-song.vercel.app/v1/auth/register", user);
     dispatch(registerSuccess());
   } catch (error) {
-    console.error("Đăng ký thất bại:", error);
+    alert("Đăng ký thất bại");
     dispatch(registerFailed());
   }
 };
