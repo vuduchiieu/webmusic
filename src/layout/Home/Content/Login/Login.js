@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Tippy from "@tippyjs/react/headless";
 import classNames from "classnames/bind";
 import styles from "./login.module.scss";
-import { auth, provider } from "./LoginGG/config";
-import { signInWithPopup } from "firebase/auth";
 import icon from "~/assets/icon";
 import { loginUser, registerUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +18,7 @@ function Login() {
   );
 
   const [login, setLogin] = useState(false);
+  const [signUp, setSignUp] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -30,6 +31,20 @@ function Login() {
     password: password,
     username: username,
   };
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDX55f48sODJp0pIjEU7LCGtyvrtJJ0IRU",
+    authDomain: "songs-cac58.firebaseapp.com",
+    projectId: "songs-cac58",
+    storageBucket: "songs-cac58.appspot.com",
+    messagingSenderId: "401411539907",
+    appId: "1:401411539907:web:066394cd9e7f744f75f376",
+    measurementId: "G-14M9HZDFP9",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -45,26 +60,21 @@ function Login() {
     }
   };
 
-  const handleLoginGG = async () => {
+  const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      // const user = result.user;
-      // const response = await axios.post(
-      //   "http://localhost:3001/v1/auth/logingoogle",
-      //   {
-      //     email: user.email,
-      //     username: user.displayName,
-      //   }
-      // );
-      // console.log(response.data);
-      // loginUser({ email: user.email, username: user.displayName }, dispatch);
+      const idToken = await result.user.getIdToken();
+      const response = await axios.post(
+        "https://be-song.vercel.app/v1/auth/google",
+        {
+          idToken: idToken,
+        }
+      );
+      console.log(response.data);
     } catch (error) {
-      console.error("Error signing in with Google:", error);
-      alert("Đăng nhập không thành công. Vui lòng thử lại.");
+      console.error(error);
     }
   };
-
-  const [signUp, setSignUp] = useState(false);
 
   return (
     <Tippy
@@ -77,7 +87,7 @@ function Login() {
             <div className={cx("signUp")}>
               <h1>Đăng ký...</h1>
               <div className={cx("social")}>
-                <div onClick={handleLoginGG} className={cx("loginGG")}>
+                <div onClick={handleGoogleLogin} className={cx("loginGG")}>
                   <button>
                     <img src={icon.google} alt="" />
                     <p>Tiếp tục bằng Google</p>
@@ -99,7 +109,7 @@ function Login() {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div className={cx("email")}>
+                <div className={cx("username")}>
                   <p>Tên người dùng</p>
                   <input
                     placeholder="Tên người dùng"
@@ -137,7 +147,7 @@ function Login() {
             <div className={cx("sign-in")}>
               <h1>Đăng nhập vào.....</h1>
               <div className={cx("social")}>
-                <div onClick={handleLoginGG} className={cx("loginGG")}>
+                <div onClick={handleGoogleLogin} className={cx("loginGG")}>
                   <button>
                     <img src={icon.google} alt="" />
                     <p>Tiếp tục bằng Google</p>
@@ -156,7 +166,10 @@ function Login() {
                   <input
                     placeholder="email hoặc tên người dùng"
                     type="text"
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
                 <div className={cx("password")}>

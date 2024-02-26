@@ -29,6 +29,10 @@ function Control() {
   const [isRandom, setIsRandom] = useState(false);
   const [volume, setVolume] = useState(100);
 
+  const user = useSelector((state) => state.auth.login.currentUser);
+  const idUser = user?._id;
+  const idSong = play?._id;
+
   // Lấy mảng hiện tại
   const currentArray = [treding, recommend, again].find(
     (array) => array && array.some((song) => song.title === play.title)
@@ -144,13 +148,9 @@ function Control() {
     handleNext();
   };
 
-  const user = useSelector((state) => state.auth.login.currentUser);
-
-  const idUser = user?._id;
-  const idSong = play?._id;
   const handleSongProgress = () => {
-    const percentageListened = Math.floor((currentTime / duration) * 100);
-    if (percentageListened >= 50 && !apiCalled) {
+    const listenTime = (audioRef.current.currentTime / duration) * 100;
+    if (listenTime > 50 && !apiCalled) {
       axios
         .put(`https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`)
         .then(() => {

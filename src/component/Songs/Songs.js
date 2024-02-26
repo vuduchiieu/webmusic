@@ -9,9 +9,7 @@ const cx = classNames.bind(styles);
 
 function Songs({ songs, search }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
-
   const elRef = useWheelScroll();
-
   return (
     <div
       ref={search ? null : elRef}
@@ -41,7 +39,10 @@ function Songs({ songs, search }) {
             <h3>{item.title}</h3>
           </div>
           <div className={cx("info")}>
-            <p>{item.author}</p>
+            <div className={cx("wrap")}>
+              <p>{item.author}</p>
+              <span>12 Tr lượt xem</span>
+            </div>
             <button onClick={() => handleLikeToggle(item.title)}>
               {like[item.title] ? (
                 <img src={icon.heartActive} alt="" />

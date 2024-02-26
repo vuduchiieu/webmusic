@@ -11,6 +11,7 @@ import Account from "./Account/Account";
 import { useSelector } from "react-redux";
 import Songs from "~/component/Songs/Songs";
 import axios from "axios";
+import Upload from "./Upload/Upload";
 
 const cx = classNames.bind(styles);
 
@@ -73,8 +74,8 @@ function Content() {
             <div onClick={handleTheme} className={cx("theme")}>
               <img src={themeMode ? icon.light : icon.dark} alt="" />
             </div>
-            <div className={cx("language")}>
-              <img src={icon.en} alt="" />
+            <div className={cx("upload")}>
+              <Upload />
             </div>
           </div>
           {user ? (
