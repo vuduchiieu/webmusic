@@ -14,6 +14,7 @@ function Upload() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [files, setFiles] = useState({});
+  const titleAllSong = allSong.map((item) => item.title);
 
   const handleMultipleSubmit = (e) => {
     const selectedFiles = e.target.files;
@@ -36,7 +37,6 @@ function Upload() {
       }
     }
     formData.append("isPublic", true);
-    const titleAllSong = allSong.map((item) => item.title);
     try {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
@@ -66,6 +66,7 @@ function Upload() {
       render={(attrs) => (
         <div tabIndex="-1" {...attrs} className={cx("upload-model")}>
           <h1>Tải lên bài gì đó...</h1>
+          <p>Bạn thích còn chúng tôi thì chưa chắc 🤣</p>
           <form onSubmit={handlePost} className={cx("normally")}>
             <div className={cx("title")}>
               <p>Tên bài hát</p>
