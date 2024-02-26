@@ -47,7 +47,7 @@ function Upload() {
         setTitle("");
         setAuthor("");
         setFiles({});
-        alert("Đăng thành công");
+        alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
       } else {
         alert("Bài hát đã tồn tại trong danh sách");
       }
