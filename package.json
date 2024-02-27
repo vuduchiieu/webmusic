@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@tippyjs/react": "^4.2.6",
+    "@vercel/speed-insights": "^1.0.10",
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
     "customize-cra": "^1.0.0",
