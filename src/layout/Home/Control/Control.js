@@ -148,6 +148,7 @@ function Control() {
     handleNext();
   };
 
+  // Put nhạc vào again
   const handleSongProgress = () => {
     const listenTime = (audioRef.current.currentTime / duration) * 100;
 
@@ -163,7 +164,6 @@ function Control() {
         });
     }
   };
-
   useEffect(() => {
     handleSongProgress();
   }, [currentTime, duration, idSong, idUser, apiCalled]);

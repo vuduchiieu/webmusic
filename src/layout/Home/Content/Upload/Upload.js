@@ -40,9 +40,7 @@ function Upload() {
     try {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
-        await axios
-          .post("http://localhost:3001/v1/songs", formData)
-          .then((res) => console.log(res.data));
+        await axios.post("https://be-song.vercel.app/v1/songs/", formData);
         setUpload(false);
         setTitle("");
         setAuthor("");

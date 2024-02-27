@@ -26,6 +26,10 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [emailError, setEmailError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const newUser = {
     email: email,
     password: password,
@@ -46,6 +50,21 @@ function Login() {
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isValidUsername = (username) => {
+    return username.length >= 5;
+  };
+
+  const isValidPassword = (password) => {
+    const uppercaseRegex = /[A-Z]/;
+    const digitRegex = /\d/;
+    return uppercaseRegex.test(password) && digitRegex.test(password);
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
     loginUser(newUser, dispatch);
@@ -53,6 +72,19 @@ function Login() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (!isValidEmail(email)) {
+      setEmailError("email không hợp lệ");
+      return;
+    }
+
+    if (!isValidUsername(username)) {
+      setUsernameError("username tối thiếu 5 ký tự ");
+      return;
+    }
+    if (!isValidPassword(password)) {
+      setPasswordError("password phải bao gồm 1 số và 1 chữ hoa");
+      return;
+    }
     await registerUser(newUser, dispatch);
     const registrationSuccessful = true;
     if (registrationSuccessful) {
@@ -86,20 +118,6 @@ function Login() {
           {signUp ? (
             <div className={cx("signUp")}>
               <h1>Đăng ký...</h1>
-              <div className={cx("social")}>
-                <div onClick={handleGoogleLogin} className={cx("loginGG")}>
-                  <button>
-                    <img src={icon.google} alt="" />
-                    <p>Tiếp tục bằng Google</p>
-                  </button>
-                </div>
-                <div className={cx("loginFB")}>
-                  <button>
-                    <img src={icon.facebook} alt="" />
-                    <p>Tiếp tục bằng Facebook</p>
-                  </button>
-                </div>
-              </div>
               <form onSubmit={handleRegister} className={cx("normally")}>
                 <div className={cx("email")}>
                   <p>Email</p>
@@ -108,6 +126,9 @@ function Login() {
                     type="text"
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                  <div className={cx("err")}>
+                    <span>{emailError}</span>
+                  </div>
                 </div>
                 <div className={cx("username")}>
                   <p>Tên người dùng</p>
@@ -116,6 +137,9 @@ function Login() {
                     type="text"
                     onChange={(e) => setUsername(e.target.value)}
                   />
+                  <div className={cx("err")}>
+                    <span>{usernameError}</span>
+                  </div>
                 </div>
                 <div className={cx("password")}>
                   <p>Mật khẩu</p>
@@ -124,6 +148,9 @@ function Login() {
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
+                  <div className={cx("err")}>
+                    <span>{passwordError}</span>
+                  </div>
                 </div>
                 <div className={cx("action")}>
                   <button type="submit">
@@ -133,7 +160,6 @@ function Login() {
                       <p>Đăng ký</p>
                     )}
                   </button>
-                  <button></button>
                 </div>
               </form>
               <div className={cx("forward")}>
@@ -187,9 +213,6 @@ function Login() {
                     ) : (
                       <p>Đăng nhập</p>
                     )}
-                  </button>
-                  <button>
-                    <p>Quên mật khẩu</p>
                   </button>
                 </div>
               </form>
