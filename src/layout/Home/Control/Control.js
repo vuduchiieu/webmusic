@@ -150,7 +150,8 @@ function Control() {
 
   const handleSongProgress = () => {
     const listenTime = (audioRef.current.currentTime / duration) * 100;
-    if (listenTime > 50 && !apiCalled) {
+
+    if (idUser && idSong && listenTime > 50 && !apiCalled) {
       axios
         .put(`https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`)
         .then(() => {
