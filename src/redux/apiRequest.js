@@ -15,7 +15,7 @@ const loginUser = async (user, dispatch) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
-      "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/auth/login",
+      "https://be-song.vercel.app/v1/auth/login",
       user
     );
     dispatch(loginSuccess(res.data));
@@ -28,10 +28,7 @@ const loginUser = async (user, dispatch) => {
 const registerUser = async (user, dispatch) => {
   dispatch(registerStart());
   try {
-    await axios.post(
-      "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/auth/register",
-      user
-    );
+    await axios.post("https://be-song.vercel.app/v1/auth/register", user);
     dispatch(registerSuccess());
   } catch (error) {
     alert("Đăng ký thất bại");
@@ -42,7 +39,7 @@ const registerUser = async (user, dispatch) => {
 const logoutUser = async (dispatch, id, assessToken, axiosJWT, setAgain) => {
   dispatch(logoutStart());
   try {
-    // await axiosJWT.post("https://be-song-dbac8dd7b6a3.herokuapp.com/v1/auth/logout", id, {
+    // await axiosJWT.post("https://be-song.vercel.app/v1/auth/logout", id, {
     //   header: { token: `Bearer ${assessToken}` },
     // });
     dispatch(logoutSuccess());

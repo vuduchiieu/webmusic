@@ -3,19 +3,15 @@ import axios from "axios";
 const fetchData = async () => {
   try {
     //All songs
-    const resAllSong = await axios.get(
-      "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs/"
-    );
+    const resAllSong = await axios.get("https://be-song.vercel.app/v1/songs/");
     const allSong = resAllSong.data.allSong;
     allSong.sort((a, b) => a.title.localeCompare(b.title));
     // Songs treding
-    const resTrading = await axios.get(
-      "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs/"
-    );
+    const resTrading = await axios.get("https://be-song.vercel.app/v1/songs/");
     const treding = resTrading.data.allSong;
     // Songs recommend
     const resRecommend = await axios.get(
-      "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs/"
+      "https://be-song.vercel.app/v1/songs/"
     );
     const recommend = resRecommend.data.allSong;
 

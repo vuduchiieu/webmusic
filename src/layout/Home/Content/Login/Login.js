@@ -97,7 +97,7 @@ function Login() {
       const result = await signInWithPopup(auth, provider);
       const idToken = await result.user.getIdToken();
       const response = await axios.post(
-        "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/auth/google",
+        "https://be-song.vercel.app/v1/auth/google",
         {
           idToken: idToken,
         }
