@@ -154,7 +154,9 @@ function Control() {
 
     if (idUser && idSong && listenTime > 50 && !apiCalled) {
       axios
-        .put(`https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`)
+        .put(
+          `https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs/listened/${idUser}/${idSong}`
+        )
         .then(() => {
           setRefreshData(true);
           setApiCalled(true);

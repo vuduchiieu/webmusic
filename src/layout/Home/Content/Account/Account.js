@@ -23,7 +23,7 @@ function Account() {
   const refreshToken = async () => {
     try {
       const res = await axios.post(
-        "https://be-song.vercel.app/v1/auth/refresh",
+        "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/auth/refresh",
         {
           withCredentials: true,
         }

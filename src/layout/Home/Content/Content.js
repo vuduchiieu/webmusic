@@ -39,7 +39,7 @@ function Content() {
       const fetchData = async () => {
         try {
           const resAgain = await axios.get(
-            `https://be-song.vercel.app/v1/songs/listened/${user._id}`
+            `https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs/listened/${user._id}`
           );
           setAgain(resAgain.data.listenAgain);
         } catch (error) {
