@@ -4,7 +4,8 @@
   overflow: scroll;
   .song {
     min-width: 12vw;
-    min-height: 34vh;
+    width: 12vw;
+    height: 34vh;
     border-radius: 16px;
     background-color: var(--songs-color);
     margin-right: 3%;

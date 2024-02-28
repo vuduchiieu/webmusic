@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
-import { recommend, treding } from "~/db/songs";
+import { allSong, recommend, treding } from "~/db/songs";
 
 const cx = classNames.bind(styles);
 
@@ -27,14 +27,16 @@ function Control() {
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
-  const [volume, setVolume] = useState(100);
+  const [volume, setVolume] = useState(
+    parseInt(localStorage.getItem("volume")) || 100
+  );
 
   const idUser = user?._id;
   const idSong = play?._id;
 
   // Lấy mảng hiện tại
-  const currentArray = [treding, recommend, again].find(
-    (array) => array && array.some((song) => song.title === play.title)
+  const currentArray = [allSong, treding, recommend, again].find(
+    (array) => array && array.some((song) => song.source === play.source)
   );
 
   // Hàm định dạng thời gian
@@ -67,6 +69,7 @@ function Control() {
 
   // Xử lý thay đổi âm lượng
   const handleVolumeChange = (value) => {
+    localStorage.setItem("volume", value);
     audioRef.current.volume = value / 100;
     setIsForcus(true);
     setVolume(value);
@@ -77,9 +80,14 @@ function Control() {
     audioRef.current.volume = 0;
     setVolume(0);
     if (volume === 0) {
-      audioRef.current.volume = volume / 100;
+      audioRef.current.volume = parseInt(localStorage.getItem("volume")) / 100;
+      setVolume(parseInt(localStorage.getItem("volume")));
     }
   };
+
+  useEffect(() => {
+    audioRef.current.volume = parseInt(localStorage.getItem("volume")) / 100;
+  }, []);
 
   // Xử lý chuyển bài ngẫu nhiên
   const handleRandom = () => {
@@ -124,16 +132,11 @@ function Control() {
   // Xử lý chuyển bài trước đó
   const handleBackWard = () => {
     if (currentArray) {
-      const currentIndex = currentArray.findIndex(
-        (song) => song.id === play.id
-      );
-
       const prevIndex = isRandom
         ? Math.floor(Math.random() * currentArray.length)
-        : (currentIndex - 1 + currentArray.length) % currentArray.length;
+        : (currentArray.indexOf(play) - 1) % currentArray?.length;
 
       const prevSong = currentArray[prevIndex];
-
       setPlay(prevSong);
       setIsPlaying(false);
       setTimeout(() => {
