@@ -59,11 +59,18 @@ const Contexts = ({ children }) => {
 
   const [like, setLike] = useState(false);
   const handleLikeToggle = (title) => {
+    if (!user) {
+      alert("bạn cần đăng nhập để thêm bài hát vào yêu thích");
+      setLogin(true);
+      return;
+    }
     setLike((prev) => ({
       ...prev,
       [title]: !prev[title],
     }));
   };
+
+  const [login, setLogin] = useState(false);
 
   const user = useSelector((state) => state.auth.login.currentUser);
 
@@ -89,6 +96,8 @@ const Contexts = ({ children }) => {
         apiCalled,
         setApiCalled,
         user,
+        login,
+        setLogin,
       }}
     >
       {children}

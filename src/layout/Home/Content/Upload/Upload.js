@@ -5,10 +5,12 @@ import icon from "~/assets/icon";
 import React, { useState } from "react";
 import axios from "axios";
 import { allSong } from "~/db/songs";
+import { useAppContext } from "~/component/context/AppContext";
 
 const cx = classNames.bind(styles);
 
 function Upload() {
+  const { user, setLogin } = useAppContext();
   const [loading, setLoading] = useState(false);
   const [upload, setUpload] = useState(false);
   const [title, setTitle] = useState("");
@@ -28,6 +30,12 @@ function Upload() {
 
   const handlePost = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setUpload(false);
+      alert("bạn cần đăng nhập để tải lên bài hát.");
+      setLogin(true);
+      return;
+    }
     const formData = new FormData();
     formData.append("title", title);
     formData.append("author", author);
@@ -37,6 +45,7 @@ function Upload() {
       }
     }
     formData.append("isPublic", true);
+
     try {
       if (!titleAllSong.includes(title)) {
         setLoading(true);

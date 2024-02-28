@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
@@ -148,7 +148,7 @@ function Control() {
   };
 
   // Put nhạc vào again
-  const handleSongProgress = () => {
+  const handleSongProgress = useCallback(() => {
     const listenTime = (audioRef.current.currentTime / duration) * 100;
 
     if (idUser && idSong && listenTime > 50 && !apiCalled) {
@@ -162,10 +162,10 @@ function Control() {
           console.error("Error adding song to listen again list:", error);
         });
     }
-  };
+  }, [duration, idSong, idUser, apiCalled, setRefreshData, setApiCalled]);
   useEffect(() => {
     handleSongProgress();
-  }, [currentTime, duration, idSong, idUser, apiCalled]);
+  }, [currentTime, duration, idSong, idUser, apiCalled, handleSongProgress]);
 
   // Xử lý phát hoặc dừng nhạc khi thay đổi trạng thái
   useEffect(() => {

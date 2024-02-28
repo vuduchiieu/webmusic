@@ -8,16 +8,18 @@ import icon from "~/assets/icon";
 import { loginUser, registerUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useAppContext } from "~/component/context/AppContext";
 
 const cx = classNames.bind(styles);
 
 function Login() {
+  const { login, setLogin } = useAppContext();
+
   const loading = useSelector((state) => state.auth.login.isFetching);
   const loadingRegister = useSelector(
     (state) => state.auth.register.isFetching
   );
 
-  const [login, setLogin] = useState(false);
   const [signUp, setSignUp] = useState(false);
 
   const dispatch = useDispatch();
@@ -67,7 +69,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    loginUser(newUser, dispatch);
+    loginUser(newUser, dispatch, setLogin);
   };
 
   const handleRegister = async (e) => {

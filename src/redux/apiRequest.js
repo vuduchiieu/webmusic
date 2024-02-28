@@ -11,7 +11,7 @@ import {
   registerSuccess,
 } from "./authSlide";
 
-const loginUser = async (user, dispatch) => {
+const loginUser = async (user, dispatch, setLogin) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
@@ -19,6 +19,7 @@ const loginUser = async (user, dispatch) => {
       user
     );
     dispatch(loginSuccess(res.data));
+    setLogin(false);
   } catch (error) {
     alert("Đăng nhập thất bại:");
     dispatch(loginFailed());
