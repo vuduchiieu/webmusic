@@ -14,6 +14,10 @@ function Search({ searchValue }) {
       setResult([]);
       return;
     }
+    if (searchValue === " ") {
+      setResult(allSong);
+      return;
+    }
     const filterResult = [...allSong].filter((item) =>
       item.title.toLowerCase().includes(searchValue.toLowerCase())
     );

@@ -161,6 +161,7 @@ function Control() {
           setRefreshData(true);
           setApiCalled(true);
         })
+
         .catch((error) => {
           console.error("Error adding song to listen again list:", error);
         });

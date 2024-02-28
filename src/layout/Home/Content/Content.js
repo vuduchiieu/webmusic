@@ -39,7 +39,12 @@ function Content() {
           const resAgain = await axios.get(
             `https://be-song.vercel.app/v1/songs/listened/${user._id}`
           );
-          setAgain(resAgain.data.listenAgain);
+          setAgain(
+            resAgain.data.listenAgain.map((song) => ({
+              ...song,
+              source: "again",
+            }))
+          );
         } catch (error) {
           console.error("Error fetching data:", error);
         } finally {

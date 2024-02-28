@@ -4,9 +4,9 @@ const fetchData = async () => {
   try {
     //All songs
     const resAllSong = await axios.get("https://be-song.vercel.app/v1/songs/");
-    let allSong = resAllSong.data.allSong;
-    allSong.sort((a, b) => a.title.localeCompare(b.title));
-    allSong = allSong.map((song) => ({ ...song, source: "allSong" }));
+    const allSong = resAllSong.data.allSong
+      .sort((a, b) => a.title.localeCompare(b.title))
+      .map((song) => ({ ...song, source: "allSong" }));
     // Songs treding
     const resTreding = await axios.get("https://be-song.vercel.app/v1/songs/");
     const treding = resTreding.data.allSong.map((song) => ({
