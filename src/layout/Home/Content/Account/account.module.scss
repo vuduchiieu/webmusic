@@ -1,7 +1,7 @@
 .setting {
   display: flex;
   flex-direction: column;
-  width: 12vw;
+  width: 10vw;
   height: 25vh;
   background-color: var(--main-background);
   border-radius: 15px;
@@ -10,7 +10,7 @@
     content: "";
     position: absolute;
     top: -5%;
-    right: 5%;
+    right: 10%;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
     border-bottom: 20px solid var(--main-background);
@@ -38,6 +38,7 @@
   .profile {
     display: flex;
     align-items: center;
+    justify-content: center;
     p {
       overflow: hidden;
       white-space: nowrap;

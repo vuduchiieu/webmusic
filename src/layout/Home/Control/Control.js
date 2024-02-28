@@ -118,9 +118,7 @@ function Control() {
       const nextSongIndex = isRandom
         ? Math.floor(Math.random() * currentArray.length)
         : (currentArray.indexOf(play) + 1) % currentArray.length;
-
       const nextSong = currentArray[nextSongIndex];
-
       setPlay(nextSong);
       setIsPlaying(false);
       setTimeout(() => {
@@ -136,7 +134,10 @@ function Control() {
         ? Math.floor(Math.random() * currentArray.length)
         : (currentArray.indexOf(play) - 1) % currentArray?.length;
 
-      const prevSong = currentArray[prevIndex];
+      const newPrevIndex =
+        prevIndex === -1 ? currentArray.length - 1 : prevIndex;
+
+      const prevSong = currentArray[newPrevIndex];
       setPlay(prevSong);
       setIsPlaying(false);
       setTimeout(() => {
