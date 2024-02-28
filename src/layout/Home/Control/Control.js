@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
-import { allSong, recommend, treding } from "~/db/songs";
+import { allSong } from "~/db/songs";
 
 const cx = classNames.bind(styles);
 
@@ -15,11 +15,14 @@ function Control() {
     isPlaying,
     setIsPlaying,
     again,
+    treding,
+    recommend,
     setRefreshData,
     apiCalled,
     setApiCalled,
     user,
   } = useAppContext();
+
   const audioRef = useRef(null);
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -151,26 +154,50 @@ function Control() {
     handleNext();
   };
 
-  // Put nhạc vào again
-  const handleSongProgress = useCallback(() => {
+  // Thêm nhạc vào again
+  const handleUpdateAgain = useCallback(() => {
     const listenTime = (audioRef.current.currentTime / duration) * 100;
-
     if (idUser && idSong && listenTime > 50 && !apiCalled) {
-      axios
-        .put(`https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`)
-        .then(() => {
-          setRefreshData(true);
-          setApiCalled(true);
-        })
-
-        .catch((error) => {
-          console.error("Error adding song to listen again list:", error);
-        });
+      setApiCalled(true);
+      try {
+        axios
+          .put(
+            `https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`
+          )
+          .then(() => {
+            setRefreshData(true);
+          });
+      } catch (error) {
+        setApiCalled(false);
+        console.error("Error adding song to listen again list:", error);
+      }
     }
   }, [duration, idSong, idUser, apiCalled, setRefreshData, setApiCalled]);
   useEffect(() => {
-    handleSongProgress();
-  }, [currentTime, duration, idSong, idUser, apiCalled, handleSongProgress]);
+    handleUpdateAgain();
+  }, [currentTime, duration, idSong, idUser, apiCalled, handleUpdateAgain]);
+
+  //Thêm nhạc vào trending
+  const handleUpdateTrending = useCallback(() => {
+    const listenTime = (audioRef.current.currentTime / duration) * 100;
+    if (idSong && listenTime > 50 && !apiCalled) {
+      setApiCalled(true);
+      try {
+        axios
+          .put(`https://be-song.vercel.app/v1/songs/trending/${idSong}`)
+          .then((res) => {
+            console.log(res.data);
+            setRefreshData(true);
+          });
+      } catch (error) {
+        setApiCalled(false);
+        console.error("Error adding song to listen again list:", error);
+      }
+    }
+  }, [duration, idSong, apiCalled, setRefreshData, setApiCalled]);
+  useEffect(() => {
+    handleUpdateTrending();
+  }, [currentTime, duration, idSong, apiCalled, handleUpdateTrending]);
 
   // Xử lý phát hoặc dừng nhạc khi thay đổi trạng thái
   useEffect(() => {

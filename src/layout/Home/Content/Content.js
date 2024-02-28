@@ -4,7 +4,6 @@ import classNames from "classnames/bind";
 import styles from "./content.module.scss";
 import { useAppContext } from "~/component/context/AppContext";
 import icon from "~/assets/icon";
-import { treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
@@ -22,16 +21,20 @@ function Content() {
     setSearch,
     again,
     setAgain,
+    treding,
+    setTreding,
+    recommend,
+    setRecommend,
     refreshData,
     setRefreshData,
     user,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
-
   const handleTheme = () => {
     setThemeMode(!themeMode);
   };
+  //render again
   useEffect(() => {
     if (user != null) {
       const fetchData = async () => {
@@ -56,6 +59,49 @@ function Content() {
     }
   }, [refreshData, user, user?._id, setRefreshData, setAgain]);
 
+  //render trending
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resTreding = await axios.get(
+          "https://be-song.vercel.app/v1/songs/trending"
+        );
+        setTreding(
+          resTreding.data.map((song) => ({
+            ...song,
+            source: "trending",
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setRefreshData(false);
+      }
+    };
+    fetchData();
+  }, [refreshData, setRefreshData, setTreding]);
+
+  //render recommend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resRecommend = await axios.get(
+          "https://be-song.vercel.app/v1/songs/"
+        );
+        setRecommend(
+          resRecommend.data.allSong.map((song) => ({
+            ...song,
+            source: "recommend",
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setRefreshData(false);
+      }
+    };
+    fetchData();
+  }, [refreshData, setRefreshData, setRecommend]);
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>

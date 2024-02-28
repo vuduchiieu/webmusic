@@ -7,28 +7,14 @@ const fetchData = async () => {
     const allSong = resAllSong.data.allSong
       .sort((a, b) => a.title.localeCompare(b.title))
       .map((song) => ({ ...song, source: "allSong" }));
-    // Songs treding
-    const resTreding = await axios.get("https://be-song.vercel.app/v1/songs/");
-    const treding = resTreding.data.allSong.map((song) => ({
-      ...song,
-      source: "trending",
-    }));
-    // Songs recommend
-    const resRecommend = await axios.get(
-      "https://be-song.vercel.app/v1/songs/"
-    );
-    const recommend = resRecommend.data.allSong.map((song) => ({
-      ...song,
-      source: "recommend",
-    }));
 
-    return { allSong, treding, recommend };
+    return { allSong };
   } catch (err) {
     console.error(err);
-    return { allSong: [], treding: [], recommend: [] };
+    return { allSong: [] };
   }
 };
 
-const { allSong, treding, recommend } = await fetchData();
+const { allSong } = await fetchData();
 
-export { allSong, treding, recommend };
+export { allSong };

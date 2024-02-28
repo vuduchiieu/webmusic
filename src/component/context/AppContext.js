@@ -6,6 +6,8 @@ const AppContext = createContext();
 const Contexts = ({ children }) => {
   const [search, setSearch] = useState(false);
   const [again, setAgain] = useState([]);
+  const [treding, setTreding] = useState([]);
+  const [recommend, setRecommend] = useState([]);
   const [refreshData, setRefreshData] = useState(true);
   const [apiCalled, setApiCalled] = useState(false);
 
@@ -91,6 +93,10 @@ const Contexts = ({ children }) => {
         handleLikeToggle,
         again,
         setAgain,
+        treding,
+        setTreding,
+        recommend,
+        setRecommend,
         refreshData,
         setRefreshData,
         apiCalled,

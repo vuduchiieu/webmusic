@@ -10,6 +10,17 @@ const cx = classNames.bind(styles);
 function Songs({ songs, search }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
   const elRef = useWheelScroll();
+
+  function formatViews(viewCount) {
+    if (viewCount < 1000) {
+      return viewCount.toString();
+    } else if (viewCount < 1000000) {
+      return (viewCount / 1000).toFixed(1) + " N";
+    } else {
+      return (viewCount / 1000000).toFixed(1) + " Tr";
+    }
+  }
+
   return (
     <div
       ref={search ? null : elRef}
@@ -41,7 +52,7 @@ function Songs({ songs, search }) {
           <div className={cx("info")}>
             <div className={cx("wrap")}>
               <p>{item.author}</p>
-              <span>12 Tr lượt xem</span>
+              <span>{formatViews(item.view)} lượt nghe</span>
             </div>
             <button onClick={() => handleLikeToggle(item.title)}>
               {like[item.title] ? (
