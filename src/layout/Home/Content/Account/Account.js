@@ -67,9 +67,13 @@ function Account() {
       visible={settingAcc}
       render={(attrs) => (
         <div tabIndex="-1" {...attrs} className={cx("setting")}>
-          <button>
-            <p>Hồ sơ</p>
-          </button>
+          <div className={cx("profile")}>
+            <img
+              src={user.avatar === null ? icon.avatar : user.avatar}
+              alt=""
+            />
+            <p>{user.username}</p>
+          </div>
           <button>
             <p>Cài đặt</p>
           </button>
