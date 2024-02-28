@@ -67,6 +67,7 @@
       flex-direction: column;
       height: 30vh;
       margin-top: 5vh;
+      .avatar,
       .email,
       .username,
       .password {
@@ -74,7 +75,7 @@
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-        height: 35%;
+        height: 30%;
         p {
           width: 40%;
         }
@@ -158,6 +159,23 @@
   .signUp {
     .normally {
       height: 50vh;
+      .avatar {
+        position: relative;
+        text-align: center;
+        input {
+          display: none;
+        }
+        label {
+          position: absolute;
+          top: -100%;
+          width: 15vw;
+          height: 15vh;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
     }
   }
 }

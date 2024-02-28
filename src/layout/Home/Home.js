@@ -11,7 +11,6 @@ const cx = classNames.bind(styles);
 
 function Home() {
   const { play } = useAppContext();
-
   return (
     <div className={cx("home")}>
       <div className={cx("main")}>

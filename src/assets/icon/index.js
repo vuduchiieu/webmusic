@@ -6,6 +6,7 @@ const icon = {
   back: require("./back.svg").default,
   upload: require("./upload.svg").default,
   uploadMedia: require("./uploadmedia.svg").default,
+  uploadAvatar: require("./upload-avatar.svg").default,
   ok: require("./ok.svg").default,
   login: require("./login.svg").default,
   play: require("./play.svg").default,

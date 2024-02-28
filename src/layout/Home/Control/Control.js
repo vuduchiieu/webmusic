@@ -1,11 +1,10 @@
-import classNames from "classnames/bind";
-import styles from "./control.module.scss";
-import { useAppContext } from "~/component/context/AppContext";
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import classNames from "classnames/bind";
+import { useAppContext } from "~/component/context/AppContext";
+import styles from "./control.module.scss";
 import icon from "~/assets/icon";
 import { recommend, treding } from "~/db/songs";
-import axios from "axios";
-import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
@@ -19,6 +18,7 @@ function Control() {
     setRefreshData,
     apiCalled,
     setApiCalled,
+    user,
   } = useAppContext();
   const audioRef = useRef(null);
 
@@ -29,7 +29,6 @@ function Control() {
   const [isRandom, setIsRandom] = useState(false);
   const [volume, setVolume] = useState(100);
 
-  const user = useSelector((state) => state.auth.login.currentUser);
   const idUser = user?._id;
   const idSong = play?._id;
 

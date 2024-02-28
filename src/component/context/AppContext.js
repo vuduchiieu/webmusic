@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
+import { useSelector } from "react-redux";
 
 const AppContext = createContext();
 
@@ -64,6 +65,8 @@ const Contexts = ({ children }) => {
     }));
   };
 
+  const user = useSelector((state) => state.auth.login.currentUser);
+
   return (
     <AppContext.Provider
       value={{
@@ -85,6 +88,7 @@ const Contexts = ({ children }) => {
         setRefreshData,
         apiCalled,
         setApiCalled,
+        user,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import classNames from "classnames/bind";
 import styles from "./account.module.scss";
 import { logoutUser } from "~/redux/apiRequest";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import icon from "~/assets/icon";
 import { loginSuccess } from "~/redux/authSlide";
 import { useAppContext } from "~/component/context/AppContext";
@@ -13,10 +13,9 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { setAgain } = useAppContext();
+  const { setAgain, user } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.login.currentUser);
   const assessToken = user?.accessToken;
   const id = user?._id;
 

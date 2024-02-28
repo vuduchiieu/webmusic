@@ -8,7 +8,6 @@ import { treding, recommend } from "~/db/songs";
 import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
-import { useSelector } from "react-redux";
 import Songs from "~/component/Songs/Songs";
 import axios from "axios";
 import Upload from "./Upload/Upload";
@@ -25,6 +24,7 @@ function Content() {
     setAgain,
     refreshData,
     setRefreshData,
+    user,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -32,8 +32,6 @@ function Content() {
   const handleTheme = () => {
     setThemeMode(!themeMode);
   };
-
-  const user = useSelector((state) => state.auth.login.currentUser);
   useEffect(() => {
     if (user != null) {
       const fetchData = async () => {
@@ -51,7 +49,7 @@ function Content() {
 
       fetchData();
     }
-  }, [refreshData, user?._id, setRefreshData, setAgain]);
+  }, [refreshData, user, user?._id, setRefreshData, setAgain]);
 
   return (
     <div className={cx("content")}>

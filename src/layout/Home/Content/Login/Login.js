@@ -119,6 +119,13 @@ function Login() {
             <div className={cx("signUp")}>
               <h1>Đăng ký...</h1>
               <form onSubmit={handleRegister} className={cx("normally")}>
+                <div className={cx("avatar")}>
+                  <input id="avatar" type="file" />
+                  <label htmlFor="avatar">
+                    <img src={icon.uploadAvatar} alt="" />
+                  </label>
+                  <p>Một chiếc ảnh thật là xinh</p>
+                </div>
                 <div className={cx("email")}>
                   <p>Email</p>
                   <input
