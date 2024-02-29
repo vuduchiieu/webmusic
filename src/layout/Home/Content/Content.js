@@ -10,7 +10,6 @@ import Account from "./Account/Account";
 import Songs from "~/component/Songs/Songs";
 import axios from "axios";
 import Upload from "./Upload/Upload";
-import { allSong } from "~/db/songs";
 
 const cx = classNames.bind(styles);
 
@@ -26,7 +25,7 @@ function Content() {
     setTreding,
     recommend,
     setRecommend,
-    refreshData,
+    allSongs,
     setRefreshData,
     user,
   } = useAppContext();
@@ -41,7 +40,7 @@ function Content() {
       const fetchData = async () => {
         try {
           const resAgain = await axios.get(
-            `https://be-song.vercel.app/v1/songs/listened/${user._id}`
+            `https://be-song.vercel.app/v1/songs/listened/${user?._id}`
           );
           setAgain(
             resAgain.data.listenAgain.map((song) => ({
@@ -58,7 +57,7 @@ function Content() {
 
       fetchData();
     }
-  }, [refreshData, user, user?._id, setRefreshData, setAgain]);
+  }, [user, setRefreshData, setAgain]);
 
   //render trending
   useEffect(() => {
@@ -80,7 +79,7 @@ function Content() {
       }
     };
     fetchData();
-  }, [refreshData, setRefreshData, setTreding]);
+  }, [setRefreshData, setTreding]);
 
   //render recommend
   useEffect(() => {
@@ -88,7 +87,7 @@ function Content() {
       if (user != null) {
         try {
           const resRecommend = await axios.get(
-            `https://be-song.vercel.app/v1/songs/recommend/${user._id}`
+            `https://be-song.vercel.app/v1/songs/recommend/${user?._id}`
           );
           setRecommend(
             resRecommend.data.map((song) => ({
@@ -104,7 +103,7 @@ function Content() {
       }
     };
     fetchData();
-  }, [refreshData, setRefreshData, setRecommend, user?._id]);
+  }, [setRefreshData, setRecommend, user]);
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>
@@ -164,7 +163,7 @@ function Content() {
           {!user && (
             <div className={cx("allSong")}>
               <h2>Tất cả bài hát</h2>
-              <Songs songs={allSong} />
+              <Songs songs={allSongs} />
             </div>
           )}
         </div>

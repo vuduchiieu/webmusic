@@ -4,7 +4,6 @@ import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
-import { allSong } from "~/db/songs";
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +16,7 @@ function Control() {
     again,
     treding,
     recommend,
+    allSongs,
     setRefreshData,
     apiCalled,
     setApiCalled,
@@ -38,7 +38,7 @@ function Control() {
   const idSong = play?._id;
 
   // Lấy mảng hiện tại
-  const currentArray = [allSong, treding, recommend, again].find(
+  const currentArray = [allSongs, treding, recommend, again].find(
     (array) => array && array.some((song) => song.source === play.source)
   );
 

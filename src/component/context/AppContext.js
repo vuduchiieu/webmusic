@@ -8,6 +8,7 @@ const Contexts = ({ children }) => {
   const [again, setAgain] = useState([]);
   const [treding, setTreding] = useState([]);
   const [recommend, setRecommend] = useState([]);
+  const [allSongs, setAllSongs] = useState([]);
   const [refreshData, setRefreshData] = useState(true);
   const [apiCalled, setApiCalled] = useState(false);
 
@@ -97,6 +98,8 @@ const Contexts = ({ children }) => {
         setTreding,
         recommend,
         setRecommend,
+        allSongs,
+        setAllSongs,
         refreshData,
         setRefreshData,
         apiCalled,

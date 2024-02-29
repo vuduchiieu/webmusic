@@ -4,19 +4,18 @@ import Tippy from "@tippyjs/react/headless";
 import icon from "~/assets/icon";
 import React, { useState } from "react";
 import axios from "axios";
-import { allSong } from "~/db/songs";
 import { useAppContext } from "~/component/context/AppContext";
 
 const cx = classNames.bind(styles);
 
 function Upload() {
-  const { user, setLogin } = useAppContext();
+  const { user, setLogin, allSongs } = useAppContext();
   const [loading, setLoading] = useState(false);
   const [upload, setUpload] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [files, setFiles] = useState({});
-  const titleAllSong = allSong.map((item) => item.title);
+  const titleAllSong = allSongs.map((item) => item.title);
 
   const handleMultipleSubmit = (e) => {
     const selectedFiles = e.target.files;
