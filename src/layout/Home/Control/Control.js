@@ -31,7 +31,7 @@ function Control() {
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
   const [volume, setVolume] = useState(
-    parseInt(localStorage.getItem("volume")) || 100
+    100 || parseInt(localStorage.getItem("volume"))
   );
 
   const idUser = user?._id;
