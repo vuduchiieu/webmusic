@@ -31,7 +31,7 @@ function Control() {
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
   const [volume, setVolume] = useState(
-    100 || parseInt(localStorage.getItem("volume"))
+    parseInt(localStorage.getItem("volume")) || 100
   );
 
   const idUser = user?._id;
@@ -89,7 +89,8 @@ function Control() {
   };
 
   useEffect(() => {
-    audioRef.current.volume = parseInt(localStorage.getItem("volume")) / 100;
+    audioRef.current.volume =
+      parseInt(localStorage.getItem("volume")) / 100 || 100 / 100;
   }, []);
 
   // Xử lý chuyển bài ngẫu nhiên
@@ -151,6 +152,7 @@ function Control() {
 
   // Xử lý sự kiện khi bài hát kết thúc
   const handleAudioEnded = () => {
+    setApiCalled(false);
     handleNext();
   };
 
