@@ -13,7 +13,7 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { setAgain, user } = useAppContext();
+  const { setAgain, user, setRecommend } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
   const assessToken = user?.accessToken;
@@ -29,7 +29,6 @@ function Account() {
       );
       return res.data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   };
@@ -56,7 +55,7 @@ function Account() {
   );
 
   const handleLogOut = () => {
-    logoutUser(dispatch, id, assessToken, axiosJWT, setAgain);
+    logoutUser(dispatch, id, assessToken, axiosJWT, setAgain, setRecommend);
   };
 
   return (

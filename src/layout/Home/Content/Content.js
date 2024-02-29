@@ -10,6 +10,7 @@ import Account from "./Account/Account";
 import Songs from "~/component/Songs/Songs";
 import axios from "axios";
 import Upload from "./Upload/Upload";
+import { allSong } from "~/db/songs";
 
 const cx = classNames.bind(styles);
 
@@ -84,24 +85,26 @@ function Content() {
   //render recommend
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const resRecommend = await axios.get(
-          "https://be-song.vercel.app/v1/songs/"
-        );
-        setRecommend(
-          resRecommend.data.allSong.map((song) => ({
-            ...song,
-            source: "recommend",
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setRefreshData(false);
+      if (user != null) {
+        try {
+          const resRecommend = await axios.get(
+            `https://be-song.vercel.app/v1/songs/recommend/${user._id}`
+          );
+          setRecommend(
+            resRecommend.data.map((song) => ({
+              ...song,
+              source: "recommend",
+            }))
+          );
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setRefreshData(false);
+        }
       }
     };
     fetchData();
-  }, [refreshData, setRefreshData, setRecommend]);
+  }, [refreshData, setRefreshData, setRecommend, user?._id]);
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>
@@ -152,10 +155,18 @@ function Content() {
             <h2>Thịnh hành</h2>
             <Songs songs={treding} />
           </div>
-          <div className={cx("recommend")}>
-            <h2>Có thể bạn sẽ thích</h2>
-            <Songs songs={recommend} />
-          </div>
+          {recommend && recommend.length > 0 && (
+            <div className={cx("recommend")}>
+              <h2>Có thể bạn sẽ thích</h2>
+              <Songs songs={recommend} />
+            </div>
+          )}
+          {!user && (
+            <div className={cx("allSong")}>
+              <h2>Tất cả bài hát</h2>
+              <Songs songs={allSong} />
+            </div>
+          )}
         </div>
       )}
     </div>

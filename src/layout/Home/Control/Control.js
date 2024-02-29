@@ -116,25 +116,20 @@ function Control() {
       }, 5000);
   };
 
-  // Xử lý sự kiện khi bài hát kết thúc
-  const handleAudioEnded = () => {
-    setApiCalled(false);
-    handleNext();
-  };
-
   // Xử lý chuyển bài tiếp theo
   const handleNext = () => {
     if (currentArray) {
-      let nextSongIndex;
+      let nextIndex;
 
       if (isRandom) {
-        nextSongIndex = Math.floor(Math.random() * currentArray.length);
-        console.log(nextSongIndex);
+        nextIndex = Math.floor(Math.random() * currentArray.length);
       } else {
-        nextSongIndex = (currentArray.indexOf(play) + 1) % currentArray.length;
+        nextIndex = (currentArray.indexOf(play) + 1) % currentArray.length;
       }
 
-      const nextSong = currentArray[nextSongIndex];
+      const newNextIndex = nextIndex === -1 ? 1 : nextIndex;
+
+      const nextSong = currentArray[newNextIndex];
       setPlay(nextSong);
       setIsPlaying(false);
       setTimeout(() => {
@@ -166,6 +161,12 @@ function Control() {
         setIsPlaying(true);
       }, 100);
     }
+  };
+
+  // Xử lý sự kiện khi bài hát kết thúc
+  const handleAudioEnded = () => {
+    setApiCalled(false);
+    handleNext();
   };
 
   // Thêm nhạc vào again
