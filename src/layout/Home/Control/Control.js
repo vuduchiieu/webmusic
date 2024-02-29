@@ -116,12 +116,24 @@ function Control() {
       }, 5000);
   };
 
+  // Xử lý sự kiện khi bài hát kết thúc
+  const handleAudioEnded = () => {
+    setApiCalled(false);
+    handleNext();
+  };
+
   // Xử lý chuyển bài tiếp theo
   const handleNext = () => {
     if (currentArray) {
-      const nextSongIndex = isRandom
-        ? Math.floor(Math.random() * currentArray.length)
-        : (currentArray.indexOf(play) + 1) % currentArray.length;
+      let nextSongIndex;
+
+      if (isRandom) {
+        nextSongIndex = Math.floor(Math.random() * currentArray.length);
+        console.log(nextSongIndex);
+      } else {
+        nextSongIndex = (currentArray.indexOf(play) + 1) % currentArray.length;
+      }
+
       const nextSong = currentArray[nextSongIndex];
       setPlay(nextSong);
       setIsPlaying(false);
@@ -134,26 +146,26 @@ function Control() {
   // Xử lý chuyển bài trước đó
   const handleBackWard = () => {
     if (currentArray) {
-      const prevIndex = isRandom
-        ? Math.floor(Math.random() * currentArray.length)
-        : (currentArray.indexOf(play) - 1) % currentArray?.length;
+      let prevIndex;
+
+      if (isRandom) {
+        prevIndex = Math.floor(Math.random() * currentArray.length);
+      } else {
+        prevIndex =
+          (currentArray.indexOf(play) - 1 + currentArray.length) %
+          currentArray.length;
+      }
 
       const newPrevIndex =
         prevIndex === -1 ? currentArray.length - 1 : prevIndex;
-
       const prevSong = currentArray[newPrevIndex];
+
       setPlay(prevSong);
       setIsPlaying(false);
       setTimeout(() => {
         setIsPlaying(true);
       }, 100);
     }
-  };
-
-  // Xử lý sự kiện khi bài hát kết thúc
-  const handleAudioEnded = () => {
-    setApiCalled(false);
-    handleNext();
   };
 
   // Thêm nhạc vào again
@@ -187,8 +199,7 @@ function Control() {
       try {
         axios
           .put(`https://be-song.vercel.app/v1/songs/trending/${idSong}`)
-          .then((res) => {
-            console.log(res.data);
+          .then(() => {
             setRefreshData(true);
           });
       } catch (error) {
