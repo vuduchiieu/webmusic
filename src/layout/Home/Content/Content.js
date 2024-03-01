@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import classNames from "classnames/bind";
 import styles from "./content.module.scss";
@@ -8,7 +8,6 @@ import Login from "./Login/Login";
 import Search from "./Search/Search";
 import Account from "./Account/Account";
 import Songs from "~/component/Songs/Songs";
-import axios from "axios";
 import Upload from "./Upload/Upload";
 
 const cx = classNames.bind(styles);
@@ -20,13 +19,9 @@ function Content() {
     search,
     setSearch,
     again,
-    setAgain,
     treding,
-    setTreding,
     recommend,
-    setRecommend,
     allSongs,
-    setRefreshData,
     user,
   } = useAppContext();
 
@@ -34,76 +29,7 @@ function Content() {
   const handleTheme = () => {
     setThemeMode(!themeMode);
   };
-  //render again
-  useEffect(() => {
-    if (user != null) {
-      const fetchData = async () => {
-        try {
-          const resAgain = await axios.get(
-            `https://be-song.vercel.app/v1/songs/listened/${user?._id}`
-          );
-          setAgain(
-            resAgain.data.listenAgain.map((song) => ({
-              ...song,
-              source: "again",
-            }))
-          );
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setRefreshData(false);
-        }
-      };
 
-      fetchData();
-    }
-  }, [user, setRefreshData, setAgain]);
-
-  //render trending
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resTreding = await axios.get(
-          "https://be-song.vercel.app/v1/songs/trending"
-        );
-        setTreding(
-          resTreding.data.map((song) => ({
-            ...song,
-            source: "trending",
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setRefreshData(false);
-      }
-    };
-    fetchData();
-  }, [setRefreshData, setTreding]);
-
-  //render recommend
-  useEffect(() => {
-    const fetchData = async () => {
-      if (user != null) {
-        try {
-          const resRecommend = await axios.get(
-            `https://be-song.vercel.app/v1/songs/recommend/${user?._id}`
-          );
-          setRecommend(
-            resRecommend.data.map((song) => ({
-              ...song,
-              source: "recommend",
-            }))
-          );
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setRefreshData(false);
-        }
-      }
-    };
-    fetchData();
-  }, [setRefreshData, setRecommend, user]);
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>

@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
@@ -9,6 +8,7 @@ const cx = classNames.bind(styles);
 
 function Control() {
   const {
+    audioRef,
     play,
     setPlay,
     isPlaying,
@@ -17,16 +17,12 @@ function Control() {
     treding,
     recommend,
     allSongs,
-    setRefreshData,
-    apiCalled,
-    setApiCalled,
-    user,
+    duration,
+    setDuration,
+    currentTime,
+    setCurrentTime,
   } = useAppContext();
 
-  const audioRef = useRef(null);
-
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
@@ -34,13 +30,12 @@ function Control() {
     parseInt(localStorage.getItem("volume")) || 100
   );
 
-  const idUser = user?._id;
-  const idSong = play?._id;
-
   // Lấy mảng hiện tại
   const currentArray = [allSongs, treding, recommend, again].find(
     (array) => array && array.some((song) => song.source === play.source)
   );
+
+  console.log(play);
 
   // Hàm định dạng thời gian
   const formatTime = (timeInSeconds) => {
@@ -91,7 +86,7 @@ function Control() {
   useEffect(() => {
     audioRef.current.volume =
       parseInt(localStorage.getItem("volume")) / 100 || 100 / 100;
-  }, []);
+  }, [audioRef]);
 
   // Xử lý chuyển bài ngẫu nhiên
   const handleRandom = () => {
@@ -165,53 +160,8 @@ function Control() {
 
   // Xử lý sự kiện khi bài hát kết thúc
   const handleAudioEnded = () => {
-    setApiCalled(false);
     handleNext();
   };
-
-  // Thêm nhạc vào again
-  const handleUpdateAgain = useCallback(() => {
-    const listenTime = (audioRef.current.currentTime / duration) * 100;
-    if (idUser && idSong && listenTime > 50 && !apiCalled) {
-      setApiCalled(true);
-      try {
-        axios
-          .put(
-            `https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`
-          )
-          .then(() => {
-            setRefreshData(true);
-          });
-      } catch (error) {
-        setApiCalled(false);
-        console.error("Error adding song to listen again list:", error);
-      }
-    }
-  }, [duration, idSong, idUser, apiCalled, setRefreshData, setApiCalled]);
-  useEffect(() => {
-    handleUpdateAgain();
-  }, [currentTime, duration, idSong, idUser, apiCalled, handleUpdateAgain]);
-
-  //Thêm nhạc vào trending
-  const handleUpdateTrending = useCallback(() => {
-    const listenTime = (audioRef.current.currentTime / duration) * 100;
-    if (idSong && listenTime > 50 && !apiCalled) {
-      setApiCalled(true);
-      try {
-        axios
-          .put(`https://be-song.vercel.app/v1/songs/trending/${idSong}`)
-          .then(() => {
-            setRefreshData(true);
-          });
-      } catch (error) {
-        setApiCalled(false);
-        console.error("Error adding song to listen again list:", error);
-      }
-    }
-  }, [duration, idSong, apiCalled, setRefreshData, setApiCalled]);
-  useEffect(() => {
-    handleUpdateTrending();
-  }, [currentTime, duration, idSong, apiCalled, handleUpdateTrending]);
 
   // Xử lý phát hoặc dừng nhạc khi thay đổi trạng thái
   useEffect(() => {
@@ -222,12 +172,11 @@ function Control() {
         audioRef.current.pause();
       }
     }
-  }, [isPlaying]);
-
+  }, [isPlaying, audioRef]);
   // Xử lý lặp lại bài hát khi thay đổi trạng thái
   useEffect(() => {
     audioRef.current.loop = isLooping;
-  }, [isLooping]);
+  }, [isLooping, audioRef]);
 
   return (
     <div className={cx("control")}>
