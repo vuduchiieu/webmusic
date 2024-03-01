@@ -83,6 +83,11 @@ const Contexts = ({ children }) => {
     }
   };
 
+  // Lấy mảng hiện tại
+  const currentArray = [allSongs, treding, recommend, again].find(
+    (array) => array && array.some((song) => song.source === play.source)
+  );
+
   // Xử lý sự kiện trước khi đóng trang web
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -300,6 +305,7 @@ const Contexts = ({ children }) => {
         setDuration,
         currentTime,
         setCurrentTime,
+        currentArray,
       }}
     >
       {children}

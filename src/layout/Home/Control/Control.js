@@ -13,14 +13,11 @@ function Control() {
     setPlay,
     isPlaying,
     setIsPlaying,
-    again,
-    treding,
-    recommend,
-    allSongs,
     duration,
     setDuration,
     currentTime,
     setCurrentTime,
+    currentArray,
   } = useAppContext();
 
   const [isLooping, setIsLooping] = useState(false);
@@ -29,13 +26,6 @@ function Control() {
   const [volume, setVolume] = useState(
     parseInt(localStorage.getItem("volume")) || 100
   );
-
-  // Lấy mảng hiện tại
-  const currentArray = [allSongs, treding, recommend, again].find(
-    (array) => array && array.some((song) => song.source === play.source)
-  );
-
-  console.log(play);
 
   // Hàm định dạng thời gian
   const formatTime = (timeInSeconds) => {
