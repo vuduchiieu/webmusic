@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 
 const AppContext = createContext();
 
-// Component chứa tất cả các context và state của ứng dụng
 const Contexts = ({ children }) => {
   // Lấy thông tin người dùng từ Redux
   const user = useSelector((state) => state.auth.login.currentUser);
@@ -108,17 +107,26 @@ const Contexts = ({ children }) => {
 
   // State cho trạng thái thích bài hát
   const [like, setLike] = useState(false);
+  const [listLike, setListLike] = useState([]);
+  const [openLibrary, setOpenLibrary] = useState(false);
 
   // Xử lý sự kiện khi nhấn nút thích
-  const handleLikeToggle = (title) => {
+  const handleLikeToggle = (songs) => {
     if (!user) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
       return;
     }
+    if (listLike.some((likedSong) => likedSong._id === songs._id)) {
+      setListLike((prev) =>
+        prev.filter((likedSong) => likedSong._id !== songs._id)
+      );
+    } else {
+      setListLike((prev) => [...prev, songs]);
+    }
     setLike((prev) => ({
       ...prev,
-      [title]: !prev[title],
+      [songs._id]: !prev[songs._id],
     }));
   };
 
@@ -265,6 +273,11 @@ const Contexts = ({ children }) => {
     handleUpdateTrending();
   }, [listenTime, idSong, handleUpdateTrending]);
 
+  const handleBack = () => {
+    setSearch(false);
+    setOpenLibrary(false);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -279,7 +292,11 @@ const Contexts = ({ children }) => {
         setSearch,
         like,
         setLike,
+        listLike,
+        setListLike,
         handleLikeToggle,
+        openLibrary,
+        setOpenLibrary,
         again,
         setAgain,
         treding,
@@ -299,6 +316,7 @@ const Contexts = ({ children }) => {
         currentTime,
         setCurrentTime,
         currentArray,
+        handleBack,
       }}
     >
       {children}

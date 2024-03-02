@@ -9,6 +9,7 @@ import Search from "./Search/Search";
 import Account from "./Account/Account";
 import Songs from "~/component/Songs/Songs";
 import Upload from "./Upload/Upload";
+import Library from "../Navbar/Library/Library";
 
 const cx = classNames.bind(styles);
 
@@ -23,6 +24,8 @@ function Content() {
     recommend,
     allSongs,
     user,
+    openLibrary,
+    handleBack,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -33,7 +36,7 @@ function Content() {
   return (
     <div className={cx("content")}>
       <div className={cx("header")}>
-        <div onClick={() => setSearch(false)} className={cx("back")}>
+        <div onClick={() => handleBack()} className={cx("back")}>
           <img src={icon.back} alt="" />
         </div>
         {search && (
@@ -68,6 +71,8 @@ function Content() {
       </div>
       {search ? (
         <Search searchValue={searchValue} />
+      ) : openLibrary ? (
+        <Library />
       ) : (
         <div className={cx("main")}>
           {again && again.length > 0 && (

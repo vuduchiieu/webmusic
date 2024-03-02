@@ -7,8 +7,9 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const { search, setSearch } = useAppContext();
-  const [openLibrary, setOpenLibrary] = useState(false);
+  const { search, setSearch, setOpenLibrary, openLibrary, handleBack } =
+    useAppContext();
+  const [createLibrary, setCreateLibrary] = useState(false);
   const [addLibrary, setAddLibrary] = useState([]);
   const [dataLibrary, setDataLibrary] = useState([
     { title: "Yêu thích", data: [{}] },
@@ -42,11 +43,17 @@ function Navbar() {
   return (
     <div className={cx("navbar")}>
       <div className={cx("control")}>
-        <div onClick={() => setSearch(false)} className={cx("home")}>
+        <div onClick={() => handleBack()} className={cx("home")}>
           <img src={icon.home} alt="" />
           <h2>Trang chủ</h2>
         </div>
-        <div onClick={() => setSearch(!search)} className={cx("search")}>
+        <div
+          onClick={() => {
+            setSearch(!search);
+            setOpenLibrary(false);
+          }}
+          className={cx("search")}
+        >
           <img src={icon.search} alt="" />
           <h2>Tìm kiếm</h2>
         </div>
@@ -60,13 +67,13 @@ function Navbar() {
             </div>
             <img
               width={30}
-              onClick={() => setOpenLibrary(!openLibrary)}
+              onClick={() => setCreateLibrary(!createLibrary)}
               src={icon.add}
               alt=""
             />
           </div>
           <div className={cx("input-add")}>
-            {openLibrary && (
+            {createLibrary && (
               <>
                 <input
                   placeholder="Bạn muốn để tên là gì?"
@@ -83,7 +90,14 @@ function Navbar() {
         </div>
         <div className={cx("list-library")}>
           {dataLibrary.map((item, i) => (
-            <div key={i} className={cx("library")}>
+            <div
+              key={i}
+              className={cx("library", { active: openLibrary })}
+              onClick={() => {
+                setOpenLibrary(!openLibrary);
+                setSearch(false);
+              }}
+            >
               <h3>{item.title}</h3>
               {i !== 0 && (
                 <img

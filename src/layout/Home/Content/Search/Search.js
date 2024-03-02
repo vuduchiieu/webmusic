@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function Search({ searchValue }) {
   const { allSongs } = useAppContext();
   const [result, setResult] = useState([]);
-  const search = true;
+  const vertical = true;
   useEffect(() => {
     if (!searchValue) {
       setResult([]);
@@ -28,7 +28,7 @@ function Search({ searchValue }) {
 
   return (
     <div className={cx("search")}>
-      <Songs songs={result} search={search} />
+      <Songs songs={result} vertical={vertical} />
     </div>
   );
 }

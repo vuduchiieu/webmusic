@@ -7,7 +7,7 @@ import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
 
 const cx = classNames.bind(styles);
 
-function Songs({ songs, search }) {
+function Songs({ songs, vertical }) {
   const { handleSongs, play, like, handleLikeToggle } = useAppContext();
   const elRef = useWheelScroll();
 
@@ -23,10 +23,10 @@ function Songs({ songs, search }) {
 
   return (
     <div
-      ref={search ? null : elRef}
+      ref={vertical ? null : elRef}
       className={cx("songs")}
       style={
-        search && {
+        vertical && {
           flexWrap: "wrap",
           overflow: "scroll",
           height: "100%",
@@ -38,9 +38,9 @@ function Songs({ songs, search }) {
       {songs.map((item, i) => (
         <div
           key={i}
-          className={cx("song", { active: play.title === item.title })}
+          className={cx("song", { active: play._id === item._id })}
           style={
-            search && {
+            vertical && {
               marginBottom: 20,
             }
           }
@@ -54,8 +54,8 @@ function Songs({ songs, search }) {
               <p>{item.author}</p>
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
-            <button onClick={() => handleLikeToggle(item.title)}>
-              {like[item.title] ? (
+            <button onClick={() => handleLikeToggle(item)}>
+              {like[item._id] ? (
                 <img src={icon.heartActive} alt="" />
               ) : (
                 <img src={icon.heart} alt="" />

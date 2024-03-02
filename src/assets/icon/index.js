@@ -27,6 +27,8 @@ const icon = {
   heartActive: require("./heart-active.svg").default,
   loading: require("./loading.svg").default,
   avatar: require("./avatar.svg").default,
+  arrowTop: require("./arrowTop.svg").default,
+  arrowDown: require("./arrowDown.svg").default,
 };
 
 export default icon;

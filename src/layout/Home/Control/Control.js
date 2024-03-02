@@ -19,7 +19,6 @@ function Control() {
     setCurrentTime,
     currentArray,
   } = useAppContext();
-
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
@@ -248,6 +247,9 @@ function Control() {
               onChange={(e) => handleVolumeChange(e.target.value)}
             />
           )}
+        </div>
+        <div className={cx("detail")}>
+          <img src={icon.arrowTop} alt="" />
         </div>
       </div>
     </div>
