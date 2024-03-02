@@ -9,7 +9,6 @@ import React, {
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-// Tạo context cho ứng dụng
 const AppContext = createContext();
 
 // Component chứa tất cả các context và state của ứng dụng

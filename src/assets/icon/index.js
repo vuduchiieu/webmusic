@@ -17,6 +17,7 @@ const icon = {
   rectangle: require("./rectangle.svg").default,
   speaker: require("./speaker.svg").default,
   mute: require("./volume-mute.svg").default,
+  medium: require("./volume-medium.svg").default,
   google: require("./google.svg").default,
   facebook: require("./facebook.svg").default,
   add: require("./add.svg").default,

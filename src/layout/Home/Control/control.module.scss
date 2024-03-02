@@ -93,7 +93,6 @@
       display: flex;
       align-items: center;
       position: relative;
-      margin-top: 14px;
       img {
         width: 24px;
         height: 24px;
@@ -103,8 +102,7 @@
       }
       input {
         position: absolute;
-        right: 35px;
-        transform: rotate(180deg);
+        left: 35px;
         width: 8vw;
         -webkit-appearance: none;
         height: 6px;

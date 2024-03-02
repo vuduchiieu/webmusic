@@ -191,9 +191,9 @@ function Control() {
           </button>
           <button className={cx("play")} onClick={handlePlayPause}>
             {isPlaying ? (
-              <img src={icon.pause} alt="" />
+              <img src={icon.pause} alt="" style={{ filter: " none" }} />
             ) : (
-              <img src={icon.play} alt="" />
+              <img src={icon.play} alt="" style={{ filter: " none" }} />
             )}
           </button>
           <button onClick={handleNext}>
@@ -225,6 +225,19 @@ function Control() {
       </div>
       <div className={cx("more")}>
         <div className={cx("volume")} style={{ "--volume": `${volume}%` }}>
+          <img
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={handleMute}
+            src={
+              volume > 60
+                ? icon.speaker
+                : volume > 1 && volume < 60
+                ? icon.medium
+                : icon.mute
+            }
+            alt=""
+          />
           {isForcus && (
             <input
               type="range"
@@ -235,13 +248,6 @@ function Control() {
               onChange={(e) => handleVolumeChange(e.target.value)}
             />
           )}
-          <img
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleMute}
-            src={volume > 0 ? icon.speaker : icon.mute}
-            alt=""
-          />
         </div>
       </div>
     </div>
