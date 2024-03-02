@@ -13,7 +13,7 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Login() {
-  const { login, setLogin } = useAppContext();
+  const { login, setLogin, setRefreshData } = useAppContext();
 
   const loading = useSelector((state) => state.auth.login.isFetching);
   const loadingRegister = useSelector(
@@ -69,7 +69,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    loginUser(newUser, dispatch, setLogin);
+    loginUser(newUser, dispatch, setLogin, setRefreshData);
   };
 
   const handleRegister = async (e) => {
@@ -87,7 +87,7 @@ function Login() {
       setPasswordError("password phải bao gồm 1 số và 1 chữ hoa");
       return;
     }
-    await registerUser(newUser, dispatch);
+    await registerUser(newUser, dispatch, setRefreshData);
     const registrationSuccessful = true;
     if (registrationSuccessful) {
       await handleLogin(e);

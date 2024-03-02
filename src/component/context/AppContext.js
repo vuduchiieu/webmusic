@@ -38,9 +38,6 @@ const Contexts = ({ children }) => {
   // State cho việc làm mới dữ liệu
   const [refreshData, setRefreshData] = useState(true);
 
-  // State để kiểm soát việc gọi API
-  const [apiCalled, setApiCalled] = useState(false);
-
   // State cho thời lượng của bài hát
   const [duration, setDuration] = useState(0);
 
@@ -76,7 +73,6 @@ const Contexts = ({ children }) => {
     }
     if (item !== play) {
       setIsPlaying(false);
-      setApiCalled(false);
       setTimeout(() => {
         setIsPlaying(true);
       }, 100);
@@ -86,6 +82,11 @@ const Contexts = ({ children }) => {
   // Lấy mảng hiện tại
   const currentArray = [allSongs, treding, recommend, again].find(
     (array) => array && array.some((song) => song.source === play.source)
+  );
+
+  // Lấy thời gian bài hát
+  const listenTime = Math.floor(
+    (audioRef.current?.currentTime / duration) * 100
   );
 
   // Xử lý sự kiện trước khi đóng trang web
@@ -226,9 +227,7 @@ const Contexts = ({ children }) => {
 
   // Thêm bài hát vào danh sách nghe lại
   const handleUpdateAgain = useCallback(async () => {
-    const listenTime = (audioRef.current.currentTime / duration) * 100;
-    if (idUser && idSong && listenTime > 50 && !apiCalled) {
-      setApiCalled(true);
+    if (idUser && idSong && listenTime === 50) {
       try {
         await axios
           .put(
@@ -238,38 +237,35 @@ const Contexts = ({ children }) => {
             setRefreshData(true);
           });
       } catch (error) {
-        setApiCalled(false);
         console.error("Lỗi khi thêm bài hát vào danh sách nghe lại:", error);
       }
     }
-  }, [duration, idSong, idUser, apiCalled, setRefreshData, setApiCalled]);
+  }, [listenTime, idSong, idUser, setRefreshData]);
 
   useEffect(() => {
     handleUpdateAgain();
-  }, [currentTime, duration, idSong, idUser, apiCalled, handleUpdateAgain]);
+  }, [listenTime, idSong, idUser, handleUpdateAgain]);
 
   // Thêm bài hát vào danh sách nhạc nổi bật
   const handleUpdateTrending = useCallback(async () => {
-    const listenTime = (audioRef.current.currentTime / duration) * 100;
-    if (idSong && listenTime > 50 && !apiCalled) {
-      setApiCalled(true);
+    if (idSong && listenTime === 50) {
       try {
         await axios.put(
           `https://be-song.vercel.app/v1/songs/trending/${idSong}`
         );
         setRefreshData(true);
       } catch (error) {
-        setApiCalled(false);
         console.error(
           "Lỗi khi thêm bài hát vào danh sách nhạc nổi bật:",
           error
         );
       }
     }
-  }, [duration, idSong, apiCalled, setRefreshData, setApiCalled]);
+  }, [listenTime, idSong, setRefreshData]);
   useEffect(() => {
     handleUpdateTrending();
-  }, [currentTime, duration, idSong, apiCalled, handleUpdateTrending]);
+  }, [listenTime, idSong, handleUpdateTrending]);
+
   return (
     <AppContext.Provider
       value={{
@@ -295,8 +291,6 @@ const Contexts = ({ children }) => {
         setAllSongs,
         refreshData,
         setRefreshData,
-        apiCalled,
-        setApiCalled,
         user,
         login,
         setLogin,

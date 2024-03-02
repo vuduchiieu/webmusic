@@ -11,7 +11,7 @@ import {
   registerSuccess,
 } from "./authSlide";
 
-const loginUser = async (user, dispatch, setLogin) => {
+const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
@@ -20,17 +20,19 @@ const loginUser = async (user, dispatch, setLogin) => {
     );
     dispatch(loginSuccess(res.data));
     setLogin(false);
+    setRefreshData(true);
   } catch (error) {
     alert("Đăng nhập thất bại:");
     dispatch(loginFailed());
   }
 };
 
-const registerUser = async (user, dispatch) => {
+const registerUser = async (user, dispatch, setRefreshData) => {
   dispatch(registerStart());
   try {
     await axios.post("https://be-song.vercel.app/v1/auth/register", user);
     dispatch(registerSuccess());
+    setRefreshData(true);
   } catch (error) {
     alert("Đăng ký thất bại");
     dispatch(registerFailed());
