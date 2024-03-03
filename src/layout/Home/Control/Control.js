@@ -18,6 +18,7 @@ function Control() {
     currentTime,
     setCurrentTime,
     currentArray,
+    indexSong,
   } = useAppContext();
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
@@ -108,12 +109,10 @@ function Control() {
       if (isRandom) {
         nextIndex = Math.floor(Math.random() * currentArray.length);
       } else {
-        nextIndex = (currentArray.indexOf(play) + 1) % currentArray.length;
+        nextIndex = (indexSong + 1) % currentArray.length;
       }
 
-      const newNextIndex = nextIndex === -1 ? 1 : nextIndex;
-
-      const nextSong = currentArray[newNextIndex];
+      const nextSong = currentArray[nextIndex];
       setPlay(nextSong);
       setIsPlaying(false);
       setTimeout(() => {
@@ -130,14 +129,9 @@ function Control() {
       if (isRandom) {
         prevIndex = Math.floor(Math.random() * currentArray.length);
       } else {
-        prevIndex =
-          (currentArray.indexOf(play) - 1 + currentArray.length) %
-          currentArray.length;
+        prevIndex = (indexSong - 1 + currentArray.length) % currentArray.length;
       }
-
-      const newPrevIndex =
-        prevIndex === -1 ? currentArray.length - 1 : prevIndex;
-      const prevSong = currentArray[newPrevIndex];
+      const prevSong = currentArray[prevIndex];
 
       setPlay(prevSong);
       setIsPlaying(false);

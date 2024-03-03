@@ -18,13 +18,12 @@ function Content() {
     themeMode,
     setThemeMode,
     search,
-    setSearch,
     again,
     treding,
     recommend,
     allSongs,
     user,
-    openLibrary,
+    libraryUpload,
     handleBack,
   } = useAppContext();
 
@@ -71,7 +70,7 @@ function Content() {
       </div>
       {search ? (
         <Search searchValue={searchValue} />
-      ) : openLibrary ? (
+      ) : libraryUpload ? (
         <Library />
       ) : (
         <div className={cx("main")}>

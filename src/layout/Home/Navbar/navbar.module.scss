@@ -93,7 +93,8 @@
       flex-direction: column;
       height: 80%;
       overflow: scroll;
-      .library {
+      .like,
+      .upload {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -128,6 +129,9 @@
         }
       }
       .active {
+        h3 {
+          color: #fff;
+        }
         background-color: var(--main-color);
       }
     }

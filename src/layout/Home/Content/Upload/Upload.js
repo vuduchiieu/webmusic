@@ -49,7 +49,7 @@ function Upload() {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
-          "https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs",
+          `https://be-song-dbac8dd7b6a3.herokuapp.com/v1/songs/${user._id}`,
           formData
         );
         setUpload(false);

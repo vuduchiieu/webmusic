@@ -7,38 +7,8 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const { search, setSearch, setOpenLibrary, openLibrary, handleBack } =
+  const { search, setSearch, setLibraryUpload, libraryUpload, handleBack } =
     useAppContext();
-  const [createLibrary, setCreateLibrary] = useState(false);
-  const [addLibrary, setAddLibrary] = useState([]);
-  const [dataLibrary, setDataLibrary] = useState([
-    { title: "Yêu thích", data: [{}] },
-  ]);
-
-  const handleaddLibrary = () => {
-    const trimmedLibrary = addLibrary.trim();
-
-    if (trimmedLibrary !== "") {
-      const newLibraryItem = {
-        title: trimmedLibrary,
-        data: [{}],
-      };
-
-      setDataLibrary((prevDataLibrary) => [...prevDataLibrary, newLibraryItem]);
-
-      setAddLibrary("");
-    } else {
-      setAddLibrary("");
-    }
-  };
-
-  const handleDeleteLibrary = (libraryItem) => {
-    const updatedDataLibrary = dataLibrary.filter(
-      (item) => item !== libraryItem
-    );
-
-    setDataLibrary(updatedDataLibrary);
-  };
 
   return (
     <div className={cx("navbar")}>
@@ -50,7 +20,7 @@ function Navbar() {
         <div
           onClick={() => {
             setSearch(!search);
-            setOpenLibrary(false);
+            setLibraryUpload(false);
           }}
           className={cx("search")}
         >
@@ -65,49 +35,22 @@ function Navbar() {
               <img src={icon.library} alt="" />
               <h2>Thư viện</h2>
             </div>
-            <img
-              width={30}
-              onClick={() => setCreateLibrary(!createLibrary)}
-              src={icon.add}
-              alt=""
-            />
-          </div>
-          <div className={cx("input-add")}>
-            {createLibrary && (
-              <>
-                <input
-                  placeholder="Bạn muốn để tên là gì?"
-                  value={addLibrary}
-                  type="text"
-                  onChange={(e) => setAddLibrary(e.target.value)}
-                />
-                <button onClick={handleaddLibrary}>
-                  <p>Tạo</p>
-                </button>
-              </>
-            )}
+            <img width={30} src={icon.add} alt="" />
           </div>
         </div>
         <div className={cx("list-library")}>
-          {dataLibrary.map((item, i) => (
-            <div
-              key={i}
-              className={cx("library", { active: openLibrary })}
-              onClick={() => {
-                setOpenLibrary(!openLibrary);
-                setSearch(false);
-              }}
-            >
-              <h3>{item.title}</h3>
-              {i !== 0 && (
-                <img
-                  onClick={() => handleDeleteLibrary(item)}
-                  src={icon.delete}
-                  alt=""
-                />
-              )}
-            </div>
-          ))}
+          <div className={cx("like")}>
+            <h3>Yêu thích</h3>
+          </div>
+          <div
+            className={cx("upload", { active: libraryUpload })}
+            onClick={() => {
+              setLibraryUpload(!libraryUpload);
+              setSearch(false);
+            }}
+          >
+            <h3>Danh sách tải lên của bạn</h3>
+          </div>
         </div>
       </div>
     </div>

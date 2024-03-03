@@ -82,6 +82,8 @@ const Contexts = ({ children }) => {
     (array) => array && array.some((song) => song.source === play.source)
   );
 
+  const indexSong = currentArray?.indexOf(play);
+
   // Lấy thời gian bài hát
   const listenTime = Math.floor(
     (audioRef.current?.currentTime / duration) * 100
@@ -108,7 +110,7 @@ const Contexts = ({ children }) => {
   // State cho trạng thái thích bài hát
   const [like, setLike] = useState(false);
   const [listLike, setListLike] = useState([]);
-  const [openLibrary, setOpenLibrary] = useState(false);
+  const [libraryUpload, setLibraryUpload] = useState(false);
 
   // Xử lý sự kiện khi nhấn nút thích
   const handleLikeToggle = (songs) => {
@@ -275,7 +277,7 @@ const Contexts = ({ children }) => {
 
   const handleBack = () => {
     setSearch(false);
-    setOpenLibrary(false);
+    setLibraryUpload(false);
   };
 
   return (
@@ -295,8 +297,8 @@ const Contexts = ({ children }) => {
         listLike,
         setListLike,
         handleLikeToggle,
-        openLibrary,
-        setOpenLibrary,
+        setLibraryUpload,
+        libraryUpload,
         again,
         setAgain,
         treding,
@@ -315,6 +317,7 @@ const Contexts = ({ children }) => {
         setDuration,
         currentTime,
         setCurrentTime,
+        indexSong,
         currentArray,
         handleBack,
       }}

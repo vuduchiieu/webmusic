@@ -7,11 +7,13 @@ import Songs from "~/component/Songs/Songs";
 const cx = classNames.bind(styles);
 
 function Library() {
-  const { listLike } = useAppContext();
+  const { user, allSongs } = useAppContext();
+  const listUpload = allSongs.filter((item) => item.user === user._id);
+
   const vertical = true;
   return (
     <div className={cx("library")}>
-      <Songs songs={listLike} vertical={vertical} />
+      <Songs songs={listUpload} vertical={vertical} />
     </div>
   );
 }
