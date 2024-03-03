@@ -33,6 +33,10 @@ const Contexts = ({ children }) => {
   // State cho tất cả các bài hát
   const [allSongs, setAllSongs] = useState([]);
 
+  //State cho bài hát upload
+
+  const [listUpload, setListUpload] = useState([]);
+
   // State cho việc làm mới dữ liệu
   const [refreshData, setRefreshData] = useState(true);
 
@@ -78,7 +82,7 @@ const Contexts = ({ children }) => {
   };
 
   // Lấy mảng hiện tại
-  const currentArray = [allSongs, treding, recommend, again].find(
+  const currentArray = [allSongs, treding, recommend, again, listUpload].find(
     (array) => array && array.some((song) => song.source === play.source)
   );
 
@@ -234,6 +238,31 @@ const Contexts = ({ children }) => {
     }
   }, [refreshData]);
 
+  // Render ra tất cả bài hát upload
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resAllSong = await axios.get(
+          "https://be-song.vercel.app/v1/songs/"
+        );
+        setListUpload(
+          resAllSong.data.allSong
+            .filter((item) => item.user === user._id)
+            .sort((a, b) => a.title.localeCompare(b.title))
+            .map((song) => ({ ...song, source: "upload" }))
+        );
+      } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu:", error);
+      } finally {
+        setRefreshData(false);
+      }
+    };
+    if (refreshData) {
+      fetchData();
+    }
+  }, [refreshData]);
+
   // Thêm bài hát vào danh sách nghe lại
   const handleUpdateAgain = useCallback(async () => {
     if (idUser && idSong && listenTime === 50) {
@@ -320,6 +349,7 @@ const Contexts = ({ children }) => {
         indexSong,
         currentArray,
         handleBack,
+        listUpload,
       }}
     >
       {children}

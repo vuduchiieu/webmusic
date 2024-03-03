@@ -7,8 +7,7 @@ import Songs from "~/component/Songs/Songs";
 const cx = classNames.bind(styles);
 
 function Library() {
-  const { user, allSongs } = useAppContext();
-  const listUpload = allSongs.filter((item) => item.user === user._id);
+  const { listUpload } = useAppContext();
 
   const vertical = true;
   return (
