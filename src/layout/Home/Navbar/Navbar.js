@@ -49,7 +49,7 @@ function Navbar() {
               setSearch(false);
             }}
           >
-            <h3>Danh sách tải lên của bạn</h3>
+            <h3>Tải lên của bạn</h3>
           </div>
         </div>
       </div>

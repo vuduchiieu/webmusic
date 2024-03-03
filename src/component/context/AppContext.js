@@ -86,7 +86,7 @@ const Contexts = ({ children }) => {
     (array) => array && array.some((song) => song.source === play.source)
   );
 
-  const indexSong = currentArray?.indexOf(play);
+  const indexSong = currentArray?.map((item) => item._id)?.indexOf(play._id);
 
   // Lấy thời gian bài hát
   const listenTime = Math.floor(
@@ -261,7 +261,7 @@ const Contexts = ({ children }) => {
     if (refreshData) {
       fetchData();
     }
-  }, [refreshData]);
+  }, [refreshData, user._id]);
 
   // Thêm bài hát vào danh sách nghe lại
   const handleUpdateAgain = useCallback(async () => {
