@@ -7,9 +7,14 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const { search, setSearch, setLibraryUpload, libraryUpload, handleBack } =
-    useAppContext();
-
+  const {
+    search,
+    setSearch,
+    setLibraryUpload,
+    libraryUpload,
+    handleBack,
+    user,
+  } = useAppContext();
   return (
     <div className={cx("navbar")}>
       <div className={cx("control")}>
@@ -42,15 +47,20 @@ function Navbar() {
           <div className={cx("like")}>
             <h3>Yêu thích</h3>
           </div>
-          <div
-            className={cx("upload", { active: libraryUpload })}
-            onClick={() => {
-              setLibraryUpload(!libraryUpload);
-              setSearch(false);
-            }}
-          >
-            <h3>Tải lên của bạn</h3>
-          </div>
+          {user && (
+            <div
+              className={cx("upload", { active: libraryUpload })}
+              onClick={() => {
+                setLibraryUpload(!libraryUpload);
+                setSearch(false);
+              }}
+            >
+              <h3>
+                Tải lên của:{" "}
+                <span style={{ fontWeight: 700 }}>{user.username}</span>
+              </h3>
+            </div>
+          )}
         </div>
       </div>
     </div>

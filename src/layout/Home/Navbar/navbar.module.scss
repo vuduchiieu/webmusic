@@ -40,13 +40,13 @@
         justify-content: space-between;
         .title {
           display: flex;
-          justify-content: space-between;
-          width: 38%;
+          width: 80%;
           img,
           h2 {
             cursor: default;
           }
           h2 {
+            margin-left: 1vw;
             font-size: 18px;
           }
         }

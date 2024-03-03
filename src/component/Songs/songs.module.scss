@@ -12,7 +12,7 @@
     box-shadow: var(--box-shadow);
     padding: 10px;
     .title {
-      height: 78%;
+      min-height: 78%;
       img {
         object-fit: cover;
         width: 100%;

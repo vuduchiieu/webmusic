@@ -1,12 +1,12 @@
 .control {
   display: flex;
   background-color: var(--main-background);
-  padding: 1vh 1vw;
+  padding: 0.5vh 1vw;
   width: 100vw;
   height: 8vh;
   .info {
     display: flex;
-    width: 20%;
+    width: 25%;
     img {
       object-fit: cover;
       width: 15%;
@@ -33,7 +33,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 65%;
+    width: 60%;
     height: 100%;
     .control-bar {
       display: flex;
