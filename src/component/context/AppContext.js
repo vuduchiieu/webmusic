@@ -81,13 +81,6 @@ const Contexts = ({ children }) => {
     }
   };
 
-  // Lấy mảng hiện tại
-  const currentArray = [allSongs, treding, recommend, again, listUpload].find(
-    (array) => array && array.some((song) => song.source === play.source)
-  );
-
-  const indexSong = currentArray?.map((item) => item._id)?.indexOf(play._id);
-
   // Lấy thời gian bài hát
   const listenTime = Math.floor(
     (audioRef.current?.currentTime / duration) * 100
@@ -113,7 +106,6 @@ const Contexts = ({ children }) => {
 
   // State cho trạng thái thích bài hát
   const [like, setLike] = useState(false);
-  const [listLike, setListLike] = useState([]);
   const [libraryUpload, setLibraryUpload] = useState(false);
 
   // Xử lý sự kiện khi nhấn nút thích
@@ -122,13 +114,6 @@ const Contexts = ({ children }) => {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
       return;
-    }
-    if (listLike.some((likedSong) => likedSong._id === songs._id)) {
-      setListLike((prev) =>
-        prev.filter((likedSong) => likedSong._id !== songs._id)
-      );
-    } else {
-      setListLike((prev) => [...prev, songs]);
     }
     setLike((prev) => ({
       ...prev,
@@ -323,8 +308,6 @@ const Contexts = ({ children }) => {
         setSearch,
         like,
         setLike,
-        listLike,
-        setListLike,
         handleLikeToggle,
         setLibraryUpload,
         libraryUpload,
@@ -346,8 +329,6 @@ const Contexts = ({ children }) => {
         setDuration,
         currentTime,
         setCurrentTime,
-        indexSong,
-        currentArray,
         handleBack,
         listUpload,
       }}

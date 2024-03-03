@@ -8,6 +8,11 @@ const cx = classNames.bind(styles);
 
 function Control() {
   const {
+    allSongs,
+    treding,
+    recommend,
+    again,
+    listUpload,
     audioRef,
     play,
     setPlay,
@@ -17,8 +22,6 @@ function Control() {
     setDuration,
     currentTime,
     setCurrentTime,
-    currentArray,
-    indexSong,
   } = useAppContext();
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
@@ -100,6 +103,12 @@ function Control() {
         setIsForcus(false);
       }, 5000);
   };
+
+  // Lấy mảng hiện tại
+  const currentArray = [allSongs, treding, recommend, again, listUpload].find(
+    (array) => array && array.some((song) => song.source === play.source)
+  );
+  const indexSong = currentArray?.map((item) => item._id)?.indexOf(play?._id);
 
   // Xử lý chuyển bài tiếp theo
   const handleNext = () => {
