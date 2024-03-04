@@ -10,6 +10,7 @@ import Account from "./Account/Account";
 import Songs from "~/component/Songs/Songs";
 import Upload from "./Upload/Upload";
 import Library from "../Navbar/Library/Library";
+import Profile from "~/component/Profile/Profile";
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,8 @@ function Content() {
     user,
     libraryUpload,
     handleBack,
+    isModalOpen,
+    closeModal,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -33,72 +36,76 @@ function Content() {
   };
 
   return (
-    <div className={cx("content")}>
-      <div className={cx("header")}>
-        <div onClick={() => handleBack()} className={cx("back")}>
-          <img src={icon.back} alt="" />
+    <>
+      <div className={cx("content")}>
+        <div className={cx("header")}>
+          <div onClick={() => handleBack()} className={cx("back")}>
+            <img src={icon.back} alt="" />
+          </div>
+          {search && (
+            <div className={cx("search-input")}>
+              <img src={icon.search} alt="" />
+              <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Bạn muốn nghe gì?"
+                type="text"
+              />
+            </div>
+          )}
+          <div className={cx("wrap")}>
+            <div className={cx("action")}>
+              <div onClick={handleTheme} className={cx("theme")}>
+                <img src={themeMode ? icon.light : icon.dark} alt="" />
+              </div>
+              <div className={cx("upload")}>
+                <Upload />
+              </div>
+            </div>
+            {user ? (
+              <div className={cx("account")}>
+                <Account />
+              </div>
+            ) : (
+              <div className={cx("login")}>
+                <Login />
+              </div>
+            )}
+          </div>
         </div>
-        {search && (
-          <div className={cx("search-input")}>
-            <input
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              placeholder="Bạn muốn nghe gì?"
-              type="text"
-            />
+        {search ? (
+          <Search searchValue={searchValue} />
+        ) : libraryUpload ? (
+          <Library />
+        ) : (
+          <div className={cx("main")}>
+            {again && again.length > 0 && (
+              <div className={cx("again")}>
+                <h2>Nghe lại</h2>
+                <Songs songs={again} />
+              </div>
+            )}
+            <div className={cx("treding")}>
+              <h2>Thịnh hành</h2>
+              <Songs songs={treding} />
+            </div>
+            {recommend && recommend.length > 0 && (
+              <div className={cx("recommend")}>
+                <h2>Có thể bạn sẽ thích</h2>
+                <Songs songs={recommend} />
+              </div>
+            )}
+            {!user && (
+              <div className={cx("allSong")}>
+                <h2>Tất cả bài hát</h2>
+                <Songs songs={allSongs} />
+              </div>
+            )}
           </div>
         )}
-        <div className={cx("wrap")}>
-          <div className={cx("action")}>
-            <div onClick={handleTheme} className={cx("theme")}>
-              <img src={themeMode ? icon.light : icon.dark} alt="" />
-            </div>
-            <div className={cx("upload")}>
-              <Upload />
-            </div>
-          </div>
-          {user ? (
-            <div className={cx("account")}>
-              <Account />
-            </div>
-          ) : (
-            <div className={cx("login")}>
-              <Login />
-            </div>
-          )}
-        </div>
       </div>
-      {search ? (
-        <Search searchValue={searchValue} />
-      ) : libraryUpload ? (
-        <Library />
-      ) : (
-        <div className={cx("main")}>
-          {again && again.length > 0 && (
-            <div className={cx("again")}>
-              <h2>Nghe lại</h2>
-              <Songs songs={again} />
-            </div>
-          )}
-          <div className={cx("treding")}>
-            <h2>Thịnh hành</h2>
-            <Songs songs={treding} />
-          </div>
-          {recommend && recommend.length > 0 && (
-            <div className={cx("recommend")}>
-              <h2>Có thể bạn sẽ thích</h2>
-              <Songs songs={recommend} />
-            </div>
-          )}
-          {!user && (
-            <div className={cx("allSong")}>
-              <h2>Tất cả bài hát</h2>
-              <Songs songs={allSongs} />
-            </div>
-          )}
-        </div>
-      )}
-    </div>
+      <Profile isOpen={isModalOpen} onClose={closeModal} />
+    </>
   );
 }
 

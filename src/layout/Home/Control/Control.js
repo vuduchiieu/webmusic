@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
+import { Helmet } from "react-helmet";
 
 const cx = classNames.bind(styles);
 
@@ -170,20 +170,23 @@ function Control() {
   useEffect(() => {
     audioRef.current.loop = isLooping;
   }, [isLooping, audioRef]);
-  console.log(play);
   return (
     <div className={cx("control")}>
       <Helmet>
-        <meta property="og:title" content={play.title || "Default Title"} />
-        <meta
-          property="og:description"
-          content={play.author || "Default Author"}
-        />
         <meta
           property="og:image"
           content={play.image?.url || "Default Image URL"}
-        />
+        ></meta>
+        <meta
+          property="og:description"
+          content={play.author || "Default Author"}
+        ></meta>
+        <meta
+          property="og:title"
+          content={play.title || "Default Title"}
+        ></meta>
       </Helmet>
+
       <div className={cx("info")}>
         {play.image && (
           <img

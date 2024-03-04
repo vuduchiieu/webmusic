@@ -20,6 +20,7 @@
       cursor: pointer;
     }
     .search-input {
+      position: relative;
       margin-right: 30%;
       flex-grow: 0.5;
       input {
@@ -37,6 +38,15 @@
         &::placeholder {
           font-size: 12px;
         }
+      }
+      img {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 20%;
+        left: 0;
+        filter: brightness(0) saturate(100%) invert(52%) sepia(0%) saturate(13%)
+          hue-rotate(227deg) brightness(85%) contrast(73%);
       }
     }
     .wrap {

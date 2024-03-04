@@ -13,7 +13,7 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { setAgain, user, setRecommend } = useAppContext();
+  const { setAgain, user, setRecommend, openModal } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
   const assessToken = user?.accessToken;
@@ -65,13 +65,19 @@ function Account() {
       visible={settingAcc}
       render={(attrs) => (
         <div tabIndex="-1" {...attrs} className={cx("setting")}>
-          <div className={cx("profile")}>
+          <button
+            className={cx("profile")}
+            onClick={() => {
+              openModal();
+              setSettingAcc(false);
+            }}
+          >
             <img
               src={user.avatar === null ? icon.avatar : user.avatar}
               alt=""
             />
             <p>{user.username}</p>
-          </div>
+          </button>
           <button>
             <p>Cài đặt</p>
           </button>

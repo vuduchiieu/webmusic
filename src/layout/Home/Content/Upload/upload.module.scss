@@ -96,7 +96,7 @@
           transform: scale(105%);
         }
         img {
-          filter: var(--filter-color);
+          filter: var(--filter-white);
           animation: spin 2s infinite;
           @keyframes spin {
             0% {

@@ -271,6 +271,16 @@ const Contexts = ({ children }) => {
     setLibraryUpload(false);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -308,6 +318,9 @@ const Contexts = ({ children }) => {
         setCurrentTime,
         handleBack,
         listUpload,
+        openModal,
+        closeModal,
+        isModalOpen,
       }}
     >
       {children}
