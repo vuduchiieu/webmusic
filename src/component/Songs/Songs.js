@@ -8,7 +8,8 @@ import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
 const cx = classNames.bind(styles);
 
 function Songs({ songs, vertical }) {
-  const { handleSongs, play, like, handleLikeToggle } = useAppContext();
+  const { handleSongs, play, like, handleLikeToggle, isMobile } =
+    useAppContext();
   const elRef = useWheelScroll();
 
   function formatViews(viewCount) {
@@ -29,8 +30,9 @@ function Songs({ songs, vertical }) {
         vertical && {
           flexWrap: "wrap",
           overflow: "scroll",
+          justifyContent: "space-between",
           height: "100%",
-          width: "78vw",
+          width: "100vw",
           padding: 20,
         }
       }
@@ -40,9 +42,17 @@ function Songs({ songs, vertical }) {
           key={i}
           className={cx("song", { active: play._id === item._id })}
           style={
-            vertical && {
-              marginBottom: 20,
-            }
+            isMobile && vertical
+              ? {
+                  minWidth: "40vw",
+                  height: "32vh",
+                  marginBottom: 20,
+                }
+              : vertical
+              ? {
+                  marginBottom: 20,
+                }
+              : null
           }
         >
           <div className={cx("title")} onClick={() => handleSongs(item)}>

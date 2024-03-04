@@ -4,7 +4,6 @@ import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
 import { Helmet } from "react-helmet";
-import { useMediaQuery } from "react-responsive";
 
 const cx = classNames.bind(styles);
 
@@ -24,8 +23,8 @@ function Control() {
     setDuration,
     currentTime,
     setCurrentTime,
+    isMobile,
   } = useAppContext();
-  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);

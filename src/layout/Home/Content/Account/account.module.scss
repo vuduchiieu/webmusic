@@ -54,3 +54,13 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .setting {
+    width: 50vw;
+    height: 25vh;
+    &::after {
+      right: 5%;
+    }
+  }
+}

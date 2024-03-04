@@ -10,11 +10,11 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Home() {
-  const { play } = useAppContext();
+  const { play, isMobile } = useAppContext();
   return (
     <div className={cx("home")}>
       <div className={cx("main")}>
-        <Navbar />
+        {!isMobile && <Navbar />}
         <Content />
       </div>
       <div

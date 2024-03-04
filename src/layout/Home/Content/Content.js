@@ -19,6 +19,7 @@ function Content() {
     themeMode,
     setThemeMode,
     search,
+    setSearch,
     again,
     treding,
     recommend,
@@ -28,6 +29,7 @@ function Content() {
     handleBack,
     isModalOpen,
     closeModal,
+    isMobile,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -40,9 +42,21 @@ function Content() {
       <div className={cx("content")}>
         <div className={cx("header")}>
           <div onClick={() => handleBack()} className={cx("back")}>
-            <img src={icon.back} alt="" />
+            <img src={isMobile ? icon.home : icon.back} alt="" />
           </div>
-          {search && (
+          {isMobile && (
+            <div className={cx("search-input")}>
+              <img src={icon.search} alt="" />
+              <input
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                placeholder="Bạn muốn nghe gì?"
+                type="text"
+                onFocus={() => setSearch(!search)}
+              />
+            </div>
+          )}
+          {!isMobile && search && (
             <div className={cx("search-input")}>
               <img src={icon.search} alt="" />
               <input
@@ -53,6 +67,7 @@ function Content() {
               />
             </div>
           )}
+
           <div className={cx("wrap")}>
             <div className={cx("action")}>
               <div onClick={handleTheme} className={cx("theme")}>

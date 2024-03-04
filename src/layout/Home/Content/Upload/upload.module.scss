@@ -125,6 +125,10 @@
   .upload-model {
     width: 100vw;
     height: 60vh;
+    &::after {
+      top: -1%;
+      right: 20%;
+    }
     .normally {
       .title,
       .author {

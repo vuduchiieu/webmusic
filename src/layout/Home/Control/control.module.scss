@@ -149,10 +149,16 @@
 @media only screen and (max-width: 767px) {
   .control {
     .info {
-      width: 70%;
+      width: 75%;
+      img {
+        width: 20%;
+      }
+      .title {
+        width: 75%;
+      }
     }
     .control-audio {
-      width: 20%;
+      width: 15%;
     }
     .more {
       width: 10%;

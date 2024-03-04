@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 
 const AppContext = createContext();
 
@@ -281,6 +282,8 @@ const Contexts = ({ children }) => {
     setIsModalOpen(false);
   };
 
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
   return (
     <AppContext.Provider
       value={{
@@ -321,6 +324,7 @@ const Contexts = ({ children }) => {
         openModal,
         closeModal,
         isModalOpen,
+        isMobile,
       }}
     >
       {children}
