@@ -21,9 +21,15 @@
       justify-content: center;
       width: 80%;
       h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 14px;
       }
       p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 12px;
       }
     }
@@ -33,7 +39,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 60%;
+    width: 55%;
     height: 100%;
     .control-bar {
       display: flex;
@@ -88,7 +94,7 @@
   .more {
     display: flex;
     align-items: center;
-    width: 15%;
+    width: 20%;
     .volume {
       display: flex;
       align-items: center;
@@ -136,6 +142,20 @@
         filter: var(--filter-color);
         cursor: pointer;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .control {
+    .info {
+      width: 70%;
+    }
+    .control-audio {
+      width: 20%;
+    }
+    .more {
+      width: 10%;
     }
   }
 }

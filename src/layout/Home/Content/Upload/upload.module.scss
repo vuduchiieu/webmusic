@@ -120,3 +120,18 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .upload-model {
+    width: 100vw;
+    height: 60vh;
+    .normally {
+      .title,
+      .author {
+        input {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
