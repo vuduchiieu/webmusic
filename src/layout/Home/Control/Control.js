@@ -166,25 +166,48 @@ function Control() {
       }
     }
   }, [isPlaying, audioRef]);
+
   // Xử lý lặp lại bài hát khi thay đổi trạng thái
   useEffect(() => {
     audioRef.current.loop = isLooping;
   }, [isLooping, audioRef]);
+
+  //MediaSession
+  useEffect(() => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: play.title || "",
+        artist: play.author || "",
+        artwork: [
+          {
+            src: play.image?.url || "https://dummyimage.com/512x512",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      });
+      navigator.mediaSession.setActionHandler("play", () => {
+        setIsPlaying(true);
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setIsPlaying(false);
+      });
+      navigator.mediaSession.setActionHandler("previoustrack", () => {
+        handleBackWard();
+      });
+      navigator.mediaSession.setActionHandler("nexttrack", () => {
+        handleNext();
+      });
+    }
+  }, [play]);
   return (
     <div className={cx("control")}>
       <Helmet>
-        <meta
-          property="og:image"
-          content={play.image?.url || "Default Image URL"}
-        ></meta>
-        <meta
-          property="og:description"
-          content={play.author || "Default Author"}
-        ></meta>
-        <meta
-          property="og:title"
-          content={play.title || "Default Title"}
-        ></meta>
+        <title>
+          {play.title && play.author
+            ? `${play.title} - ${play.author}`
+            : "Stave - Web player"}
+        </title>
       </Helmet>
 
       <div className={cx("info")}>
