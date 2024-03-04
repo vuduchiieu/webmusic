@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./homeMobile.module.scss";
 import Content from "../Home/Content/Content";
