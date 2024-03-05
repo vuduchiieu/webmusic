@@ -88,7 +88,7 @@ function Upload() {
       setFiles({});
       setTitle("");
       setAuthor("");
-      console.log(error);
+      alert("Gửi lên thất bại");
     }
   };
   return (
