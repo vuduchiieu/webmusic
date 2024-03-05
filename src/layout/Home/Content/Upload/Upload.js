@@ -72,7 +72,7 @@ function Upload() {
     try {
       setUploadYtb("");
       const response = await axios.post(
-        `http://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
+        `https://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
       );
 
       const { cover, url } = response.data;
