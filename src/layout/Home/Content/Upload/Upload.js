@@ -15,6 +15,7 @@ function Upload() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [files, setFiles] = useState({});
+  const [uploadYtb, setUploadYtb] = useState("");
   const titleAllSong = allSongs.map((item) => item.title);
 
   const handleMultipleSubmit = (e) => {
@@ -67,6 +68,29 @@ function Upload() {
     }
   };
 
+  const handleUploadYtb = async () => {
+    try {
+      setUploadYtb("");
+      const response = await axios.post(
+        `http://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
+      );
+
+      const { cover, url } = response.data;
+
+      const filesObject = {
+        cover: new File([cover], "cover.jpg"),
+        url: new File([url], "audio.mp3"),
+      };
+      setFiles(filesObject);
+      setTitle(response.data.title);
+      setAuthor(response.data.author);
+    } catch (error) {
+      setFiles({});
+      setTitle("");
+      setAuthor("");
+      console.log(error);
+    }
+  };
   return (
     <Tippy
       interactive
@@ -76,6 +100,18 @@ function Upload() {
         <div tabIndex="-1" {...attrs} className={cx("upload-model")}>
           <h1>Tải lên bài gì đó...</h1>
           <p>Bạn thích còn chúng tôi thì chưa chắc 🤣</p>
+          <div className={cx("upload-ytb")}>
+            <p>Upload bằng link yêu từ bé</p>
+            <input
+              type="text"
+              name=""
+              id=""
+              value={uploadYtb}
+              placeholder="Dán link ytb vào đây!!!"
+              onChange={(e) => setUploadYtb(e.target.value)}
+            />
+            <button onClick={handleUploadYtb}>Gửi</button>
+          </div>
           <form onSubmit={handlePost} className={cx("normally")}>
             <div className={cx("title")}>
               <p>Tên bài hát</p>
