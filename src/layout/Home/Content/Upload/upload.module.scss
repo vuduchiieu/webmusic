@@ -163,11 +163,21 @@
 @media only screen and (max-width: 767px) {
   .upload-model {
     width: 100vw;
-    height: 60vh;
+    height: 80vh;
     &::after {
       top: -1%;
-      right: 20%;
+      right: 22%;
     }
+    .upload-ytb {
+      input {
+        font-size: 12px;
+      }
+      button {
+        top: 45px;
+        right: 1px;
+      }
+    }
+
     .normally {
       .title,
       .author {
