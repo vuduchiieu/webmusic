@@ -11,11 +11,7 @@ function Search({ searchValue }) {
   const [result, setResult] = useState([]);
   const vertical = true;
   useEffect(() => {
-    if (!searchValue) {
-      setResult([]);
-      return;
-    }
-    if (searchValue === " ") {
+    if (searchValue === "") {
       setResult(allSongs);
       return;
     }

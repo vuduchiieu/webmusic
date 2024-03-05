@@ -30,7 +30,6 @@ function Songs({ songs, vertical }) {
         vertical && {
           flexWrap: "wrap",
           overflow: "scroll",
-          justifyContent: "space-between",
           height: "100%",
           width: "100vw",
           padding: 20,
