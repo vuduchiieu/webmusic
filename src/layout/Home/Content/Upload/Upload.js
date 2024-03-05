@@ -71,7 +71,7 @@ function Upload() {
   const handleUploadYtb = async () => {
     try {
       setUploadYtb("");
-      const response = await axios.post(
+      const response = await axios.get(
         `https://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
       );
 
