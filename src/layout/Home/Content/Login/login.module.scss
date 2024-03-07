@@ -154,23 +154,21 @@
     width: 100vw;
     height: 75vh;
     .sign-in,
-    .signUp {
-      .social {
-        .loginGG,
-        .loginFB {
-          button {
-            width: 70vw;
+    .register {
+      .form {
+        .normally {
+          .email,
+          .username,
+          .password,
+          .social {
+            input {
+              width: 100%;
+            }
           }
         }
-      }
-      .normally {
-        .avatar,
-        .email,
-        .username,
-        .password {
-          p,
-          input {
-            width: 90%;
+        .action {
+          button {
+            width: 15vw;
           }
         }
       }
