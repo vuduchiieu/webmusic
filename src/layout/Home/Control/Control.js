@@ -24,6 +24,8 @@ function Control() {
     currentTime,
     setCurrentTime,
     isMobile,
+    detail,
+    setDetail,
   } = useAppContext();
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
@@ -307,7 +309,7 @@ function Control() {
             )}
           </div>
         )}
-        <div className={cx("detail")}>
+        <div onClick={() => setDetail(!detail)} className={cx("detail")}>
           <img src={icon.arrowTop} alt="" />
         </div>
       </div>

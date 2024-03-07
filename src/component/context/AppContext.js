@@ -283,7 +283,7 @@ const Contexts = ({ children }) => {
   };
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
+  const [detail, setDetail] = useState(false);
   return (
     <AppContext.Provider
       value={{
@@ -325,6 +325,8 @@ const Contexts = ({ children }) => {
         closeModal,
         isModalOpen,
         isMobile,
+        detail,
+        setDetail,
       }}
     >
       {children}
