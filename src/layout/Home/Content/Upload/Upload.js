@@ -43,6 +43,11 @@ function Upload() {
       setLogin(true);
       return;
     }
+    if (!user || !title || !author || Object.keys(files).length === 0) {
+      setUpload(false);
+      alert("Vui lòng điền đầy đủ thông tin và tải lên tệp âm thanh.");
+      return;
+    }
     const formData = new FormData();
     formData.append("title", title);
     formData.append("author", author);
@@ -83,6 +88,11 @@ function Upload() {
       setUpload(false);
       alert("bạn cần đăng nhập để tải lên bài hát.");
       setLogin(true);
+      return;
+    }
+    if (!user || !titleYtb || !authorYtb || !coverYtb.url || !srcYtb.url) {
+      setUpload(false);
+      alert("Vui lòng điền đầy đủ thông tin và kiểm tra link YouTube.");
       return;
     }
     const newSong = {
