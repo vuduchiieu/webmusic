@@ -46,7 +46,6 @@
           height: 35%;
           input {
             font-weight: 500;
-            font-size: 0.8vw;
             color: var(--text-color);
             background-color: var(--songs-color);
             box-shadow: var(--box-shadow);
@@ -96,8 +95,8 @@
         margin-top: 4%;
         height: 15%;
         button {
-          height: 60px;
-          width: 70px;
+          height: 6vh;
+          width: 4vw;
           border-radius: 30%;
           background-color: var(--main-color);
           transition: 0.4s;
@@ -172,9 +171,6 @@
           p,
           input {
             width: 90%;
-          }
-          input {
-            font-size: 12px;
           }
         }
         .action {
