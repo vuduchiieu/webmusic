@@ -118,55 +118,55 @@ function Login() {
       render={(attrs) => (
         <div tabIndex="-1" {...attrs} className={cx("login-model")}>
           {signUp ? (
-            <div className={cx("signUp")}>
-              <h1>Đăng ký...</h1>
-              <form onSubmit={handleRegister} className={cx("normally")}>
-                <div className={cx("avatar")}>
-                  <input id="avatar" type="file" />
-                  <label htmlFor="avatar">
-                    <img src={icon.uploadAvatar} alt="" />
-                  </label>
-                  <p>Một chiếc ảnh thật là xinh</p>
-                </div>
-                <div className={cx("email")}>
-                  <p>Email</p>
-                  <input
-                    placeholder="Email"
-                    type="text"
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <div className={cx("err")}>
-                    <span>{emailError}</span>
+            <div className={cx("register")}>
+              <h1>Đăng ký</h1>
+              <form onSubmit={handleRegister} className={cx("form")}>
+                <div className={cx("normally")}>
+                  <div className={cx("email")}>
+                    <input
+                      placeholder="Email"
+                      type="text"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    />
+                    <div className={cx("err")}>
+                      <span>{emailError}</span>
+                    </div>
                   </div>
-                </div>
-                <div className={cx("username")}>
-                  <p>Tên người dùng</p>
-                  <input
-                    placeholder="Tên người dùng"
-                    type="text"
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                  <div className={cx("err")}>
-                    <span>{usernameError}</span>
+                  <div className={cx("username")}>
+                    <input
+                      placeholder="Tên người dùng"
+                      type="text"
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                      }}
+                    />
+                    <div className={cx("err")}>
+                      <span>{usernameError}</span>
+                    </div>
                   </div>
-                </div>
-                <div className={cx("password")}>
-                  <p>Mật khẩu</p>
-                  <input
-                    placeholder="Mật khẩu"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                  <div className={cx("err")}>
-                    <span>{passwordError}</span>
+                  <div className={cx("password")}>
+                    <input
+                      placeholder="Mật khẩu"
+                      type="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className={cx("err")}>
+                      <span>{passwordError}</span>
+                    </div>
                   </div>
                 </div>
                 <div className={cx("action")}>
                   <button type="submit">
                     {loadingRegister ? (
-                      <img src={icon.loading} alt="" />
+                      <img
+                        className={cx("loading")}
+                        src={icon.loading}
+                        alt=""
+                      />
                     ) : (
-                      <p>Đăng ký</p>
+                      <img className={cx("next")} src={icon.arrowNext} alt="" />
                     )}
                   </button>
                 </div>
@@ -180,47 +180,41 @@ function Login() {
             </div>
           ) : (
             <div className={cx("sign-in")}>
-              <h1>Đăng nhập vào.....</h1>
-              <div className={cx("social")}>
-                <div onClick={handleGoogleLogin} className={cx("loginGG")}>
-                  <button>
+              <h1>Đăng nhập</h1>
+              <form onSubmit={handleLogin} className={cx("form")}>
+                <div className={cx("normally")}>
+                  <div className={cx("email")}>
+                    <input
+                      placeholder="Email hoặc tên người dùng"
+                      type="text"
+                      onChange={(e) => {
+                        setUsername(e.target.value);
+                        setEmail(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className={cx("password")}>
+                    <input
+                      placeholder="Mật khẩu"
+                      type="password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className={cx("social")}>
                     <img src={icon.google} alt="" />
-                    <p>Tiếp tục bằng Google</p>
-                  </button>
-                </div>
-                <div className={cx("loginFB")}>
-                  <button>
                     <img src={icon.facebook} alt="" />
-                    <p>Tiếp tục bằng Facebook</p>
-                  </button>
-                </div>
-              </div>
-              <form onSubmit={handleLogin} className={cx("normally")}>
-                <div className={cx("email")}>
-                  <p>Email hoặc tên người dùng</p>
-                  <input
-                    placeholder="email hoặc tên người dùng"
-                    type="text"
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                      setEmail(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className={cx("password")}>
-                  <p>Mật khẩu</p>
-                  <input
-                    placeholder="Mật khẩu"
-                    type="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                  </div>
                 </div>
                 <div className={cx("action")}>
                   <button type="submit">
                     {loading ? (
-                      <img src={icon.loading} alt="" />
+                      <img
+                        className={cx("loading")}
+                        src={icon.loading}
+                        alt=""
+                      />
                     ) : (
-                      <p>Đăng nhập</p>
+                      <img className={cx("next")} src={icon.arrowNext} alt="" />
                     )}
                   </button>
                 </div>
