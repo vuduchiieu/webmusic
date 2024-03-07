@@ -37,7 +37,7 @@ const Contexts = ({ children }) => {
   //State cho bài hát upload
   const listUpload = allSongs
     .filter((item) => item.user === user?._id)
-    .sort((a, b) => a.title.localeCompare(b.title))
+    .sort((a, b) => a.title?.localeCompare(b.title))
     .map((song) => ({ ...song, source: "upload" }));
 
   // State cho việc làm mới dữ liệu
@@ -212,7 +212,7 @@ const Contexts = ({ children }) => {
         );
         setAllSongs(
           resAllSong.data.allSong
-            .sort((a, b) => a.title.localeCompare(b.title))
+            .sort((a, b) => a.title?.localeCompare(b.title))
             .map((song) => ({ ...song, source: "allSong" }))
         );
       } catch (error) {

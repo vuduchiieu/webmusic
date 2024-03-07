@@ -55,7 +55,7 @@ function Songs({ songs, vertical }) {
           }
         >
           <div className={cx("title")} onClick={() => handleSongs(item)}>
-            <img src={item.image.url} alt="" />
+            <img src={item.image?.url} alt="" />
             <h3>{item.title}</h3>
           </div>
           <div className={cx("info")}>

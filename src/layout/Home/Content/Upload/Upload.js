@@ -19,8 +19,8 @@ function Upload() {
   const [uploadYtb, setUploadYtb] = useState("");
   const [titleYtb, setTitleYtb] = useState("");
   const [authorYtb, setAuthorYtb] = useState("");
-  const [coverYtb, setCoverYtb] = useState("");
-  const [srcYtb, setSrcYtb] = useState("");
+  const [coverYtb, setCoverYtb] = useState({ url: "" });
+  const [srcYtb, setSrcYtb] = useState({ url: "" });
   const titleAllSong = allSongs.map((item) => item.title);
 
   const handleMultipleSubmit = (e) => {
@@ -56,10 +56,9 @@ function Upload() {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
-          `http://localhost:3001/v1/songs/${user._id}`,
+          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/${user._id}`,
           formData
         );
-        // be-song-dbac8dd7b6a3.herokuapp.com
         setUpload(false);
         setTitle("");
         setAuthor("");
@@ -85,19 +84,21 @@ function Upload() {
       setLogin(true);
       return;
     }
-    const formData = new FormData();
-    formData.append("title", titleYtb);
-    formData.append("author", authorYtb);
-    formData.append("image", coverYtb);
-    formData.append("song", srcYtb);
-    formData.append("isPublic", true);
+
+    const newSong = {
+      title: titleYtb,
+      author: authorYtb,
+      cover: { url: coverYtb.url, publicId: "" },
+      url: { url: srcYtb.url, publicId: "" },
+      isPublic: true,
+    };
 
     try {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
           `https://be-song.vercel.app/v1/songs/ytb/${user._id}`,
-          formData
+          newSong
         );
         setUpload(false);
         setTitleYtb("");
@@ -127,8 +128,8 @@ function Upload() {
       const { title, author, cover, url } = response.data;
       setTitleYtb(title);
       setAuthorYtb(author);
-      setCoverYtb(cover);
-      setSrcYtb(url);
+      setCoverYtb({ url: cover });
+      setSrcYtb({ url: url });
     } catch (error) {
       alert("Gửi lên thất bại");
     }
@@ -176,6 +177,7 @@ function Upload() {
                   onChange={(e) => setAuthorYtb(e.target.value)}
                 />
               </div>
+
               <div className={cx("action")}>
                 <button type="submit">
                   {loading ? <img src={icon.loading} alt="" /> : <p>Đăng</p>}
