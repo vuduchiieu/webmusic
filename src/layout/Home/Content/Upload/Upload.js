@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./upload.module.scss";
 import Tippy from "@tippyjs/react/headless";
 import icon from "~/assets/icon";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useAppContext } from "~/component/context/AppContext";
 
@@ -12,6 +12,7 @@ function Upload() {
   const { user, setLogin, allSongs } = useAppContext();
   const [swap, setSwap] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingGetLink, setLoadingGetLink] = useState(false);
   const [upload, setUpload] = useState(false);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -84,7 +85,6 @@ function Upload() {
       setLogin(true);
       return;
     }
-
     const newSong = {
       title: titleYtb,
       author: authorYtb,
@@ -118,13 +118,13 @@ function Upload() {
     }
   };
 
-  const handleUploadYtb = async () => {
+  const handleGetYtb = async () => {
     try {
+      setLoadingGetLink(true);
       setUploadYtb("");
       const response = await axios.get(
         `https://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
       );
-
       const { title, author, cover, url } = response.data;
       setTitleYtb(title);
       setAuthorYtb(author);
@@ -132,6 +132,8 @@ function Upload() {
       setSrcYtb({ url: url });
     } catch (error) {
       alert("Gửi lên thất bại");
+    } finally {
+      setLoadingGetLink(false);
     }
   };
   return (
@@ -141,26 +143,32 @@ function Upload() {
       visible={upload}
       render={(attrs) => (
         <div tabIndex="-1" {...attrs} className={cx("upload-model")}>
-          {swap ? <h1>Tải bằng link ytb</h1> : <h1>Tải lên bài gì đó...</h1>}
-          <p>Bạn thích còn chúng tôi thì chưa chắc 🤣</p>
+          <div className={cx("header")}>
+            <h1>Tải lên</h1>
+            <p>Bạn thích còn chúng tôi thì chưa chắc 🤣</p>
+          </div>
           {swap && (
-            <div className={cx("upload-ytb")}>
-              <p>Link yêu từ bé</p>
+            <div className={cx("getlink")}>
               <input
                 type="text"
                 name=""
                 id=""
                 value={uploadYtb}
-                placeholder="Link bài hát bạn thích"
+                placeholder="Link youtube"
                 onChange={(e) => setUploadYtb(e.target.value)}
               />
-              <button onClick={handleUploadYtb}>Gửi</button>
+              <button onClick={handleGetYtb}>
+                {loadingGetLink ? (
+                  <img className={cx("loading")} src={icon.loading} alt="" />
+                ) : (
+                  <img src={icon.arrowNext} alt="" />
+                )}
+              </button>
             </div>
           )}
           {swap ? (
-            <form onSubmit={handlePostYtb} className={cx("normally")}>
+            <form onSubmit={handlePostYtb} className={cx("form")}>
               <div className={cx("title")}>
-                <p>Tên bài hát</p>
                 <input
                   value={titleYtb}
                   placeholder="Tên bài hát"
@@ -169,7 +177,6 @@ function Upload() {
                 />
               </div>
               <div className={cx("author")}>
-                <p>Nhạc sĩ</p>
                 <input
                   value={authorYtb}
                   placeholder="Nhạc sĩ"
@@ -177,17 +184,23 @@ function Upload() {
                   onChange={(e) => setAuthorYtb(e.target.value)}
                 />
               </div>
-
               <div className={cx("action")}>
                 <button type="submit">
-                  {loading ? <img src={icon.loading} alt="" /> : <p>Đăng</p>}
+                  {loading ? (
+                    <img className={cx("loading")} src={icon.loading} alt="" />
+                  ) : (
+                    <img src={icon.send} alt="" />
+                  )}
                 </button>
               </div>
             </form>
           ) : (
-            <form onSubmit={handlePost} className={cx("normally")}>
+            <form
+              onSubmit={handlePost}
+              style={{ height: "70%" }}
+              className={cx("form")}
+            >
               <div className={cx("title")}>
-                <p>Tên bài hát</p>
                 <input
                   value={title}
                   placeholder="Tên bài hát"
@@ -196,7 +209,6 @@ function Upload() {
                 />
               </div>
               <div className={cx("author")}>
-                <p>Nhạc sĩ</p>
                 <input
                   value={author}
                   placeholder="Nhạc sĩ"
@@ -224,16 +236,20 @@ function Upload() {
                 </label>
                 <p>Thêm tệp âm thanh và ảnh</p>
               </div>
-
               <div className={cx("action")}>
                 <button type="submit">
-                  {loading ? <img src={icon.loading} alt="" /> : <p>Đăng</p>}
+                  {loading ? (
+                    <img className={cx("loading")} src={icon.loading} alt="" />
+                  ) : (
+                    <img src={icon.send} alt="" />
+                  )}
                 </button>
               </div>
             </form>
           )}
-
-          <p onClick={() => setSwap(!swap)}>upload bằng link yêu từ bé</p>
+          <div onClick={() => setSwap(!swap)} className={cx("swap")}>
+            {!swap ? <p>Bạn cảm thấy lười và phức tạp?</p> : <p>Quay lại</p>}
+          </div>
         </div>
       )}
       onClickOutside={() => setUpload(!upload)}

@@ -30,6 +30,7 @@ const icon = {
   arrowTop: require("./arrowTop.svg").default,
   arrowDown: require("./arrowDown.svg").default,
   arrowNext: require("./arrowNext.svg").default,
+  send: require("./send.svg").default,
   close: require("./close.svg").default,
 };
 
