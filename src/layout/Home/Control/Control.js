@@ -203,6 +203,7 @@ function Control() {
       });
     }
   }, [play]);
+
   return (
     <div className={cx("control")}>
       <Helmet>
