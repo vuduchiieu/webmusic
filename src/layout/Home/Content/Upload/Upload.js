@@ -22,6 +22,7 @@ function Upload() {
   const [authorYtb, setAuthorYtb] = useState("");
   const [coverYtb, setCoverYtb] = useState({ url: "" });
   const [srcYtb, setSrcYtb] = useState({ url: "" });
+  const [linkytb, setLinkytb] = useState("");
   const titleAllSong = allSongs.map((item) => item.title);
 
   const handleMultipleSubmit = (e) => {
@@ -101,6 +102,7 @@ function Upload() {
       cover: { url: coverYtb.url, publicId: "" },
       url: { url: srcYtb.url, publicId: "" },
       isPublic: true,
+      linkytb: linkytb,
     };
 
     try {
@@ -135,11 +137,12 @@ function Upload() {
       const response = await axios.get(
         `https://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
       );
-      const { title, author, cover, url } = response.data;
+      const { title, author, cover, url, link } = response.data;
       setTitleYtb(title);
       setAuthorYtb(author);
       setCoverYtb({ url: cover });
       setSrcYtb({ url: url });
+      setLinkytb(link);
     } catch (error) {
       alert("Gửi lên thất bại");
     } finally {
