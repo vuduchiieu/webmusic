@@ -84,7 +84,7 @@ function Login() {
       return;
     }
     if (!isValidPassword(password)) {
-      setPasswordError("password phải bao gồm 1 số và 1 chữ hoa");
+      setPasswordError("password gồm số và chữ hoa");
       return;
     }
     await registerUser(newUser, dispatch, setRefreshData);

@@ -126,11 +126,6 @@
             }
           }
         }
-        &:hover {
-          cursor: pointer;
-          transform: scale(105%);
-        }
-
         p {
           color: #fff;
           font-weight: 500;
@@ -141,7 +136,7 @@
   .swap {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     height: 5%;
     p {
       cursor: pointer;
