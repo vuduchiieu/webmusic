@@ -37,7 +37,9 @@ const Contexts = ({ children }) => {
   //State cho bài hát upload
   const listUpload = allSongs
     .filter((item) => item.user === user?._id)
-    .sort((a, b) => a.title?.localeCompare(b.title))
+    .sort((a, b) =>
+      b.createdAt > a.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0
+    )
     .map((song) => ({ ...song, source: "upload" }));
 
   // State cho việc làm mới dữ liệu

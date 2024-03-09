@@ -131,7 +131,11 @@
       .active {
         h3 {
           color: #fff;
+          span {
+            color: #fff;
+          }
         }
+
         background-color: var(--main-color);
       }
     }

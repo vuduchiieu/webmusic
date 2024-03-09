@@ -29,7 +29,7 @@
     box-shadow: var(--box-shadow);
     border: none;
     outline: none;
-    padding: 0.4vw;
+    padding: 0.4vh 1.5vw;
     transition: 0.4s;
     &:hover {
       box-shadow: 0 0 0 0.15vw rgba(135, 207, 235, 0.186);
@@ -47,11 +47,11 @@
     margin-top: 5%;
     height: 10%;
     input {
-      width: 90%;
+      width: 85%;
       height: 100%;
     }
     button {
-      width: 10%;
+      width: 15%;
       background-color: var(--songs-color);
       box-shadow: var(--box-shadow);
       .loading {

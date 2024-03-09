@@ -144,7 +144,7 @@ function Upload() {
       setSrcYtb({ url: url });
       setLinkytb(link);
     } catch (error) {
-      alert("Gửi lên thất bại");
+      alert("Link không hợp lệ");
     } finally {
       setLoadingGetLink(false);
     }
@@ -168,6 +168,7 @@ function Upload() {
                 id=""
                 value={uploadYtb}
                 placeholder="Link youtube"
+                className={cx("inputgetlink")}
                 onChange={(e) => setUploadYtb(e.target.value)}
               />
               <button onClick={handleGetYtb}>

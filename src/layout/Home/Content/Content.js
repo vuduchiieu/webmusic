@@ -100,10 +100,12 @@ function Content() {
                 <Songs songs={again} />
               </div>
             )}
-            <div className={cx("treding")}>
-              <h2>Thịnh hành</h2>
-              <Songs songs={treding} />
-            </div>
+            {treding && treding.length > 0 && (
+              <div className={cx("treding")}>
+                <h2>Thịnh hành</h2>
+                <Songs songs={treding} />
+              </div>
+            )}
             {recommend && recommend.length > 0 && (
               <div className={cx("recommend")}>
                 <h2>Có thể bạn sẽ thích</h2>
