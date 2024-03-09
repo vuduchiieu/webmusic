@@ -9,11 +9,12 @@ import { useDispatch } from "react-redux";
 import icon from "~/assets/icon";
 import { loginSuccess } from "~/redux/authSlide";
 import { useAppContext } from "~/component/context/AppContext";
+import ListLibrary from "../../Navbar/ListLibrary/ListLibrary";
 
 const cx = classNames.bind(styles);
 
 function Account() {
-  const { setAgain, user, setRecommend, openModal } = useAppContext();
+  const { setAgain, user, setRecommend, openModal, isMobile } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
   const assessToken = user?.accessToken;
@@ -78,9 +79,13 @@ function Account() {
             />
             <p>{user.username}</p>
           </button>
-          <button>
-            <p>Cài đặt</p>
-          </button>
+          {isMobile ? (
+            <ListLibrary />
+          ) : (
+            <button>
+              <p>Cài đặt</p>
+            </button>
+          )}
           <button onClick={handleLogOut}>
             <p>Đăng xuất</p>
           </button>

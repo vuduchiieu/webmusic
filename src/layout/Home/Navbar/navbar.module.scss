@@ -24,6 +24,15 @@
         height: 22px;
       }
     }
+    .active {
+      img {
+        filter: brightness(0) saturate(100%) invert(42%) sepia(77%)
+          saturate(3538%) hue-rotate(317deg) brightness(101%) contrast(101%);
+      }
+      h2 {
+        color: var(--main-color);
+      }
+    }
   }
   .list {
     background-color: var(--secondary-background);
@@ -86,57 +95,6 @@
             transform: scale(110%);
           }
         }
-      }
-    }
-    .list-library {
-      display: flex;
-      flex-direction: column;
-      height: 80%;
-      overflow: scroll;
-      .like,
-      .upload {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 10%;
-        background-color: var(--songs-color);
-        padding: 10px 20px;
-        margin-top: 10px;
-        border-radius: 10px;
-        &:hover {
-          cursor: pointer;
-          opacity: 0.8;
-        }
-        h3 {
-          font-size: 16px;
-        }
-        img {
-          width: 22px;
-          filter: var(--filter-color);
-
-          &:hover {
-            cursor: pointer;
-            animation: spin 1s infinite alternate;
-            @keyframes spin {
-              0% {
-                transform: rotate(10deg);
-              }
-              100% {
-                transform: rotate(-10deg);
-              }
-            }
-          }
-        }
-      }
-      .active {
-        h3 {
-          color: #fff;
-          span {
-            color: #fff;
-          }
-        }
-
-        background-color: var(--main-color);
       }
     }
   }

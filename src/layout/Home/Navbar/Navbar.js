@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./navbar.module.scss";
 import icon from "~/assets/icon";
 import { useAppContext } from "~/component/context/AppContext";
+import ListLibrary from "./ListLibrary/ListLibrary";
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +19,10 @@ function Navbar() {
   return (
     <div className={cx("navbar")}>
       <div className={cx("control")}>
-        <div onClick={() => handleBack()} className={cx("home")}>
+        <div
+          onClick={() => handleBack()}
+          className={cx("home", { active: !search && !libraryUpload })}
+        >
           <img src={icon.home} alt="" />
           <h2>Trang chủ</h2>
         </div>
@@ -27,7 +31,7 @@ function Navbar() {
             setSearch(!search);
             setLibraryUpload(false);
           }}
-          className={cx("search")}
+          className={cx("search", { active: search })}
         >
           <img src={icon.search} alt="" />
           <h2>Tìm kiếm</h2>
@@ -43,25 +47,7 @@ function Navbar() {
             <img width={30} src={icon.add} alt="" />
           </div>
         </div>
-        <div className={cx("list-library")}>
-          <div className={cx("like")}>
-            <h3>Yêu thích</h3>
-          </div>
-          {user && (
-            <div
-              className={cx("upload", { active: libraryUpload })}
-              onClick={() => {
-                setLibraryUpload(!libraryUpload);
-                setSearch(false);
-              }}
-            >
-              <h3>
-                Tải lên của:{" "}
-                <span style={{ fontWeight: 700 }}>{user.username}</span>
-              </h3>
-            </div>
-          )}
-        </div>
+        <ListLibrary />
       </div>
     </div>
   );
