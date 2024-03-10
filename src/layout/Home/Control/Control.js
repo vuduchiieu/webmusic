@@ -205,7 +205,18 @@ function Control() {
   }, [play]);
 
   return (
-    <div className={cx("control")}>
+    <div
+      className={cx("control")}
+      style={
+        detail
+          ? {
+              height: "100vh",
+              flexDirection: "column",
+              alignItems: "center",
+            }
+          : { height: "8vh" }
+      }
+    >
       <Helmet>
         <title>
           {play.title && play.author
@@ -214,9 +225,27 @@ function Control() {
         </title>
       </Helmet>
 
-      <div className={cx("info")}>
+      <div
+        className={cx("info")}
+        style={
+          detail
+            ? {
+                flexDirection: "column",
+                width: "50%",
+                height: "50%",
+              }
+            : {}
+        }
+      >
         {play.image && (
           <img
+            style={
+              detail
+                ? {
+                    width: "100%",
+                  }
+                : {}
+            }
             src={play.image?.url}
             alt={`Bìa album cho ${play.title || "Tiêu đề không xác định"}`}
           />
@@ -311,7 +340,7 @@ function Control() {
           </div>
         )}
         <div onClick={() => setDetail(!detail)} className={cx("detail")}>
-          <img src={icon.arrowTop} alt="" />
+          <img src={detail ? icon.arrowDown : icon.arrowTop} alt="" />
         </div>
       </div>
     </div>

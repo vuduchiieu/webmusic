@@ -8,14 +8,8 @@ import ListLibrary from "./ListLibrary/ListLibrary";
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const {
-    search,
-    setSearch,
-    setLibraryUpload,
-    libraryUpload,
-    handleBack,
-    user,
-  } = useAppContext();
+  const { search, setSearch, setLibraryUpload, libraryUpload, handleBack } =
+    useAppContext();
   return (
     <div className={cx("navbar")}>
       <div className={cx("control")}>
