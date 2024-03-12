@@ -103,7 +103,6 @@ function Upload() {
       url: { url: srcYtb.url, publicId: "" },
       isPublic: true,
       linkytb: linkytb,
-      status: "pending",
     };
 
     try {
