@@ -36,7 +36,7 @@ const Contexts = ({ children }) => {
 
   //State cho bài hát upload
   const listUpload = allSongs
-    .filter((item) => item.user === user?._id)
+    .filter((song) => song.user === user?._id)
     .sort((a, b) =>
       b.createdAt > a.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0
     )
@@ -138,10 +138,12 @@ const Contexts = ({ children }) => {
             `https://be-song.vercel.app/v1/songs/listened/${user?._id}`
           );
           setAgain(
-            resAgain.data.listenAgain.map((song) => ({
-              ...song,
-              source: "again",
-            }))
+            resAgain.data.listenAgain
+              .map((song) => ({
+                ...song,
+                source: "again",
+              }))
+              .filter((song) => song["status"] === "approved")
           );
         } catch (error) {
           console.error("Lỗi khi lấy dữ liệu:", error);
@@ -163,10 +165,12 @@ const Contexts = ({ children }) => {
           "https://be-song.vercel.app/v1/songs/trending"
         );
         setTreding(
-          resTrending.data.map((song) => ({
-            ...song,
-            source: "trending",
-          }))
+          resTrending.data
+            .map((song) => ({
+              ...song,
+              source: "trending",
+            }))
+            .filter((song) => song["status"] === "approved")
         );
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
@@ -188,10 +192,12 @@ const Contexts = ({ children }) => {
             `https://be-song.vercel.app/v1/songs/recommend/${user?._id}`
           );
           setRecommend(
-            resRecommend.data.map((song) => ({
-              ...song,
-              source: "recommend",
-            }))
+            resRecommend.data
+              .map((song) => ({
+                ...song,
+                source: "recommend",
+              }))
+              .filter((song) => song["status"] === "approved")
           );
         } catch (error) {
           console.error("Lỗi khi lấy dữ liệu:", error);
@@ -216,6 +222,7 @@ const Contexts = ({ children }) => {
           resAllSong.data.allSong
             .sort((a, b) => a.title?.localeCompare(b.title))
             .map((song) => ({ ...song, source: "allSong" }))
+            .filter((song) => song["status"] === "approved")
         );
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);

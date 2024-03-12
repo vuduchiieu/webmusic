@@ -201,7 +201,7 @@ function Login() {
                     />
                   </div>
                   <div className={cx("social")}>
-                    <img src={icon.google} alt="" />
+                    <img onClick={handleGoogleLogin} src={icon.google} alt="" />
                     <img src={icon.facebook} alt="" />
                   </div>
                 </div>

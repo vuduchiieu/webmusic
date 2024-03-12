@@ -3,7 +3,6 @@ import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
-import { Helmet } from "react-helmet";
 
 const cx = classNames.bind(styles);
 
@@ -202,75 +201,73 @@ function Control() {
         handleNext();
       });
     }
-  }, [play]);
+    return () => {
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.setActionHandler("play", null);
+        navigator.mediaSession.setActionHandler("pause", null);
+        navigator.mediaSession.setActionHandler("previoustrack", null);
+        navigator.mediaSession.setActionHandler("nexttrack", null);
+      }
+    };
+    // eslint-disable-next-line
+  }, [play, setIsPlaying]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsForcus(true);
+    }
+  }, [isMobile]);
 
   return (
-    <div
-      className={cx("control")}
-      style={
-        detail
-          ? {
-              height: "100vh",
-              flexDirection: "column",
-              alignItems: "center",
-            }
-          : { height: "8vh" }
-      }
-    >
-      <Helmet>
-        <title>
-          {play.title && play.author
-            ? `${play.title} - ${play.author}`
-            : "Stave - Web để nghe nhạc"}
-        </title>
-      </Helmet>
-
-      <div
-        className={cx("info")}
-        style={
-          detail
-            ? {
-                flexDirection: "column",
-                width: "50%",
-                height: "50%",
-              }
-            : {}
-        }
-      >
-        {play.image && (
+    <div className={cx("control", { detail: detail })}>
+      {detail && (
+        <div className={cx("header")}>
           <img
-            style={
-              detail
-                ? {
-                    width: "100%",
-                  }
-                : {}
-            }
-            src={play.image?.url}
-            alt={`Bìa album cho ${play.title || "Tiêu đề không xác định"}`}
+            onClick={() => {
+              setDetail(!detail);
+            }}
+            src={detail ? icon.arrowDown : icon.arrowTop}
+            alt=""
           />
-        )}
-        <div className={cx("title")}>
-          <h3>{play.title}</h3>
-          <p>{play.author}</p>
+          <div className={cx("title")}>
+            <p>Đang phát:</p>
+            <h3>{play.title}</h3>
+          </div>
+          <div></div>
         </div>
+      )}
+      <div className={cx("info")}>
+        {play.image &&
+          (detail ? (
+            <img
+              src={play.image?.url}
+              alt={`Bìa album cho ${play.title || "Tiêu đề không xác định"}`}
+            />
+          ) : (
+            <img
+              src={play.image?.url}
+              alt={`Bìa album cho ${play.title || "Tiêu đề không xác định"}`}
+            />
+          ))}
+        {!detail && (
+          <div className={cx("title")}>
+            <h3>{play.title}</h3>
+            <p>{play.author}</p>
+          </div>
+        )}
       </div>
       <div className={cx("control-audio")}>
         <div className={cx("control-bar")}>
-          {!isMobile && (
-            <button onClick={handleRandom}>
-              <img
-                className={cx({ active: isRandom })}
-                src={icon.random}
-                alt=""
-              />
-            </button>
-          )}
-          {!isMobile && (
-            <button onClick={handleBackWard}>
-              <img src={icon.backward} alt="" />
-            </button>
-          )}
+          <button onClick={handleRandom}>
+            <img
+              className={cx({ active: isRandom })}
+              src={icon.random}
+              alt=""
+            />
+          </button>
+          <button onClick={handleBackWard}>
+            <img src={icon.backward} alt="" />
+          </button>
           <button className={cx("play")} onClick={handlePlayPause}>
             {isPlaying ? (
               <img src={icon.pause} alt="" style={{ filter: " none" }} />
@@ -278,31 +275,25 @@ function Control() {
               <img src={icon.play} alt="" style={{ filter: " none" }} />
             )}
           </button>
-          {!isMobile && (
-            <button onClick={handleNext}>
-              <img src={icon.forward} alt="" />
-            </button>
-          )}
-          {!isMobile && (
-            <button className={cx({ active: isLooping })} onClick={handleLoop}>
-              <img src={icon.rectangle} alt="" />
-            </button>
-          )}
+          <button onClick={handleNext}>
+            <img src={icon.forward} alt="" />
+          </button>
+          <button className={cx({ active: isLooping })} onClick={handleLoop}>
+            <img src={icon.rectangle} alt="" />
+          </button>
         </div>
-        {!isMobile && (
-          <div className={cx("range")}>
-            <p>{formatTime(currentTime)}</p>
-            <input
-              type="range"
-              value={currentTime}
-              step="1"
-              min="0"
-              max={duration}
-              onChange={(e) => handleRange(e.target.value)}
-            />
-            <p>{formatTime(duration)}</p>
-          </div>
-        )}
+        <div className={cx("range")}>
+          <p>{formatTime(currentTime)}</p>
+          <input
+            type="range"
+            value={currentTime}
+            step="1"
+            min="0"
+            max={duration}
+            onChange={(e) => handleRange(e.target.value)}
+          />
+          <p>{formatTime(duration)}</p>
+        </div>
         <audio
           ref={audioRef}
           src={play.song?.url}
@@ -312,36 +303,41 @@ function Control() {
         ></audio>
       </div>
       <div className={cx("more")}>
-        {!isMobile && (
-          <div className={cx("volume")} style={{ "--volume": `${volume}%` }}>
-            <img
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              onClick={handleMute}
-              src={
-                volume > 60
-                  ? icon.speaker
-                  : volume > 1 && volume < 60
-                  ? icon.medium
-                  : icon.mute
-              }
-              alt=""
+        <div className={cx("volume")} style={{ "--volume": `${volume}%` }}>
+          <img
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            onClick={handleMute}
+            src={
+              volume > 60
+                ? icon.speaker
+                : volume > 1 && volume < 60
+                ? icon.medium
+                : icon.mute
+            }
+            alt=""
+          />
+          {isForcus && (
+            <input
+              type="range"
+              value={volume}
+              step="1"
+              min="0"
+              max="100"
+              onChange={(e) => handleVolumeChange(e.target.value)}
             />
-            {isForcus && (
-              <input
-                type="range"
-                value={volume}
-                step="1"
-                min="0"
-                max="100"
-                onChange={(e) => handleVolumeChange(e.target.value)}
-              />
-            )}
+          )}
+        </div>
+        {!detail && (
+          <div
+            onClick={() => {
+              setDetail(!detail);
+            }}
+            className={cx("open-detail")}
+          >
+            <img src={detail ? icon.arrowDown : icon.arrowTop} alt="" />
           </div>
         )}
-        <div onClick={() => setDetail(!detail)} className={cx("detail")}>
-          <img src={detail ? icon.arrowDown : icon.arrowTop} alt="" />
-        </div>
       </div>
     </div>
   );
