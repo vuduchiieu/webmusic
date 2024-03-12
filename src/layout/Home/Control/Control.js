@@ -215,6 +215,8 @@ function Control() {
   useEffect(() => {
     if (isMobile) {
       setIsForcus(true);
+    } else {
+      setIsForcus(false);
     }
   }, [isMobile]);
 
