@@ -266,16 +266,20 @@
     flex-direction: column;
     padding: 0;
     .header {
+      position: sticky;
+      top: 0;
       height: 10%;
-      margin-top: 5%;
+      img {
+        width: 32px;
+      }
     }
     .info {
       height: 45%;
       max-height: none;
       width: 100%;
       img {
-        width: 350px;
-        height: 350px;
+        width: 250px;
+        height: 250px;
       }
     }
     .control-audio {
@@ -300,13 +304,20 @@
       }
       .range {
         display: flex;
+        input {
+          height: 12px;
+        }
       }
     }
 
     .more {
+      height: 5%;
       width: 100%;
       .volume {
         display: flex;
+        input {
+          height: 10px;
+        }
       }
     }
   }
