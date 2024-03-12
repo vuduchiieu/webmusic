@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Tippy from "@tippyjs/react/headless";
 import classNames from "classnames/bind";
 import styles from "./login.module.scss";
 import icon from "~/assets/icon";
 import { loginUser, registerUser } from "~/redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { useAppContext } from "~/component/context/AppContext";
 
 const cx = classNames.bind(styles);
@@ -38,20 +35,6 @@ function Login() {
     username: username,
   };
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDX55f48sODJp0pIjEU7LCGtyvrtJJ0IRU",
-    authDomain: "songs-cac58.firebaseapp.com",
-    projectId: "songs-cac58",
-    storageBucket: "songs-cac58.appspot.com",
-    messagingSenderId: "401411539907",
-    appId: "1:401411539907:web:066394cd9e7f744f75f376",
-    measurementId: "G-14M9HZDFP9",
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -78,7 +61,6 @@ function Login() {
       setEmailError("email không hợp lệ");
       return;
     }
-
     if (!isValidUsername(username)) {
       setUsernameError("username tối thiếu 5 ký tự ");
       return;
@@ -91,22 +73,6 @@ function Login() {
     const registrationSuccessful = true;
     if (registrationSuccessful) {
       await handleLogin(e);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const idToken = await result.user.getIdToken();
-      const response = await axios.post(
-        "https://be-song.vercel.app/v1/auth/google",
-        {
-          idToken: idToken,
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -201,7 +167,7 @@ function Login() {
                     />
                   </div>
                   <div className={cx("social")}>
-                    <img onClick={handleGoogleLogin} src={icon.google} alt="" />
+                    <img src={icon.google} alt="" />
                     <img src={icon.facebook} alt="" />
                   </div>
                 </div>

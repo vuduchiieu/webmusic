@@ -39,19 +39,9 @@ const registerUser = async (user, dispatch, setRefreshData) => {
   }
 };
 
-const logoutUser = async (
-  dispatch,
-  id,
-  assessToken,
-  axiosJWT,
-  setAgain,
-  setRecommend
-) => {
+const logoutUser = async (dispatch, setAgain, setRecommend) => {
   dispatch(logoutStart());
   try {
-    // await axiosJWT.post("https://be-song.vercel.app/v1/auth/logout", id, {
-    //   header: { token: `Bearer ${assessToken}` },
-    // });
     dispatch(logoutSuccess());
     setAgain([]);
     setRecommend([]);

@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import Tippy from "@tippyjs/react/headless";
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 import classNames from "classnames/bind";
 import styles from "./account.module.scss";
 import { logoutUser } from "~/redux/apiRequest";
 import { useDispatch } from "react-redux";
 import icon from "~/assets/icon";
-import { loginSuccess } from "~/redux/authSlide";
 import { useAppContext } from "~/component/context/AppContext";
 import ListLibrary from "../../Navbar/ListLibrary/ListLibrary";
 
@@ -17,46 +14,9 @@ function Account() {
   const { setAgain, user, setRecommend, openModal, isMobile } = useAppContext();
   const [settingAcc, setSettingAcc] = useState(false);
   const dispatch = useDispatch();
-  const assessToken = user?.accessToken;
-  const id = user?._id;
-
-  const refreshToken = async () => {
-    try {
-      const res = await axios.post(
-        "https://be-song.vercel.app/v1/auth/refresh",
-        {
-          withCredentials: true,
-        }
-      );
-      return res.data;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  let axiosJWT = axios.create();
-  axiosJWT.interceptors.request.use(
-    async (config) => {
-      let date = new Date();
-      const decoedToken = jwtDecode(user?.accessToken);
-      if (decoedToken.exp < date.getTime() / 1000) {
-        const data = await refreshToken();
-        const refreshUser = {
-          ...user,
-          accessToken: data.accessToken,
-        };
-        dispatch(loginSuccess(refreshUser));
-        config.headers["token"] = "Bearer " + data.accessToken;
-      }
-      return config;
-    },
-    (err) => {
-      return Promise.reject(err);
-    }
-  );
 
   const handleLogOut = () => {
-    logoutUser(dispatch, id, assessToken, axiosJWT, setAgain, setRecommend);
+    logoutUser(dispatch, setAgain, setRecommend);
   };
 
   return (
