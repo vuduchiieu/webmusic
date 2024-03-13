@@ -81,9 +81,14 @@ module.exports = {
           from: path.join(__dirname, "public", "robots.txt"),
           to: path.join(__dirname, "build"),
         },
+        {
+          from: path.join(__dirname, "public", "sitemap.xml"),
+          to: path.join(__dirname, "build"),
+        },
       ],
     }),
   ],
+
   devServer: {
     historyApiFallback: true,
   },
