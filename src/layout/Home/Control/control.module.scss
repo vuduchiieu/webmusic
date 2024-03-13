@@ -168,12 +168,17 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 90%;
+      width: 80%;
       height: 100%;
       p {
         color: var(--main-color);
       }
       h3 {
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 2rem;
       }
     }
@@ -283,6 +288,7 @@
       }
     }
     .control-audio {
+      flex-direction: column-reverse;
       height: 25%;
       width: 100%;
       .control-bar {
@@ -309,10 +315,6 @@
 
     .more {
       height: 5%;
-      width: 100%;
-      .volume {
-        display: flex;
-      }
     }
   }
 }

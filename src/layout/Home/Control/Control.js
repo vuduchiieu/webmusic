@@ -220,8 +220,21 @@ function Control() {
     }
   }, [isMobile]);
 
+  const handleDetail = (e) => {
+    if (
+      !e.target.closest("button") &&
+      !e.target.closest("input") &&
+      !e.target.closest("img")
+    ) {
+      setDetail(!detail);
+    }
+  };
+
   return (
-    <div className={cx("control", { detail: detail })}>
+    <div
+      onClick={(e) => handleDetail(e)}
+      className={cx("control", { detail: detail })}
+    >
       {detail && (
         <div className={cx("header")}>
           <img
