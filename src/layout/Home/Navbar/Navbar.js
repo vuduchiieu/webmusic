@@ -18,7 +18,7 @@ function Navbar() {
           className={cx("home", { active: !search && !libraryUpload })}
         >
           <img src={icon.home} alt="home" />
-          <h2>Trang chủ</h2>
+          <h1>Stave</h1>
         </div>
         <div
           onClick={() => {

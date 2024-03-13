@@ -10,7 +10,7 @@ function ListLibrary() {
   return (
     <div className={cx("list-library")}>
       <div className={cx("like")}>
-        <h3>Yêu thích</h3>
+        <h2>Yêu thích</h2>
       </div>
       {user && (
         <div
@@ -20,10 +20,10 @@ function ListLibrary() {
             setSearch(false);
           }}
         >
-          <h3>
+          <h2>
             Tải lên của:{" "}
             <span style={{ fontWeight: 700 }}>{user.username}</span>
-          </h3>
+          </h2>
         </div>
       )}
     </div>
