@@ -50,13 +50,32 @@
 
 @media only screen and (max-width: 767px) {
   .list-library {
+    align-items: center;
     height: 20vh;
     .like,
     .upload {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      width: 100%;
       height: 45%;
       margin-top: 0;
       margin-bottom: 5px;
       border-radius: 0;
+      background-color: transparent;
+      h2 {
+        text-align: center;
+      }
+      ::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        opacity: 0.3;
+        background-color: var(--range-color);
+      }
     }
   }
 }
