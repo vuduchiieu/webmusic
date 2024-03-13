@@ -222,6 +222,7 @@ function Control() {
 
   const handleDetail = (e) => {
     if (
+      !detail &&
       !e.target.closest("button") &&
       !e.target.closest("input") &&
       !e.target.closest("img")
