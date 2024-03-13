@@ -38,7 +38,7 @@
     }
   }
   .active {
-    h3 {
+    h2 {
       color: #fff;
       span {
         color: #fff;
@@ -76,6 +76,15 @@
         opacity: 0.3;
         background-color: var(--range-color);
       }
+    }
+    .active {
+      h2 {
+        color: #fff;
+        span {
+          color: #fff;
+        }
+      }
+      background-color: var(--main-color);
     }
   }
 }
