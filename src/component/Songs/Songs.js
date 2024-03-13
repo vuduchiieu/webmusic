@@ -55,7 +55,7 @@ function Songs({ songs, vertical }) {
           }
         >
           <div className={cx("title")} onClick={() => handleSongs(item)}>
-            <img src={item.image?.url} alt="" />
+            <img src={item.image?.url} alt={item.title} />
             <h3>{item.title}</h3>
           </div>
           <div className={cx("info")}>
@@ -65,9 +65,9 @@ function Songs({ songs, vertical }) {
             </div>
             <button onClick={() => handleLikeToggle(item)}>
               {like[item._id] ? (
-                <img src={icon.heartActive} alt="" />
+                <img src={icon.heartActive} alt="heart" />
               ) : (
-                <img src={icon.heart} alt="" />
+                <img src={icon.heart} alt="heart" />
               )}
             </button>
           </div>

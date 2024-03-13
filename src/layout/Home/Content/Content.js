@@ -41,11 +41,11 @@ function Content() {
       <div className={cx("content")}>
         <div className={cx("header")}>
           <div onClick={() => handleBack()} className={cx("back")}>
-            <img src={isMobile ? icon.home : icon.back} alt="" />
+            <img src={isMobile ? icon.home : icon.back} alt="icon" />
           </div>
           {isMobile && (
             <div className={cx("search-input")}>
-              <img src={icon.search} alt="" />
+              <img src={icon.search} alt="search" />
               <input
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
@@ -57,7 +57,7 @@ function Content() {
           )}
           {!isMobile && search && (
             <div className={cx("search-input")}>
-              <img src={icon.search} alt="" />
+              <img src={icon.search} alt="search" />
               <input
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
@@ -70,7 +70,7 @@ function Content() {
           <div className={cx("wrap")}>
             <div className={cx("action")}>
               <div onClick={handleTheme} className={cx("theme")}>
-                <img src={themeMode ? icon.light : icon.dark} alt="" />
+                <img src={themeMode ? icon.light : icon.dark} alt="theme" />
               </div>
               <div className={cx("upload")}>
                 <Upload />

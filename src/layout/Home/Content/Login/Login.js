@@ -129,10 +129,14 @@ function Login() {
                       <img
                         className={cx("loading")}
                         src={icon.loading}
-                        alt=""
+                        alt="loading"
                       />
                     ) : (
-                      <img className={cx("next")} src={icon.arrowNext} alt="" />
+                      <img
+                        className={cx("next")}
+                        src={icon.arrowNext}
+                        alt="next"
+                      />
                     )}
                   </button>
                 </div>
@@ -167,8 +171,8 @@ function Login() {
                     />
                   </div>
                   <div className={cx("social")}>
-                    <img src={icon.google} alt="" />
-                    <img src={icon.facebook} alt="" />
+                    <img src={icon.google} alt="google" />
+                    <img src={icon.facebook} alt="facebook" />
                   </div>
                 </div>
                 <div className={cx("action")}>
@@ -177,10 +181,14 @@ function Login() {
                       <img
                         className={cx("loading")}
                         src={icon.loading}
-                        alt=""
+                        alt="loading"
                       />
                     ) : (
-                      <img className={cx("next")} src={icon.arrowNext} alt="" />
+                      <img
+                        className={cx("next")}
+                        src={icon.arrowNext}
+                        alt="next"
+                      />
                     )}
                   </button>
                 </div>
@@ -202,7 +210,7 @@ function Login() {
           <img
             style={{ width: "100%", height: "100%" }}
             src={icon.login}
-            alt=""
+            alt="login"
           />
         </button>
       </div>

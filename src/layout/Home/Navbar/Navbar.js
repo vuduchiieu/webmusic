@@ -17,7 +17,7 @@ function Navbar() {
           onClick={() => handleBack()}
           className={cx("home", { active: !search && !libraryUpload })}
         >
-          <img src={icon.home} alt="" />
+          <img src={icon.home} alt="home" />
           <h2>Trang chủ</h2>
         </div>
         <div
@@ -27,7 +27,7 @@ function Navbar() {
           }}
           className={cx("search", { active: search })}
         >
-          <img src={icon.search} alt="" />
+          <img src={icon.search} alt="search" />
           <h2>Tìm kiếm</h2>
         </div>
       </div>
@@ -35,10 +35,10 @@ function Navbar() {
         <div className={cx("header")}>
           <div className={cx("wrap")}>
             <div className={cx("title")}>
-              <img src={icon.library} alt="" />
+              <img src={icon.library} alt="library" />
               <h2>Thư viện</h2>
             </div>
-            <img width={30} src={icon.add} alt="" />
+            <img width={30} src={icon.add} alt="add" />
           </div>
         </div>
         <ListLibrary />

@@ -242,7 +242,7 @@ function Control() {
               setDetail(!detail);
             }}
             src={detail ? icon.arrowDown : icon.arrowTop}
-            alt=""
+            alt="aroww"
           />
           <div className={cx("title")}>
             <p>Đang phát:</p>
@@ -254,15 +254,9 @@ function Control() {
       <div className={cx("info")}>
         {play.image &&
           (detail ? (
-            <img
-              src={play.image?.url}
-              alt={`Bìa album cho ${play.title || "Tiêu đề không xác định"}`}
-            />
+            <img src={play.image?.url} alt={play.title} />
           ) : (
-            <img
-              src={play.image?.url}
-              alt={`Bìa album cho ${play.title || "Tiêu đề không xác định"}`}
-            />
+            <img src={play.image?.url} alt={play.title} />
           ))}
         {!detail && (
           <div className={cx("title")}>
@@ -277,24 +271,24 @@ function Control() {
             <img
               className={cx({ active: isRandom })}
               src={icon.random}
-              alt=""
+              alt="random"
             />
           </button>
           <button onClick={handleBackWard}>
-            <img src={icon.backward} alt="" />
+            <img src={icon.backward} alt="back" />
           </button>
           <button className={cx("play")} onClick={handlePlayPause}>
             {isPlaying ? (
-              <img src={icon.pause} alt="" style={{ filter: " none" }} />
+              <img src={icon.pause} alt="pause" style={{ filter: " none" }} />
             ) : (
-              <img src={icon.play} alt="" style={{ filter: " none" }} />
+              <img src={icon.play} alt="play" style={{ filter: " none" }} />
             )}
           </button>
           <button onClick={handleNext}>
-            <img src={icon.forward} alt="" />
+            <img src={icon.forward} alt="forward" />
           </button>
           <button className={cx({ active: isLooping })} onClick={handleLoop}>
-            <img src={icon.rectangle} alt="" />
+            <img src={icon.rectangle} alt="rectangle" />
           </button>
         </div>
         <div className={cx("range")}>
@@ -330,7 +324,7 @@ function Control() {
                 ? icon.medium
                 : icon.mute
             }
-            alt=""
+            alt="speaker"
           />
           {isForcus && (
             <input
@@ -350,7 +344,7 @@ function Control() {
             }}
             className={cx("open-detail")}
           >
-            <img src={detail ? icon.arrowDown : icon.arrowTop} alt="" />
+            <img src={detail ? icon.arrowDown : icon.arrowTop} alt="arrow" />
           </div>
         )}
       </div>

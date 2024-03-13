@@ -19,10 +19,10 @@ function Profile({ isOpen, onClose }) {
     >
       <div className={cx("header")}>
         <h2>Chi tiết hồ sơ</h2>
-        <img src={icon.close} alt="" onClick={onClose} />
+        <img src={icon.close} alt="close" onClick={onClose} />
       </div>
       <div className={cx("profile")}>
-        <img src={icon.avatar} alt="" />
+        <img src={icon.avatar} alt="avatar" />
         <form className={cx("detail")}>
           <input type="text" defaultValue={user?.username} />
           <input type="email" defaultValue={user?.email} />

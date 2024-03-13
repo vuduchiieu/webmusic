@@ -35,7 +35,7 @@ function Account() {
           >
             <img
               src={user.avatar === null ? icon.avatar : user.avatar}
-              alt=""
+              alt="avatar"
             />
             <p>{user.username}</p>
           </button>
@@ -57,7 +57,7 @@ function Account() {
         <img
           onClick={() => setSettingAcc(!settingAcc)}
           src={user.avatar === null ? icon.avatar : user.avatar}
-          alt=""
+          alt="avatar"
         />
       </div>
     </Tippy>

@@ -173,9 +173,13 @@ function Upload() {
               />
               <button onClick={handleGetYtb}>
                 {loadingGetLink ? (
-                  <img className={cx("loading")} src={icon.loading} alt="" />
+                  <img
+                    className={cx("loading")}
+                    src={icon.loading}
+                    alt="loading"
+                  />
                 ) : (
-                  <img src={icon.arrowNext} alt="" />
+                  <img src={icon.arrowNext} alt="next" />
                 )}
               </button>
             </div>
@@ -201,9 +205,13 @@ function Upload() {
               <div className={cx("action")}>
                 <button type="submit">
                   {loading ? (
-                    <img className={cx("loading")} src={icon.loading} alt="" />
+                    <img
+                      className={cx("loading")}
+                      src={icon.loading}
+                      alt="loading"
+                    />
                   ) : (
-                    <img src={icon.send} alt="" />
+                    <img src={icon.send} alt="send" />
                   )}
                 </button>
               </div>
@@ -239,12 +247,12 @@ function Upload() {
                 />
                 <label htmlFor="file">
                   {Object.keys(files).length > 0 ? (
-                    <img src={icon.ok} style={{ filter: "none" }} alt="" />
+                    <img src={icon.ok} style={{ filter: "none" }} alt="ok" />
                   ) : (
                     <img
                       src={icon.uploadMedia}
                       style={{ filter: "none" }}
-                      alt=""
+                      alt="upload"
                     />
                   )}
                 </label>
@@ -253,9 +261,13 @@ function Upload() {
               <div className={cx("action")}>
                 <button type="submit">
                   {loading ? (
-                    <img className={cx("loading")} src={icon.loading} alt="" />
+                    <img
+                      className={cx("loading")}
+                      src={icon.loading}
+                      alt="loading"
+                    />
                   ) : (
-                    <img src={icon.send} alt="" />
+                    <img src={icon.send} alt="send" />
                   )}
                 </button>
               </div>
@@ -270,7 +282,7 @@ function Upload() {
     >
       <div className={cx("upload")}>
         <button onClick={() => setUpload(!upload)}>
-          <img src={icon.upload} alt="" />
+          <img src={icon.upload} alt="upload" />
         </button>
       </div>
     </Tippy>
