@@ -1,9 +1,8 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import classNames from "classnames/bind";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "~/layout/Home/Home.js";
 import { useAppContext } from "./component/context/AppContext";
-import { Helmet } from "react-helmet";
 
 const cx = classNames.bind();
 
@@ -11,16 +10,12 @@ function App() {
   const { themeMode, play } = useAppContext();
 
   return (
-    <Router>
-      <div
-        className={cx("App", {
-          dark: themeMode,
-        })}
-      >
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </div>
+    <div
+      className={cx("App", {
+        dark: themeMode,
+      })}
+    >
+      <Home />
       <Helmet>
         <title>
           {play.title && play.author
@@ -28,7 +23,7 @@ function App() {
             : "Stave - Web để nghe nhạc"}
         </title>
       </Helmet>
-    </Router>
+    </div>
   );
 }
 

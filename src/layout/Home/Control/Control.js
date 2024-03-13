@@ -219,7 +219,6 @@ function Control() {
       setIsForcus(false);
     }
   }, [isMobile]);
-
   const handleDetail = (e) => {
     if (
       !detail &&
