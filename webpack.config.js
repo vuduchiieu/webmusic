@@ -74,6 +74,10 @@ module.exports = {
           to: path.join(__dirname, "build"),
         },
         {
+          from: path.join(__dirname, "public", "preview.png"),
+          to: path.join(__dirname, "build"),
+        },
+        {
           from: path.join(__dirname, "public", "robots.txt"),
           to: path.join(__dirname, "build"),
         },
