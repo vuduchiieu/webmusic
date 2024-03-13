@@ -73,6 +73,10 @@ module.exports = {
           from: path.join(__dirname, "public", "logo512.png"),
           to: path.join(__dirname, "build"),
         },
+        {
+          from: path.join(__dirname, "public", "robots.txt"),
+          to: path.join(__dirname, "build"),
+        },
       ],
     }),
   ],
