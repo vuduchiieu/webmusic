@@ -85,7 +85,7 @@ function Login() {
         <div tabIndex="-1" {...attrs} className={cx("login-model")}>
           {signUp ? (
             <div className={cx("register")}>
-              <h1>Đăng ký</h1>
+              <h2>Đăng ký</h2>
               <form onSubmit={handleRegister} className={cx("form")}>
                 <div className={cx("normally")}>
                   <div className={cx("email")}>
@@ -150,7 +150,7 @@ function Login() {
             </div>
           ) : (
             <div className={cx("sign-in")}>
-              <h1>Đăng nhập</h1>
+              <h2>Đăng nhập</h2>
               <form onSubmit={handleLogin} className={cx("form")}>
                 <div className={cx("normally")}>
                   <div className={cx("email")}>

@@ -157,7 +157,7 @@ function Upload() {
       render={(attrs) => (
         <div tabIndex="-1" {...attrs} className={cx("upload-model")}>
           <div className={cx("header")}>
-            <h1>Tải lên</h1>
+            <h2>Tải lên</h2>
             <p>Bạn thích còn chúng tôi thì chưa chắc 🤣</p>
           </div>
           {swap && (
