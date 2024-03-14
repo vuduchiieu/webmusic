@@ -128,7 +128,7 @@ const Contexts = ({ children }) => {
 
   // State cho trạng thái đăng nhập
   const [login, setLogin] = useState(false);
-
+  console.log(play);
   // Render danh sách nghe lại
   useEffect(() => {
     if (user != null) {
@@ -253,8 +253,10 @@ const Contexts = ({ children }) => {
   }, [listenTime, idSong, idUser, setRefreshData]);
 
   useEffect(() => {
-    handleUpdateAgain();
-  }, [listenTime, idSong, idUser, handleUpdateAgain]);
+    if (play.source !== "again") {
+      handleUpdateAgain();
+    }
+  }, [play, handleUpdateAgain]);
 
   // Thêm bài hát vào danh sách nhạc nổi bật
   const handleUpdateTrending = useCallback(async () => {

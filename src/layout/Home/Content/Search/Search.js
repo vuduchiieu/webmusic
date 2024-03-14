@@ -16,9 +16,12 @@ function Search({ searchValue }) {
       return;
     }
 
-    const filterResult = [...allSongs].filter((item) =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    const filterResult = [...allSongs].filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.author.toLowerCase().includes(searchValue.toLowerCase())
     );
+
     setResult(filterResult);
   }, [searchValue, allSongs]);
 
