@@ -8,14 +8,21 @@ import ListLibrary from "./ListLibrary/ListLibrary";
 const cx = classNames.bind(styles);
 
 function Navbar() {
-  const { search, setSearch, setLibraryUpload, libraryUpload, handleBack } =
-    useAppContext();
+  const {
+    search,
+    setSearch,
+    setLibraryUpload,
+    libraryUpload,
+    handleBack,
+    like,
+    setLike,
+  } = useAppContext();
   return (
     <div className={cx("navbar")}>
       <div className={cx("control")}>
         <div
           onClick={() => handleBack()}
-          className={cx("home", { active: !search && !libraryUpload })}
+          className={cx("home", { active: !search && !libraryUpload && !like })}
         >
           <img src={icon.home} alt="home" />
           <h1>Stave</h1>
@@ -23,6 +30,7 @@ function Navbar() {
         <div
           onClick={() => {
             setSearch(!search);
+            setLike(false);
             setLibraryUpload(false);
           }}
           className={cx("search", { active: search })}

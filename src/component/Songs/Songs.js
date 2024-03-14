@@ -8,11 +8,10 @@ import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
 const cx = classNames.bind(styles);
 
 function Songs({ songs, vertical }) {
-  const { handleSongs, play, like, handleLikeToggle, isMobile } =
-    useAppContext();
+  const { handleSongs, play, handleLikeToggle, isMobile } = useAppContext();
   const elRef = useWheelScroll();
 
-  function formatViews(viewCount) {
+  const formatViews = (viewCount) => {
     if (viewCount < 1000) {
       return viewCount.toString();
     } else if (viewCount < 1000000) {
@@ -20,7 +19,7 @@ function Songs({ songs, vertical }) {
     } else {
       return (viewCount / 1000000).toFixed(1) + " Tr";
     }
-  }
+  };
 
   return (
     <div
@@ -63,12 +62,11 @@ function Songs({ songs, vertical }) {
               <p>{item.author}</p>
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
-            <button onClick={() => handleLikeToggle(item)}>
-              {like[item._id] ? (
-                <img src={icon.heartActive} alt="heart" />
-              ) : (
-                <img src={icon.heart} alt="heart" />
-              )}
+            <button onClick={() => handleLikeToggle(item._id)}>
+              <img
+                src={item.like ? icon.heartActive : icon.heart}
+                alt="heart"
+              />
             </button>
           </div>
         </div>

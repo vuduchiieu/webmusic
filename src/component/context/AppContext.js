@@ -21,6 +21,8 @@ const Contexts = ({ children }) => {
 
   // State cho việc tìm kiếm
   const [search, setSearch] = useState(false);
+  //State cho danh sách like
+  const [listLike, setListLike] = useState([]);
 
   // State cho danh sách nhạc nghe lại
   const [again, setAgain] = useState([]);
@@ -114,21 +116,57 @@ const Contexts = ({ children }) => {
   const [libraryUpload, setLibraryUpload] = useState(false);
 
   // Xử lý sự kiện khi nhấn nút thích
-  const handleLikeToggle = (songs) => {
-    if (!user) {
+  const handleLikeToggle = async (idSong) => {
+    if (!idUser) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
       return;
     }
-    setLike((prev) => ({
-      ...prev,
-      [songs._id]: !prev[songs._id],
-    }));
+    if (idUser) {
+      try {
+        await axios
+          .put(
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/like/${idUser}/${idSong}`
+          )
+          .then(() => {
+            setRefreshData(true);
+          });
+      } catch (error) {
+        console.error("Lỗi khi thêm bài hát vào danh sách nghe lại:", error);
+      }
+    }
   };
 
   // State cho trạng thái đăng nhập
   const [login, setLogin] = useState(false);
-  console.log(play);
+  //Render danh sách likes
+  useEffect(() => {
+    if (user != null) {
+      const fetchData = async () => {
+        try {
+          const resLike = await axios.get(
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/like/likes/${user?._id}`
+          );
+          setListLike(
+            resLike.data.likes
+              .map((song) => ({
+                ...song,
+                source: "likes",
+              }))
+              .filter((song) => song["status"] === "approved")
+          );
+        } catch (error) {
+          console.error("Lỗi khi lấy dữ liệu:", error);
+        } finally {
+          setRefreshData(false);
+        }
+      };
+      if (refreshData) {
+        fetchData();
+      }
+    }
+  }, [refreshData, user]);
+
   // Render danh sách nghe lại
   useEffect(() => {
     if (user != null) {
@@ -137,6 +175,7 @@ const Contexts = ({ children }) => {
           const resAgain = await axios.get(
             `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${user?._id}`
           );
+
           setAgain(
             resAgain.data.listenAgain
               .map((song) => ({
@@ -281,6 +320,7 @@ const Contexts = ({ children }) => {
   const handleBack = () => {
     setSearch(false);
     setLibraryUpload(false);
+    setLike(false);
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -312,6 +352,7 @@ const Contexts = ({ children }) => {
         handleLikeToggle,
         setLibraryUpload,
         libraryUpload,
+        listLike,
         again,
         setAgain,
         treding,

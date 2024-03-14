@@ -6,16 +6,26 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function ListLibrary() {
-  const { setLibraryUpload, libraryUpload, setSearch, user } = useAppContext();
+  const { setLibraryUpload, libraryUpload, setSearch, user, like, setLike } =
+    useAppContext();
+
   return (
     <div className={cx("list-library")}>
-      <div className={cx("like")}>
+      <div
+        onClick={() => {
+          setLike(!like);
+          setSearch(false);
+          setLibraryUpload(false);
+        }}
+        className={cx("like", { active: like })}
+      >
         <h2>Yêu thích</h2>
       </div>
       {user && (
         <div
           className={cx("upload", { active: libraryUpload })}
           onClick={() => {
+            setLike(false);
             setLibraryUpload(!libraryUpload);
             setSearch(false);
           }}

@@ -10,6 +10,7 @@ import Songs from "~/component/Songs/Songs";
 import Upload from "./Upload/Upload";
 import Library from "../Navbar/Library/Library";
 import Profile from "~/component/Profile/Profile";
+import Like from "../Navbar/Library/Like";
 
 const cx = classNames.bind(styles);
 
@@ -29,6 +30,7 @@ function Content() {
     isModalOpen,
     closeModal,
     isMobile,
+    like,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -91,6 +93,8 @@ function Content() {
           <Search searchValue={searchValue} />
         ) : libraryUpload ? (
           <Library />
+        ) : like ? (
+          <Like />
         ) : (
           <div className={cx("main")}>
             {again && again.length > 0 && (
