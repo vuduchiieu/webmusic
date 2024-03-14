@@ -15,7 +15,7 @@ const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
-      "https://be-song.vercel.app/v1/auth/login",
+      "https://be-stave-6c9234b70089.herokuapp.com/v1/auth/login",
       user
     );
     dispatch(loginSuccess(res.data));
@@ -30,7 +30,10 @@ const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
 const registerUser = async (user, dispatch, setRefreshData) => {
   dispatch(registerStart());
   try {
-    await axios.post("https://be-song.vercel.app/v1/auth/register", user);
+    await axios.post(
+      "https://be-stave-6c9234b70089.herokuapp.com/v1/auth/register",
+      user
+    );
     dispatch(registerSuccess());
     setRefreshData(true);
   } catch (error) {

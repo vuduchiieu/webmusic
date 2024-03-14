@@ -109,7 +109,7 @@ function Upload() {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
-          `https://be-song.vercel.app/v1/songs/ytb/${user._id}`,
+          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/ytb/${user._id}`,
           newSong
         );
         setUpload(false);
@@ -135,7 +135,7 @@ function Upload() {
       setLoadingGetLink(true);
       setUploadYtb("");
       const response = await axios.get(
-        `https://be-song.vercel.app/v1/songs/ytb?url=${uploadYtb}`
+        `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/ytb?url=${uploadYtb}`
       );
       const { title, author, cover, url, link } = response.data;
       setTitleYtb(title);

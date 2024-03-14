@@ -135,7 +135,7 @@ const Contexts = ({ children }) => {
       const fetchData = async () => {
         try {
           const resAgain = await axios.get(
-            `https://be-song.vercel.app/v1/songs/listened/${user?._id}`
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${user?._id}`
           );
           setAgain(
             resAgain.data.listenAgain
@@ -162,7 +162,7 @@ const Contexts = ({ children }) => {
     const fetchData = async () => {
       try {
         const resTrending = await axios.get(
-          "https://be-song.vercel.app/v1/songs/trending"
+          "https://be-stave-6c9234b70089.herokuapp.com/v1/songs/trending"
         );
         setTreding(
           resTrending.data
@@ -189,7 +189,7 @@ const Contexts = ({ children }) => {
       if (user != null) {
         try {
           const resRecommend = await axios.get(
-            `https://be-song.vercel.app/v1/songs/recommend/${user?._id}`
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/recommend/${user?._id}`
           );
           setRecommend(
             resRecommend.data
@@ -216,7 +216,7 @@ const Contexts = ({ children }) => {
     const fetchData = async () => {
       try {
         const resAllSong = await axios.get(
-          "https://be-song.vercel.app/v1/songs/"
+          "https://be-stave-6c9234b70089.herokuapp.com/v1/songs/"
         );
         setAllSongs(
           resAllSong.data.allSong
@@ -241,7 +241,7 @@ const Contexts = ({ children }) => {
       try {
         await axios
           .put(
-            `https://be-song.vercel.app/v1/songs/listened/${idUser}/${idSong}`
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${idUser}/${idSong}`
           )
           .then(() => {
             setRefreshData(true);
@@ -263,7 +263,7 @@ const Contexts = ({ children }) => {
     if (idSong && listenTime === 50) {
       try {
         await axios.put(
-          `https://be-song.vercel.app/v1/songs/trending/${idSong}`
+          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/trending/${idSong}`
         );
         setRefreshData(true);
       } catch (error) {
