@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
@@ -85,7 +85,7 @@ function Songs({ songs, vertical }) {
             </div>
             <button onClick={() => handleLikeToggle(item, item._id)}>
               <img
-                src={item.liked[0].like ? icon.heartActive : icon.heart}
+                src={item.liked[0]?.like ? icon.heartActive : icon.heart}
                 alt="heart"
               />
             </button>
