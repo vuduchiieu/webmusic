@@ -12,9 +12,7 @@ function Songs({ songs, vertical }) {
   const { handleSongs, play, isMobile, setRefreshData, setLogin, user } =
     useAppContext();
   const elRef = useWheelScroll();
-
   const handleLikeToggle = async (songs, idSong) => {
-    console.log(songs.liked[0].like);
     if (!user?._id) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
@@ -84,10 +82,7 @@ function Songs({ songs, vertical }) {
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
             <button onClick={() => handleLikeToggle(item, item._id)}>
-              <img
-                src={item.liked[0]?.like ? icon.heartActive : icon.heart}
-                alt="heart"
-              />
+              <img src={false ? icon.heartActive : icon.heart} alt="heart" />
             </button>
           </div>
         </div>
