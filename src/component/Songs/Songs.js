@@ -9,17 +9,10 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 
 function Songs({ songs, vertical }) {
-  const {
-    handleSongs,
-    play,
-    isMobile,
-    setRefreshData,
-    setLogin,
-    user,
-    listLike,
-  } = useAppContext();
+  const { handleSongs, play, isMobile, setRefreshData, setLogin, user } =
+    useAppContext();
   const elRef = useWheelScroll();
-  const handleLikeToggle = async (idSong) => {
+  const handleLikeToggle = async (idSong, songs) => {
     if (!user?._id) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
@@ -37,10 +30,6 @@ function Songs({ songs, vertical }) {
       console.error(error);
     }
   };
-
-  const currentArray = [listLike].find(
-    (array) => array && array.some((song) => song.source === "likes")
-  );
 
   const formatViews = (viewCount) => {
     if (viewCount < 1000) {
@@ -93,11 +82,8 @@ function Songs({ songs, vertical }) {
               <p>{item.author}</p>
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
-            <button onClick={() => handleLikeToggle(item._id)}>
-              <img
-                src={item.source === "likes" ? icon.heartActive : icon.heart}
-                alt="heart"
-              />
+            <button onClick={() => handleLikeToggle(item._id, item)}>
+              <img src={false ? icon.heartActive : icon.heart} alt="heart" />
             </button>
           </div>
         </div>

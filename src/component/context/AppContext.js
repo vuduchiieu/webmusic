@@ -128,7 +128,7 @@ const Contexts = ({ children }) => {
             `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}`
           );
           setListLike(
-            resLike.data.likes
+            resLike.data
               .map((song) => ({
                 ...song,
                 source: "likes",
@@ -149,15 +149,14 @@ const Contexts = ({ children }) => {
 
   // Render danh sách nghe lại
   useEffect(() => {
-    if (user != null) {
+    if (user) {
       const fetchData = async () => {
         try {
           const resAgain = await axios.get(
             `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${user?._id}`
           );
-
           setAgain(
-            resAgain.data.listenAgain
+            resAgain.data
               .map((song) => ({
                 ...song,
                 source: "again",
