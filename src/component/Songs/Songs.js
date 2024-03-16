@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
@@ -9,10 +9,17 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 
 function Songs({ songs, vertical }) {
-  const { handleSongs, play, isMobile, setRefreshData, setLogin, user } =
-    useAppContext();
+  const {
+    handleSongs,
+    play,
+    isMobile,
+    setRefreshData,
+    setLogin,
+    user,
+    listLike,
+  } = useAppContext();
   const elRef = useWheelScroll();
-  const handleLikeToggle = async (songs, idSong) => {
+  const handleLikeToggle = async (idSong) => {
     if (!user?._id) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
@@ -31,6 +38,10 @@ function Songs({ songs, vertical }) {
     }
   };
 
+  const currentArray = [listLike].find(
+    (array) => array && array.some((song) => song.source === "likes")
+  );
+
   const formatViews = (viewCount) => {
     if (viewCount < 1000) {
       return viewCount.toString();
@@ -40,6 +51,7 @@ function Songs({ songs, vertical }) {
       return (viewCount / 1000000).toFixed(1) + " Tr";
     }
   };
+
   return (
     <div
       ref={vertical ? null : elRef}
@@ -81,8 +93,11 @@ function Songs({ songs, vertical }) {
               <p>{item.author}</p>
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
-            <button onClick={() => handleLikeToggle(item, item._id)}>
-              <img src={false ? icon.heartActive : icon.heart} alt="heart" />
+            <button onClick={() => handleLikeToggle(item._id)}>
+              <img
+                src={item.source === "likes" ? icon.heartActive : icon.heart}
+                alt="heart"
+              />
             </button>
           </div>
         </div>
