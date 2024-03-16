@@ -111,41 +111,21 @@ const Contexts = ({ children }) => {
     };
   }, [isPlaying]);
 
-  // State cho trạng thái thích bài hát
-  const [like, setLike] = useState(false);
-  const [libraryUpload, setLibraryUpload] = useState(false);
-
-  // Xử lý sự kiện khi nhấn nút thích
-  const handleLikeToggle = async (idSong) => {
-    if (!idUser) {
-      alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
-      setLogin(true);
-      return;
-    }
-    if (idUser) {
-      try {
-        await axios
-          .put(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/like/${idUser}/${idSong}`
-          )
-          .then(() => {
-            setRefreshData(true);
-          });
-      } catch (error) {
-        console.error("Lỗi khi thêm bài hát vào danh sách nghe lại:", error);
-      }
-    }
-  };
-
   // State cho trạng thái đăng nhập
   const [login, setLogin] = useState(false);
+
+  // State cho trạng thái thích bài hát
+  const [like, setLike] = useState(false);
+
+  const [libraryUpload, setLibraryUpload] = useState(false);
+
   //Render danh sách likes
   useEffect(() => {
     if (user != null) {
       const fetchData = async () => {
         try {
           const resLike = await axios.get(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/like/likes/${user?._id}`
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}`
           );
           setListLike(
             resLike.data.likes
@@ -290,13 +270,11 @@ const Contexts = ({ children }) => {
       }
     }
   }, [listenTime, idSong, idUser, setRefreshData]);
-
   useEffect(() => {
     if (play.source !== "again") {
       handleUpdateAgain();
     }
   }, [play, handleUpdateAgain]);
-
   // Thêm bài hát vào danh sách nhạc nổi bật
   const handleUpdateTrending = useCallback(async () => {
     if (idSong && listenTime === 50) {
@@ -349,7 +327,6 @@ const Contexts = ({ children }) => {
         setSearch,
         like,
         setLike,
-        handleLikeToggle,
         setLibraryUpload,
         libraryUpload,
         listLike,

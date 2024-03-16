@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
 import icon from "~/assets/icon";
 import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 
 function Songs({ songs, vertical }) {
-  const { handleSongs, play, handleLikeToggle, isMobile } = useAppContext();
+  const { handleSongs, play, isMobile, setRefreshData, setLogin, user } =
+    useAppContext();
   const elRef = useWheelScroll();
+
+  const handleLikeToggle = async (songs, idSong) => {
+    console.log(songs.liked[0].like);
+    if (!user?._id) {
+      alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
+      setLogin(true);
+      return;
+    }
+    try {
+      await axios
+        .put(
+          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}/${idSong}`
+        )
+        .then(() => {
+          setRefreshData(true);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const formatViews = (viewCount) => {
     if (viewCount < 1000) {
@@ -20,7 +42,6 @@ function Songs({ songs, vertical }) {
       return (viewCount / 1000000).toFixed(1) + " Tr";
     }
   };
-
   return (
     <div
       ref={vertical ? null : elRef}
@@ -62,9 +83,9 @@ function Songs({ songs, vertical }) {
               <p>{item.author}</p>
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
-            <button onClick={() => handleLikeToggle(item._id)}>
+            <button onClick={() => handleLikeToggle(item, item._id)}>
               <img
-                src={item.like ? icon.heartActive : icon.heart}
+                src={item.liked[0].like ? icon.heartActive : icon.heart}
                 alt="heart"
               />
             </button>

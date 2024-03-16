@@ -13,6 +13,7 @@ function Control() {
     recommend,
     again,
     listUpload,
+    listLike,
     audioRef,
     play,
     setPlay,
@@ -108,9 +109,14 @@ function Control() {
   };
 
   // Lấy mảng hiện tại
-  const currentArray = [allSongs, treding, recommend, again, listUpload].find(
-    (array) => array && array.some((song) => song.source === play.source)
-  );
+  const currentArray = [
+    allSongs,
+    treding,
+    recommend,
+    again,
+    listUpload,
+    listLike,
+  ].find((array) => array && array.some((song) => song.source === play.source));
   const indexSong = currentArray?.map((item) => item._id).indexOf(play._id);
 
   // Xử lý chuyển bài tiếp theo
