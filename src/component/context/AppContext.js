@@ -21,8 +21,6 @@ const Contexts = ({ children }) => {
 
   // State cho việc tìm kiếm
   const [search, setSearch] = useState(false);
-  //State cho danh sách like
-  const [listLike, setListLike] = useState([]);
 
   // State cho danh sách nhạc nghe lại
   const [again, setAgain] = useState([]);
@@ -120,40 +118,39 @@ const Contexts = ({ children }) => {
   const [libraryUpload, setLibraryUpload] = useState(false);
 
   //Render danh sách likes
-  useEffect(() => {
-    if (user != null) {
-      const fetchData = async () => {
-        try {
-          const resLike = await axios.get(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}`
-          );
-          setListLike(
-            resLike.data
-              .map((song) => ({
-                ...song,
-                source: "likes",
-              }))
-              .filter((song) => song["status"] === "approved")
-          );
-        } catch (error) {
-          console.error("Lỗi khi lấy dữ liệu:", error);
-        } finally {
-          setRefreshData(false);
-        }
-      };
-      if (refreshData) {
-        fetchData();
-      }
-    }
-  }, [refreshData, user]);
-
+  // useEffect(() => {
+  //   if (user != null) {
+  //     const fetchData = async () => {
+  //       try {
+  //         const resLike = await axios.get(
+  //           `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}`
+  //         );
+  //         setListLike(
+  //           resLike.data
+  //             .map((song) => ({
+  //               ...song,
+  //               source: "likes",
+  //             }))
+  //             .filter((song) => song["status"] === "approved")
+  //         );
+  //       } catch (error) {
+  //         console.error("Lỗi khi lấy dữ liệu:", error);
+  //       } finally {
+  //         setRefreshData(false);
+  //       }
+  //     };
+  //     if (refreshData) {
+  //       fetchData();
+  //     }
+  //   }
+  // }, [refreshData, user]);
   // Render danh sách nghe lại
   useEffect(() => {
-    if (user) {
+    if (idUser) {
       const fetchData = async () => {
         try {
           const resAgain = await axios.get(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${user?._id}`
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${idUser}`
           );
           setAgain(
             resAgain.data
@@ -173,7 +170,7 @@ const Contexts = ({ children }) => {
         fetchData();
       }
     }
-  }, [refreshData, user]);
+  }, [refreshData, idUser]);
 
   // Render danh sách nhạc nổi bật
   useEffect(() => {
@@ -204,10 +201,10 @@ const Contexts = ({ children }) => {
   // Render danh sách nhạc đề xuất
   useEffect(() => {
     const fetchData = async () => {
-      if (user != null) {
+      if (idUser) {
         try {
           const resRecommend = await axios.get(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/recommend/${user?._id}`
+            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/recommend/${idUser}`
           );
           setRecommend(
             resRecommend.data
@@ -227,7 +224,7 @@ const Contexts = ({ children }) => {
     if (refreshData) {
       fetchData();
     }
-  }, [refreshData, user]);
+  }, [refreshData, idUser]);
 
   // Render tất cả các bài hát
   useEffect(() => {
@@ -328,7 +325,6 @@ const Contexts = ({ children }) => {
         setLike,
         setLibraryUpload,
         libraryUpload,
-        listLike,
         again,
         setAgain,
         treding,

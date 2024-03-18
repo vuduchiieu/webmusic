@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
@@ -12,7 +12,7 @@ function Songs({ songs, vertical }) {
   const { handleSongs, play, isMobile, setRefreshData, setLogin, user } =
     useAppContext();
   const elRef = useWheelScroll();
-  const handleLikeToggle = async (idSong, songs) => {
+  const handleLikeToggle = async (idSong) => {
     if (!user?._id) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
@@ -20,9 +20,7 @@ function Songs({ songs, vertical }) {
     }
     try {
       await axios
-        .put(
-          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}/${idSong}`
-        )
+        .put(`http://localhost:3001/v1/songs/like/${user?._id}/${idSong}`)
         .then(() => {
           setRefreshData(true);
         });
@@ -82,7 +80,7 @@ function Songs({ songs, vertical }) {
               <p>{item.author}</p>
               <span>{formatViews(item.view)} lượt nghe</span>
             </div>
-            <button onClick={() => handleLikeToggle(item._id, item)}>
+            <button onClick={() => handleLikeToggle(item._id)}>
               <img src={false ? icon.heartActive : icon.heart} alt="heart" />
             </button>
           </div>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import {
   loginFailed,
   loginStart,
@@ -18,7 +19,8 @@ const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
       "https://be-stave-6c9234b70089.herokuapp.com/v1/auth/login",
       user
     );
-    dispatch(loginSuccess(res.data));
+    const decodedToken = jwtDecode(res.data);
+    dispatch(loginSuccess(decodedToken));
     setLogin(false);
     setRefreshData(true);
   } catch (error) {
