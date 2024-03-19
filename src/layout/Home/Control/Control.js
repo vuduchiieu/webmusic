@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
@@ -27,6 +27,9 @@ function Control() {
     detail,
     setDetail,
   } = useAppContext();
+
+  const videoRef = useRef(null);
+  const [audioVideo, setAudioVideo] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
@@ -44,6 +47,13 @@ function Control() {
   // Xử lý chơi và dừng nhạc
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
   };
 
   // Xử lý thanh trượt thời gian
@@ -55,11 +65,17 @@ function Control() {
   // Cập nhật thời gian khi đang chạy
   const handleTimeUpdate = () => {
     setCurrentTime(audioRef.current.currentTime);
+    if (videoRef.current) {
+      videoRef.current.currentTime = audioRef.current.currentTime;
+    }
   };
 
   // Xử lý khi tệp nhạc đã tải xong
   const handleLoadedData = () => {
     setDuration(audioRef.current.duration);
+    if (videoRef.current) {
+      videoRef.current.load();
+    }
   };
 
   // Xử lý thay đổi âm lượng
@@ -258,13 +274,42 @@ function Control() {
           <div></div>
         </div>
       )}
+      {detail && (
+        <div className={cx("audio-video")}>
+          <button
+            className={cx({ active: !audioVideo })}
+            onClick={() => setAudioVideo(false)}
+          >
+            <p>Bài hát</p>
+          </button>
+          <button
+            className={cx({ active: audioVideo })}
+            onClick={() => setAudioVideo(!isMobile && true)}
+          >
+            <p>Video</p>
+          </button>
+        </div>
+      )}
       <div className={cx("info")}>
-        {play.image &&
-          (detail ? (
-            <img src={play.image?.url} alt={play.title} />
+        {audioVideo ? (
+          play.linkytb ? (
+            <video
+              poster={play.image?.url}
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
+              ref={videoRef}
+            >
+              <source src={play.song?.url} type="video/mp4"></source>
+            </video>
           ) : (
             <img src={play.image?.url} alt={play.title} />
-          ))}
+          )
+        ) : (
+          <img src={play.image?.url} alt={play.title} />
+        )}
+
         {!detail && (
           <div className={cx("title")}>
             <h3>{play.title}</h3>
