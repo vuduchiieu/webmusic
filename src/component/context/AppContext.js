@@ -9,6 +9,7 @@ import React, {
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
+import { jwtDecode } from "jwt-decode";
 
 const AppContext = createContext();
 
@@ -150,11 +151,12 @@ const Contexts = ({ children }) => {
     if (idUser) {
       const fetchData = async () => {
         try {
-          const resAgain = await axios.get(
+          const res = await axios.get(
             `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${idUser}`
           );
+          const decodedToken = jwtDecode(res.data);
           setAgain(
-            resAgain.data
+            Object.values(decodedToken)
               .map((song) => ({
                 ...song,
                 source: "again",
@@ -177,11 +179,12 @@ const Contexts = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resTrending = await axios.get(
+        const res = await axios.get(
           "https://be-stave-6c9234b70089.herokuapp.com/v1/songs/trending"
         );
+        const decodedToken = jwtDecode(res.data);
         setTreding(
-          resTrending.data
+          Object.values(decodedToken)
             .map((song) => ({
               ...song,
               source: "trending",
@@ -204,11 +207,12 @@ const Contexts = ({ children }) => {
     const fetchData = async () => {
       if (idUser) {
         try {
-          const resRecommend = await axios.get(
+          const res = await axios.get(
             `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/recommend/${idUser}`
           );
+          const decodedToken = jwtDecode(res.data);
           setRecommend(
-            resRecommend.data
+            Object.values(decodedToken)
               .map((song) => ({
                 ...song,
                 source: "recommend",
@@ -231,11 +235,12 @@ const Contexts = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resAllSong = await axios.get(
-          "https://be-stave-6c9234b70089.herokuapp.com/v1/songs/"
+        const res = await axios.get(
+          "https://be-stave-6c9234b70089.herokuapp.com/v1/songs"
         );
+        const decodedToken = jwtDecode(res.data);
         setAllSongs(
-          resAllSong.data.allSong
+          Object.values(decodedToken)
             .sort((a, b) => a.title?.localeCompare(b.title))
             .map((song) => ({ ...song, source: "allSong" }))
             .filter((song) => song["status"] === "approved")

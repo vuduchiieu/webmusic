@@ -202,6 +202,9 @@
       background-color: var(--songs-color);
     }
     .active {
+      p {
+        color: #fff;
+      }
       cursor: default;
       background-color: var(--main-color);
     }
