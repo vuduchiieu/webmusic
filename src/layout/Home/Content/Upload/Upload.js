@@ -63,23 +63,23 @@ function Upload() {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
-          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/${user._id}`,
+          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/${user?._id}`,
           formData
         );
         setUpload(false);
         setTitle("");
         setAuthor("");
         setFiles({});
-
-        alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
+        if (!user?.admin) {
+          alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
+        }
+        setLoading(true);
       } else {
         alert("Bài hát đã tồn tại trong danh sách");
       }
     } catch (error) {
       console.log(error);
       alert("Đăng thất bại");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -118,15 +118,16 @@ function Upload() {
         setCoverYtb("");
         setSrcYtb("");
 
-        alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
+        if (!user?.admin) {
+          alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
+        }
+        setLoading(true);
       } else {
         alert("Bài hát đã tồn tại trong danh sách");
       }
     } catch (error) {
       console.log(error);
       alert("Đăng thất bại");
-    } finally {
-      setLoading(false);
     }
   };
 

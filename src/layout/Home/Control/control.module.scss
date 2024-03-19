@@ -202,6 +202,7 @@
       background-color: var(--songs-color);
     }
     .active {
+      cursor: default;
       background-color: var(--main-color);
     }
   }
@@ -289,7 +290,7 @@
     }
   }
   .detail {
-    height: 100vh;
+    min-height: 95vh;
     background-color: var(--secondary-background);
     flex-direction: column;
     padding: 0;
@@ -297,10 +298,10 @@
       position: sticky;
       top: 0;
       height: 10%;
+      margin-bottom: 20%;
     }
     .audio-video {
       width: 30%;
-      margin-top: 20%;
     }
     .info {
       height: 45%;
