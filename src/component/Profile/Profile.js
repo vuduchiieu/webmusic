@@ -22,7 +22,9 @@ function Profile({ isOpen, onClose }) {
         <img src={icon.close} alt="close" onClick={onClose} />
       </div>
       <div className={cx("profile")}>
-        <img src={icon.avatar} alt="avatar" />
+        <div className={cx("avatar")}>
+          <img src={user?.avatar || icon.avatar} alt="avatar" />
+        </div>
         <form className={cx("detail")}>
           <input type="text" defaultValue={user?.username} />
           <input type="email" defaultValue={user?.email} />
