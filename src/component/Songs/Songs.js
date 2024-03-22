@@ -16,6 +16,7 @@ function Songs({ songs, vertical, nextSong }) {
       setLogin(true);
       return;
     }
+    alert("Chưa làm xong cái này!");
   };
 
   const formatViews = (viewCount) => {
