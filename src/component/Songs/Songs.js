@@ -8,8 +8,7 @@ import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
 const cx = classNames.bind(styles);
 
 function Songs({ songs, vertical, nextSong }) {
-  const { handleSongs, play, isMobile, setLogin, user, listRef } =
-    useAppContext();
+  const { handleSongs, play, isMobile, setLogin, user } = useAppContext();
   const elRef = useWheelScroll();
   const handleLikeToggle = async () => {
     if (!user?._id) {
@@ -46,6 +45,9 @@ function Songs({ songs, vertical, nextSong }) {
       {songs.map((item, i) => (
         <div
           key={i}
+          onClick={() => {
+            nextSong && handleSongs(item);
+          }}
           className={cx("song", { active: play._id === item._id })}
           style={
             isMobile && vertical
@@ -67,9 +69,7 @@ function Songs({ songs, vertical, nextSong }) {
           </div>
           <div className={cx("info")}>
             <div className={cx("wrap")}>
-              {nextSong && (
-                <h3 onClick={() => handleSongs(item)}>{item.title}</h3>
-              )}
+              {nextSong && <h3>{item.title}</h3>}
               <p>{item.author}</p>
               {!nextSong && <span>{formatViews(item.view)} lượt nghe</span>}
             </div>
