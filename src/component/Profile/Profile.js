@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { loginSuccess } from "~/redux/authSlide";
 import { jwtDecode } from "jwt-decode";
+import { token } from "~/redux/apiRequest";
 
 const cx = classNames.bind(styles);
 
@@ -38,7 +39,12 @@ function Profile({ isOpen, onClose }) {
     try {
       const res = await axios.put(
         `https://be-stave-6c9234b70089.herokuapp.com/v1/user/${user?._id}`,
-        newUser
+        newUser,
+        {
+          headers: {
+            token: `Bearer ${token}`,
+          },
+        }
       );
       const decodedToken = jwtDecode(res.data);
       dispatch(loginSuccess(decodedToken));

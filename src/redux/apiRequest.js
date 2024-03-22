@@ -12,6 +12,8 @@ import {
   registerSuccess,
 } from "./authSlide";
 
+let token = null;
+
 const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
   dispatch(loginStart());
   try {
@@ -20,6 +22,7 @@ const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
       user
     );
     const decodedToken = jwtDecode(res.data);
+    token = res.data;
     dispatch(loginSuccess(decodedToken));
     setLogin(false);
     setRefreshData(true);
@@ -55,4 +58,4 @@ const logoutUser = async (dispatch, setAgain, setRecommend) => {
   }
 };
 
-export { loginUser, registerUser, logoutUser };
+export { loginUser, registerUser, logoutUser, token };
