@@ -4,28 +4,18 @@ import styles from "./songs.module.scss";
 import { useAppContext } from "../context/AppContext";
 import icon from "~/assets/icon";
 import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
-import axios from "axios";
 
 const cx = classNames.bind(styles);
 
-function Songs({ songs, vertical }) {
-  const { handleSongs, play, isMobile, setRefreshData, setLogin, user } =
+function Songs({ songs, vertical, nextSong }) {
+  const { handleSongs, play, isMobile, setLogin, user, listRef } =
     useAppContext();
   const elRef = useWheelScroll();
-  const handleLikeToggle = async (idSong) => {
+  const handleLikeToggle = async () => {
     if (!user?._id) {
       alert("Bạn cần đăng nhập để thêm bài hát vào yêu thích");
       setLogin(true);
       return;
-    }
-    try {
-      await axios
-        .put(`http://localhost:3001/v1/songs/like/${user?._id}/${idSong}`)
-        .then(() => {
-          setRefreshData(true);
-        });
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -42,7 +32,7 @@ function Songs({ songs, vertical }) {
   return (
     <div
       ref={vertical ? null : elRef}
-      className={cx("songs")}
+      className={cx("songs", { nextSong: nextSong })}
       style={
         vertical && {
           flexWrap: "wrap",
@@ -73,16 +63,21 @@ function Songs({ songs, vertical }) {
         >
           <div className={cx("title")} onClick={() => handleSongs(item)}>
             <img src={item.image?.url} alt={item.title} />
-            <h3>{item.title}</h3>
+            {!nextSong && <h3>{item.title}</h3>}
           </div>
           <div className={cx("info")}>
             <div className={cx("wrap")}>
+              {nextSong && (
+                <h3 onClick={() => handleSongs(item)}>{item.title}</h3>
+              )}
               <p>{item.author}</p>
-              <span>{formatViews(item.view)} lượt nghe</span>
+              {!nextSong && <span>{formatViews(item.view)} lượt nghe</span>}
             </div>
-            <button onClick={() => handleLikeToggle(item._id)}>
-              <img src={false ? icon.heartActive : icon.heart} alt="heart" />
-            </button>
+            {!nextSong && (
+              <button onClick={() => handleLikeToggle(item._id)}>
+                <img src={false ? icon.heartActive : icon.heart} alt="heart" />
+              </button>
+            )}
           </div>
         </div>
       ))}

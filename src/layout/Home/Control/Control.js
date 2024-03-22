@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import { useAppContext } from "~/component/context/AppContext";
 import styles from "./control.module.scss";
 import icon from "~/assets/icon";
+import Songs from "~/component/Songs/Songs";
 
 const cx = classNames.bind(styles);
 
@@ -136,6 +137,23 @@ function Control() {
   ].find((array) => array && array.some((song) => song.source === play.source));
   const indexSong = currentArray?.map((item) => item._id).indexOf(play._id);
 
+  //Mảng nextsong
+  let nextSongArr;
+  if (currentArray) {
+    nextSongArr = [...currentArray];
+    const indexNextSongArr = nextSongArr.findIndex(
+      (song) => song._id === play._id
+    );
+    if (indexNextSongArr !== -1) {
+      nextSongArr = [
+        ...nextSongArr.slice(indexNextSongArr),
+        ...nextSongArr.slice(0, indexNextSongArr),
+      ];
+    }
+  } else {
+    nextSongArr = [];
+  }
+
   // Xử lý chuyển bài tiếp theo
   const handleNext = () => {
     if (currentArray) {
@@ -254,11 +272,17 @@ function Control() {
     }
   };
 
+  const nextSong = true;
   return (
     <div
       onClick={(e) => handleDetail(e)}
       className={cx("control", { detail: detail })}
     >
+      {detail && !isMobile && (
+        <div className={cx("next-song")}>
+          <Songs songs={nextSongArr} nextSong={nextSong} />
+        </div>
+      )}
       {detail && (
         <div className={cx("header")}>
           <img

@@ -74,6 +74,7 @@ const Contexts = ({ children }) => {
   }, [themeMode]);
 
   // Xử lý sự kiện khi chọn bài hát để phát
+
   const handleSongs = (item) => {
     setPlay(item);
     if (item === play) {
