@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classNames from "classnames/bind";
-import Home from "~/layout/Home/Home.js";
+import Pages from "~/pages/Pages.js";
 import { useAppContext } from "./component/context/AppContext";
 
 const cx = classNames.bind();
@@ -19,7 +19,7 @@ function App() {
         dark: themeMode,
       })}
     >
-      <Home />
+      <Pages />
     </div>
   );
 }

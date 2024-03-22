@@ -18,7 +18,7 @@ function Navbar() {
     setLike,
   } = useAppContext();
   return (
-    <div className={cx("navbar")}>
+    <nav className={cx("navbar")}>
       <div className={cx("control")}>
         <div
           onClick={() => handleBack()}
@@ -51,7 +51,7 @@ function Navbar() {
         </div>
         <ListLibrary />
       </div>
-    </div>
+    </nav>
   );
 }
 

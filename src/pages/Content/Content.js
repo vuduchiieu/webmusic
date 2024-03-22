@@ -30,6 +30,7 @@ function Content() {
     closeModal,
     isMobile,
     like,
+    allSongs,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -39,7 +40,7 @@ function Content() {
 
   return (
     <>
-      <div className={cx("content")}>
+      <main className={cx("content")}>
         <div className={cx("header")}>
           <div onClick={() => handleBack()} className={cx("back")}>
             <img src={isMobile ? icon.home : icon.back} alt="icon" />
@@ -114,9 +115,15 @@ function Content() {
                 <Songs songs={recommend} />
               </div>
             )}
+            {!user && allSongs && allSongs.length > 0 && (
+              <div className={cx("allSong")}>
+                <h2>Tất cả bài hát</h2>
+                <Songs songs={allSongs} />
+              </div>
+            )}
           </div>
         )}
-      </div>
+      </main>
       <Profile isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
