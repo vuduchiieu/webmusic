@@ -23,7 +23,6 @@ function Content() {
     again,
     treding,
     recommend,
-    allSongs,
     user,
     libraryUpload,
     handleBack,
@@ -113,12 +112,6 @@ function Content() {
               <div className={cx("recommend")}>
                 <h2>Có thể bạn sẽ thích</h2>
                 <Songs songs={recommend} />
-              </div>
-            )}
-            {!user && allSongs && allSongs.length > 0 && (
-              <div className={cx("allSong")}>
-                <h2>Tất cả bài hát</h2>
-                <Songs songs={allSongs} />
               </div>
             )}
           </div>
