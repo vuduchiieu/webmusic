@@ -9,7 +9,7 @@ import { useAppContext } from "~/component/context/AppContext";
 const cx = classNames.bind(styles);
 
 function Upload() {
-  const { user, setLogin, allSongs } = useAppContext();
+  const { user, setLogin, allSongs, setRefreshData } = useAppContext();
   const [swap, setSwap] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingGetLink, setLoadingGetLink] = useState(false);
@@ -24,6 +24,12 @@ function Upload() {
   const [srcYtb, setSrcYtb] = useState({ url: "" });
   const [linkytb, setLinkytb] = useState("");
   const titleAllSong = allSongs.map((item) => item.title);
+  let status;
+  if (user?.admin) {
+    status = "approved";
+  } else {
+    status = "pending";
+  }
 
   const handleMultipleSubmit = (e) => {
     const selectedFiles = e.target.files;
@@ -73,13 +79,14 @@ function Upload() {
         if (!user?.admin) {
           alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
         }
-        setLoading(true);
       } else {
         alert("Bài hát đã tồn tại trong danh sách");
       }
     } catch (error) {
       console.log(error);
       alert("Đăng thất bại");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -96,6 +103,7 @@ function Upload() {
       alert("Vui lòng điền đầy đủ thông tin và kiểm tra link YouTube.");
       return;
     }
+
     const newSong = {
       title: titleYtb,
       author: authorYtb,
@@ -103,6 +111,7 @@ function Upload() {
       url: { url: srcYtb.url, publicId: "" },
       isPublic: true,
       linkytb: linkytb,
+      status: status,
     };
 
     try {
@@ -113,21 +122,22 @@ function Upload() {
           newSong
         );
         setUpload(false);
+        setRefreshData(true);
         setTitleYtb("");
         setAuthorYtb("");
         setCoverYtb("");
         setSrcYtb("");
-
         if (!user?.admin) {
           alert("Đợi chúng tôi duyệt là bài của bạn sẽ được hiển thị");
         }
-        setLoading(true);
       } else {
         alert("Bài hát đã tồn tại trong danh sách");
       }
     } catch (error) {
       console.log(error);
       alert("Đăng thất bại");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,6 +160,7 @@ function Upload() {
       setLoadingGetLink(false);
     }
   };
+  console.log(status);
   return (
     <Tippy
       interactive
