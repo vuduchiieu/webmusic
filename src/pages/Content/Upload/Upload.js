@@ -160,7 +160,6 @@ function Upload() {
       setLoadingGetLink(false);
     }
   };
-  console.log(status);
   return (
     <Tippy
       interactive
