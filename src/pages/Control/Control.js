@@ -30,7 +30,7 @@ function Control() {
   } = useAppContext();
 
   const videoRef = useRef(null);
-  const userAgent = navigator.userAgent;
+  const isChorme = /chrome/i.test(navigator.userAgent);
   const [audioVideo, setAudioVideo] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
   const [isForcus, setIsForcus] = useState(false);
@@ -310,11 +310,12 @@ function Control() {
           <button
             className={cx({ active: audioVideo })}
             onClick={() => {
-              if (!userAgent.indexOf("Chrome") !== -1 && isMobile) {
+              if (!isChorme || isMobile) {
                 alert("Chỉ hỗ trợ Chrome và máy tính!");
                 return;
+              } else {
+                setAudioVideo(true);
               }
-              setAudioVideo(true);
             }}
           >
             <p>Video</p>

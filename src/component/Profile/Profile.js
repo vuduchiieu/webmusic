@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 
 import classNames from "classnames/bind";
@@ -18,9 +18,17 @@ function Profile({ isOpen, onClose }) {
   const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
   const [avatar, setAvatar] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState("");
   const [isForcus, setIsForcus] = useState(false);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (avatar) {
+      const imageURL = URL.createObjectURL(avatar);
+      setAvatarPreview(imageURL);
+    }
+  }, [avatar]);
 
   const handleUpdateUser = async (e) => {
     e.preventDefault();
@@ -53,6 +61,11 @@ function Profile({ isOpen, onClose }) {
       console.log(error);
     }
   };
+  const handleRemoveAvatar = () => {
+    if (avatarPreview) {
+      setAvatarPreview(null);
+    }
+  };
 
   return (
     <Modal
@@ -76,7 +89,7 @@ function Profile({ isOpen, onClose }) {
                 }, 5000);
               }
             }}
-            src={user?.avatar || icon.avatar}
+            src={avatarPreview || user?.avatar || icon.avatar}
             alt="avatar"
             className={isForcus ? cx("avatar-hover") : ""}
           />
@@ -98,9 +111,16 @@ function Profile({ isOpen, onClose }) {
             onChange={(e) => setAvatar(e.target.files[0])}
           />
           {isForcus && (
-            <label className={cx("changeAvt")} for="file-upload">
-              <p>Chọn ảnh</p>
-            </label>
+            <div className={cx("action")}>
+              <label className={cx("select")} for="file-upload">
+                <img src={icon.camera} alt="camera" />
+              </label>
+              {avatarPreview && (
+                <div className={cx("delete")} onClick={handleRemoveAvatar}>
+                  <img src={icon.delete} alt="delete" />
+                </div>
+              )}
+            </div>
           )}
 
           <button type="submit">

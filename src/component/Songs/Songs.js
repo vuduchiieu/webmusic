@@ -65,7 +65,16 @@ function Songs({ songs, vertical, nextSong }) {
           }
         >
           <div className={cx("title")} onClick={() => handleSongs(item)}>
-            <img src={item.image?.url} alt={item.title} />
+            <div className={cx("img")}>
+              <img src={item.image?.url} alt={item.title} />
+              {item.linkytb && (
+                <img
+                  className={cx("logo-ytb")}
+                  src={icon.youtube}
+                  alt="youtube"
+                />
+              )}
+            </div>
             {!nextSong && <h3>{item.title}</h3>}
           </div>
           <div className={cx("info")}>

@@ -32,6 +32,8 @@ const icon = {
   arrowNext: require("./arrowNext.svg").default,
   send: require("./send.svg").default,
   close: require("./close.svg").default,
+  camera: require("./camera.svg").default,
+  youtube: require("./youtube.svg").default,
 };
 
 export default icon;

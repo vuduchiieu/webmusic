@@ -115,7 +115,7 @@ function Content() {
                 <Songs songs={recommend} />
               </div>
             )}
-            {!user && allSongs && allSongs.length > 0 && (
+            {!user && allSongs && (
               <div className={cx("allSong")}>
                 <h2>Tất cả bài hát</h2>
                 <Songs songs={allSongs} />

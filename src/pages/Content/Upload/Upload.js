@@ -172,7 +172,12 @@ function Upload() {
                 className={cx("inputgetlink")}
                 onChange={(e) => setUploadYtb(e.target.value)}
               />
-              <button onClick={handleGetYtb}>
+              <button
+                style={
+                  uploadYtb ? { backgroundColor: "var(--main-color)" } : {}
+                }
+                onClick={handleGetYtb}
+              >
                 {loadingGetLink ? (
                   <img
                     className={cx("loading")}
@@ -180,7 +185,11 @@ function Upload() {
                     alt="loading"
                   />
                 ) : (
-                  <img src={icon.arrowNext} alt="next" />
+                  <img
+                    style={uploadYtb ? { filter: "var(--filter-white" } : {}}
+                    src={icon.arrowNext}
+                    alt="next"
+                  />
                 )}
               </button>
             </div>
