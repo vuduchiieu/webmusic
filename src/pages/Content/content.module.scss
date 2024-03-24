@@ -62,11 +62,13 @@
       .action {
         display: flex;
         justify-content: space-between;
-        width: 40%;
+        width: 50%;
       }
       .account {
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: 45%;
         img {
           border-radius: 50%;
           object-fit: cover;
@@ -75,7 +77,6 @@
           filter: none;
         }
       }
-
       .login {
         display: flex;
         align-items: center;

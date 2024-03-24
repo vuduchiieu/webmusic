@@ -112,7 +112,7 @@ function Profile({ isOpen, onClose }) {
           />
           {isForcus && (
             <div className={cx("action")}>
-              <label className={cx("select")} for="file-upload">
+              <label className={cx("select")} htmlFor="file-upload">
                 <img src={icon.camera} alt="camera" />
               </label>
               {avatarPreview && (
