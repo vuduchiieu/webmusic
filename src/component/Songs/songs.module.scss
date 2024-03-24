@@ -45,6 +45,7 @@
       justify-content: space-between;
       height: 20%;
       padding: 0 4%;
+
       .wrap {
         display: flex;
         flex-direction: column;
@@ -52,14 +53,14 @@
         height: 90%;
         width: 70%;
         p {
-          color: #978c88;
+          color: #a59894;
           font-size: 80%;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
         span {
-          color: #978c88;
+          color: #a59894;
           font-weight: 600;
           font-size: 1.2rem;
         }
