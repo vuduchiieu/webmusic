@@ -125,7 +125,7 @@ const Contexts = ({ children }) => {
   //     const fetchData = async () => {
   //       try {
   //         const resLike = await axios.get(
-  //           `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/like/${user?._id}`
+  //           `${process.env.REACT_APP_API}/v1/songs/like/${user?._id}`
   //         );
   //         setListLike(
   //           resLike.data
@@ -153,7 +153,7 @@ const Contexts = ({ children }) => {
       const fetchData = async () => {
         try {
           const res = await axios.get(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${idUser}`
+            `${process.env.REACT_APP_API}/v1/songs/listened/${idUser}`
           );
           const decodedToken = jwtDecode(res.data);
           setAgain(
@@ -181,7 +181,7 @@ const Contexts = ({ children }) => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          "https://be-stave-6c9234b70089.herokuapp.com/v1/songs/trending"
+          `${process.env.REACT_APP_API}/v1/songs/trending`
         );
         const decodedToken = jwtDecode(res.data);
         setTreding(
@@ -209,7 +209,7 @@ const Contexts = ({ children }) => {
       if (idUser) {
         try {
           const res = await axios.get(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/recommend/${idUser}`
+            `${process.env.REACT_APP_API}/v1/songs/recommend/${idUser}`
           );
           const decodedToken = jwtDecode(res.data);
           setRecommend(
@@ -236,9 +236,7 @@ const Contexts = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(
-          "https://be-stave-6c9234b70089.herokuapp.com/v1/songs"
-        );
+        const res = await axios.get(`${process.env.REACT_APP_API}/v1/songs`);
         const decodedToken = jwtDecode(res.data);
         setAllSongs(
           Object.values(decodedToken)
@@ -263,7 +261,7 @@ const Contexts = ({ children }) => {
       try {
         await axios
           .put(
-            `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/listened/${idUser}/${idSong}`
+            `${process.env.REACT_APP_API}/v1/songs/listened/${idUser}/${idSong}`
           )
           .then(() => {
             setRefreshData(true);
@@ -283,7 +281,7 @@ const Contexts = ({ children }) => {
     if (idSong && listenTime === 50) {
       try {
         await axios.put(
-          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/trending/${idSong}`
+          `${process.env.REACT_APP_API}/v1/songs/trending/${idSong}`
         );
         setRefreshData(true);
       } catch (error) {

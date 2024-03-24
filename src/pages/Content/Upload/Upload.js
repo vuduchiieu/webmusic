@@ -69,7 +69,7 @@ function Upload() {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
-          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/${user?._id}`,
+          `${process.env.REACT_APP_API}/v1/songs/${user?._id}`,
           formData
         );
         setUpload(false);
@@ -118,7 +118,7 @@ function Upload() {
       if (!titleAllSong.includes(title)) {
         setLoading(true);
         await axios.post(
-          `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/ytb/${user._id}`,
+          `${process.env.REACT_APP_API}/v1/songs/ytb/${user._id}`,
           newSong
         );
         setUpload(false);
@@ -146,7 +146,7 @@ function Upload() {
       setLoadingGetLink(true);
       setUploadYtb("");
       const response = await axios.get(
-        `https://be-stave-6c9234b70089.herokuapp.com/v1/songs/ytb?url=${uploadYtb}`
+        `${process.env.REACT_APP_API}/v1/songs/ytb?url=${uploadYtb}`
       );
       const { title, author, cover, url, link } = response.data;
       setTitleYtb(title);

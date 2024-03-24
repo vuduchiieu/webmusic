@@ -46,7 +46,7 @@ function Profile({ isOpen, onClose }) {
 
     try {
       const res = await axios.put(
-        `https://be-stave-6c9234b70089.herokuapp.com/v1/user/${user?._id}`,
+        `${process.env.REACT_APP_API}/v1/user/${user?._id}`,
         newUser,
         {
           headers: {
