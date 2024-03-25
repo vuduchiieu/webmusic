@@ -1,3 +1,4 @@
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./albums.module.scss";
 import { useAppContext } from "~/component/context/AppContext";
