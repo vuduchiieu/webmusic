@@ -10,10 +10,15 @@ import {
   registerFailed,
   registerStart,
   registerSuccess,
+  updateUserSuccess,
 } from "./authSlide";
+import Cookies from "js-cookie";
 
 let token = null;
-
+const storedToken = Cookies.get("token");
+if (storedToken) {
+  token = storedToken;
+}
 const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
   dispatch(loginStart());
   try {
@@ -22,6 +27,7 @@ const loginUser = async (user, dispatch, setLogin, setRefreshData) => {
       user
     );
     const decodedToken = jwtDecode(res.data);
+    Cookies.set("token", res.data, { expires: 7 });
     token = res.data;
     dispatch(loginSuccess(decodedToken));
     setLogin(false);
@@ -47,6 +53,7 @@ const registerUser = async (user, dispatch, setRefreshData) => {
 const logoutUser = async (dispatch, setAgain, setRecommend) => {
   dispatch(logoutStart());
   try {
+    Cookies.remove("token");
     dispatch(logoutSuccess());
     setAgain([]);
     setRecommend([]);
@@ -55,4 +62,22 @@ const logoutUser = async (dispatch, setAgain, setRecommend) => {
   }
 };
 
-export { loginUser, registerUser, logoutUser, token };
+const updateUser = async (newUser, user, dispatch, closeModal) => {
+  try {
+    const res = await axios.put(
+      `${process.env.REACT_APP_API}/v1/user/${user?._id}`,
+      newUser,
+      {
+        headers: {
+          token: `Bearer ${token}`,
+        },
+      }
+    );
+    const decodedToken = jwtDecode(res.data);
+    dispatch(updateUserSuccess(decodedToken));
+    closeModal();
+  } catch (error) {
+    console.log(error);
+  }
+};
+export { loginUser, registerUser, logoutUser, updateUser };

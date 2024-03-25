@@ -45,7 +45,6 @@
       justify-content: space-between;
       height: 20%;
       padding: 0 4%;
-
       .wrap {
         display: flex;
         flex-direction: column;
@@ -78,17 +77,18 @@
       }
     }
   }
-
   .active {
-    .title {
-      &:hover {
-        opacity: 1;
-      }
-    }
-    h3,
-    p,
-    span {
+    h3 {
       color: var(--main-color);
+    }
+
+    .info {
+      .wrap {
+        p,
+        span {
+          color: var(--main-color);
+        }
+      }
     }
   }
 }
@@ -141,6 +141,7 @@
     }
   }
 }
+
 @media only screen and (max-width: 767px) {
   .songs {
     .song {

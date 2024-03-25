@@ -6,10 +6,7 @@ import styles from "./profile.module.scss";
 import icon from "~/assets/icon";
 import { useAppContext } from "../context/AppContext";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import { loginSuccess } from "~/redux/authSlide";
-import { jwtDecode } from "jwt-decode";
-import { token } from "~/redux/apiRequest";
+import { updateUser } from "~/redux/apiRequest";
 
 const cx = classNames.bind(styles);
 
@@ -43,23 +40,7 @@ function Profile({ isOpen, onClose }) {
     if (avatar) {
       newUser.append("file", avatar);
     }
-
-    try {
-      const res = await axios.put(
-        `${process.env.REACT_APP_API}/v1/user/${user?._id}`,
-        newUser,
-        {
-          headers: {
-            token: `Bearer ${token}`,
-          },
-        }
-      );
-      const decodedToken = jwtDecode(res.data);
-      dispatch(loginSuccess(decodedToken));
-      closeModal();
-    } catch (error) {
-      console.log(error);
-    }
+    await updateUser(newUser, user, dispatch, closeModal);
   };
   const handleRemoveAvatar = () => {
     if (avatarPreview) {

@@ -55,6 +55,10 @@ const authSlice = createSlice({
       state.login.isFetching = false;
       state.login.error = true;
     },
+    //updateUser
+    updateUserSuccess: (state, action) => {
+      state.login.currentUser = action.payload;
+    },
   },
 });
 
@@ -68,6 +72,7 @@ export const {
   logoutStart,
   logoutSuccess,
   logoutFailed,
+  updateUserSuccess,
 } = authSlice.actions;
 
 export default authSlice.reducer;
