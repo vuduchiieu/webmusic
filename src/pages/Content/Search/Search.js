@@ -15,13 +15,19 @@ function Search({ searchValue }) {
       setResult(allSongs);
       return;
     }
-
     const filterResult = [...allSongs].filter(
       (item) =>
-        item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.author.toLowerCase().includes(searchValue.toLowerCase())
+        item.title
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .includes(searchValue.toLowerCase()) ||
+        item.author
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .includes(searchValue.toLowerCase())
     );
-
     setResult(filterResult);
   }, [searchValue, allSongs]);
 

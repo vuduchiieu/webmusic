@@ -27,6 +27,7 @@ function Control() {
     isMobile,
     detail,
     setDetail,
+    album,
   } = useAppContext();
 
   const videoRef = useRef(null);
@@ -134,6 +135,7 @@ function Control() {
     again,
     listUpload,
     listLike,
+    album,
   ].find((array) => array && array.some((song) => song.source === play.source));
   const indexSong = currentArray?.map((item) => item._id).indexOf(play._id);
 

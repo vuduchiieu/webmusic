@@ -11,6 +11,8 @@ import Upload from "./Upload/Upload";
 import Library from "../Navbar/Library/Library";
 import Profile from "~/component/Profile/Profile";
 import Like from "../Navbar/Library/Like";
+import Albums from "./Albums/Albums";
+import Album from "~/component/Album/Album";
 
 const cx = classNames.bind(styles);
 
@@ -31,6 +33,7 @@ function Content() {
     isMobile,
     like,
     allSongs,
+    openAlbum,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -95,8 +98,16 @@ function Content() {
           <Library />
         ) : like ? (
           <Like />
+        ) : openAlbum ? (
+          <Album />
         ) : (
           <div className={cx("main")}>
+            {!user && allSongs && (
+              <div className={cx("albums")}>
+                <h2>Albums</h2>
+                <Albums />
+              </div>
+            )}
             {again && again.length > 0 && (
               <div className={cx("again")}>
                 <h2>Nghe lại</h2>
@@ -113,12 +124,6 @@ function Content() {
               <div className={cx("recommend")}>
                 <h2>Có thể bạn sẽ thích</h2>
                 <Songs songs={recommend} />
-              </div>
-            )}
-            {!user && allSongs && (
-              <div className={cx("allSong")}>
-                <h2>Tất cả bài hát</h2>
-                <Songs songs={allSongs} />
               </div>
             )}
           </div>

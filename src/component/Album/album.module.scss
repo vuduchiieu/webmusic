@@ -1,0 +1,13 @@
+.album {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  height: 100%;
+  overflow: scroll;
+}
+
+@media only screen and (max-width: 767px) {
+  .album {
+    width: 100vw;
+  }
+}

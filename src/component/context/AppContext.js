@@ -23,6 +23,11 @@ const Contexts = ({ children }) => {
   // State cho việc tìm kiếm
   const [search, setSearch] = useState(false);
 
+  // State cho danh sách nhạc trong album
+
+  const [album, setAlbum] = useState([]);
+  const [openAlbum, setOpenAlbum] = useState(false);
+
   // State cho danh sách nhạc nghe lại
   const [again, setAgain] = useState([]);
 
@@ -118,34 +123,6 @@ const Contexts = ({ children }) => {
   const [like, setLike] = useState(false);
 
   const [libraryUpload, setLibraryUpload] = useState(false);
-
-  //Render danh sách likes
-  // useEffect(() => {
-  //   if (user != null) {
-  //     const fetchData = async () => {
-  //       try {
-  //         const resLike = await axios.get(
-  //           `${process.env.REACT_APP_API}/v1/songs/like/${user?._id}`
-  //         );
-  //         setListLike(
-  //           resLike.data
-  //             .map((song) => ({
-  //               ...song,
-  //               source: "likes",
-  //             }))
-  //             .filter((song) => song["status"] === "approved")
-  //         );
-  //       } catch (error) {
-  //         console.error("Lỗi khi lấy dữ liệu:", error);
-  //       } finally {
-  //         setRefreshData(false);
-  //       }
-  //     };
-  //     if (refreshData) {
-  //       fetchData();
-  //     }
-  //   }
-  // }, [refreshData, user]);
 
   // Render danh sách nghe lại
   useEffect(() => {
@@ -297,6 +274,7 @@ const Contexts = ({ children }) => {
   }, [listenTime, idSong, handleUpdateTrending]);
 
   const handleBack = () => {
+    setOpenAlbum(false);
     setSearch(false);
     setLibraryUpload(false);
     setLike(false);
@@ -314,6 +292,16 @@ const Contexts = ({ children }) => {
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [detail, setDetail] = useState(false);
+  const handleOpenAlb = (author) => {
+    setOpenAlbum(!openAlbum);
+    setAlbum(
+      [...allSongs]
+        .filter((item) =>
+          item.author.toLowerCase().includes(author.toLowerCase())
+        )
+        .map((song) => ({ ...song, source: "albums" }))
+    );
+  };
   return (
     <AppContext.Provider
       value={{
@@ -356,6 +344,11 @@ const Contexts = ({ children }) => {
         isMobile,
         detail,
         setDetail,
+        handleOpenAlb,
+        album,
+        setAlbum,
+        openAlbum,
+        setOpenAlbum,
       }}
     >
       {children}
