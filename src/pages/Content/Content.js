@@ -113,10 +113,7 @@ function Content() {
         ) : openAlbum ? (
           <Album />
         ) : (
-          <div
-            className={cx("main")}
-            style={play.length === 0 ? {} : { marginBottom: "10vh" }}
-          >
+          <div className={cx("main")}>
             {treding && treding.length > 0 && (
               <div className={cx("treding")}>
                 <div className={cx("songs")}>
