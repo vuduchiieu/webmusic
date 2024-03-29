@@ -24,3 +24,12 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .albums-module {
+    .album {
+      width: 23vw;
+      height: 20vh;
+    }
+  }
+}

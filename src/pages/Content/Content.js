@@ -34,6 +34,7 @@ function Content() {
     like,
     allSongs,
     openAlbum,
+    play,
     handleSongs,
   } = useAppContext();
 
@@ -126,7 +127,12 @@ function Content() {
                     <h2>Nghe nhiều nhất</h2>
                     <div className={cx("wrap")}>
                       {treding.slice(1).map((item, i) => (
-                        <div key={i} className={cx("song")}>
+                        <div
+                          key={i}
+                          className={cx("song", {
+                            active: play._id === item._id,
+                          })}
+                        >
                           <div
                             onClick={() => handleSongs(item)}
                             className={cx("img")}

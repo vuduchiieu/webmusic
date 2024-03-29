@@ -132,7 +132,7 @@
               display: flex;
               height: 20%;
               background-color: var(--songs-color);
-              margin: 0 0 20px 0;
+              margin-bottom: 3%;
               border-radius: 20px;
               overflow: hidden;
               &:hover {
@@ -187,6 +187,17 @@
                 }
               }
             }
+            .active {
+              .title {
+                h3 {
+                  color: var(--main-color);
+                }
+                p,
+                span {
+                  color: var(--main-color);
+                }
+              }
+            }
           }
         }
       }
@@ -231,6 +242,34 @@
         }
         .login {
           width: 35%;
+        }
+      }
+    }
+    .main {
+      .treding {
+        height: 34vh;
+        .songs {
+          display: flex;
+          height: 90%;
+          .top1 {
+            width: 50%;
+            img {
+              border-radius: 10px;
+            }
+          }
+          .topchart {
+            width: 50%;
+            h2 {
+              height: 10%;
+              font-size: 100%;
+            }
+            .wrap {
+              height: 85%;
+              .song {
+                height: 40%;
+              }
+            }
+          }
         }
       }
     }
