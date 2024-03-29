@@ -34,11 +34,22 @@ function Content() {
     like,
     allSongs,
     openAlbum,
+    handleSongs,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
   const handleTheme = () => {
     setThemeMode(!themeMode);
+  };
+
+  const formatViews = (viewCount) => {
+    if (viewCount < 1000) {
+      return viewCount.toString();
+    } else if (viewCount < 1000000) {
+      return (viewCount / 1000).toFixed(1) + " N";
+    } else {
+      return (viewCount / 1000000).toFixed(1) + " Tr";
+    }
   };
 
   return (
@@ -102,28 +113,64 @@ function Content() {
           <Album />
         ) : (
           <div className={cx("main")}>
-            {!user && allSongs && (
-              <div className={cx("albums")}>
-                <h2>Albums</h2>
-                <Albums />
+            {treding && treding.length > 0 && (
+              <div className={cx("treding")}>
+                <div className={cx("songs")}>
+                  <div
+                    className={cx("top1")}
+                    onClick={() => handleSongs(treding[0])}
+                  >
+                    <img src={treding[0].image.url} alt="" />
+                  </div>
+                  <div className={cx("topchart")}>
+                    <h2>Nghe nhiều nhất</h2>
+                    <div className={cx("wrap")}>
+                      {treding.slice(1).map((item, i) => (
+                        <div
+                          key={i}
+                          className={cx("song")}
+                          onClick={() => handleSongs(item)}
+                        >
+                          <div className={cx("img")}>
+                            <img src={item.image?.url} alt={item.title} />
+                            {item.linkytb && (
+                              <img
+                                className={cx("logo-ytb")}
+                                src={icon.youtube}
+                                alt="youtube"
+                              />
+                            )}
+                          </div>
+                          <div className={cx("title")}>
+                            <h3>{item.title}</h3>
+                            <p>{item.author}</p>
+                            <span>{formatViews(item.view)} lượt nghe</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
+
             {again && again.length > 0 && (
               <div className={cx("again")}>
                 <h2>Nghe lại</h2>
                 <Songs songs={again} />
               </div>
             )}
-            {treding && treding.length > 0 && (
-              <div className={cx("treding")}>
-                <h2>Thịnh hành</h2>
-                <Songs songs={treding} />
-              </div>
-            )}
+
             {recommend && recommend.length > 0 && (
               <div className={cx("recommend")}>
                 <h2>Có thể bạn sẽ thích</h2>
                 <Songs songs={recommend} />
+              </div>
+            )}
+            {allSongs && (
+              <div className={cx("albums")}>
+                <h2>Nghệ sĩ</h2>
+                <Albums />
               </div>
             )}
           </div>

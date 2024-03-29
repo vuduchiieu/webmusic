@@ -1,10 +1,12 @@
 .control {
   display: flex;
-  background-color: var(--main-background);
+  background-color: var(--control-color);
   padding: 0.5vh 1vw;
   width: 100vw;
   height: 8vh;
   transition: 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
   .info {
     display: flex;
     width: 25%;
@@ -150,7 +152,8 @@
 .detail {
   position: relative;
   height: 100vh;
-  background-color: var(--secondary-background);
+  background-color: var(--control-color);
+  backdrop-filter: blur(15px);
   flex-direction: column;
   padding: 5vh 30vw;
   .next-song {
@@ -308,7 +311,6 @@
   }
   .detail {
     height: 100vh;
-    background-color: var(--secondary-background);
     flex-direction: column;
     padding: 0;
     .header {

@@ -7,7 +7,7 @@ import { useWheelScroll } from "../useWheelScroll/useWheelScroll";
 
 const cx = classNames.bind(styles);
 
-function Songs({ songs, vertical, nextSong }) {
+function Songs({ songs, vertical, nextSong, isTreding }) {
   const { handleSongs, play, isMobile, setLogin, user } = useAppContext();
   const elRef = useWheelScroll();
   const handleLikeToggle = async () => {
@@ -32,7 +32,7 @@ function Songs({ songs, vertical, nextSong }) {
   return (
     <div
       ref={vertical ? null : elRef}
-      className={cx("songs", { nextSong: nextSong })}
+      className={cx("songs", { nextSong: nextSong }, { isTreding: isTreding })}
       style={
         vertical && {
           flexWrap: "wrap",
