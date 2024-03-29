@@ -126,12 +126,11 @@ function Content() {
                     <h2>Nghe nhiều nhất</h2>
                     <div className={cx("wrap")}>
                       {treding.slice(1).map((item, i) => (
-                        <div
-                          key={i}
-                          className={cx("song")}
-                          onClick={() => handleSongs(item)}
-                        >
-                          <div className={cx("img")}>
+                        <div key={i} className={cx("song")}>
+                          <div
+                            onClick={() => handleSongs(item)}
+                            className={cx("img")}
+                          >
                             <img src={item.image?.url} alt={item.title} />
                             {item.linkytb && (
                               <img
@@ -141,11 +140,20 @@ function Content() {
                               />
                             )}
                           </div>
-                          <div className={cx("title")}>
+                          <div
+                            className={cx("title")}
+                            onClick={() => handleSongs(item)}
+                          >
                             <h3>{item.title}</h3>
                             <p>{item.author}</p>
                             <span>{formatViews(item.view)} lượt nghe</span>
                           </div>
+                          <button>
+                            <img
+                              src={false ? icon.heartActive : icon.heart}
+                              alt="heart"
+                            />
+                          </button>
                         </div>
                       ))}
                     </div>

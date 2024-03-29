@@ -117,6 +117,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 40px;
+            cursor: pointer;
           }
         }
         .topchart {
@@ -134,6 +135,9 @@
               margin: 0 0 20px 0;
               border-radius: 20px;
               overflow: hidden;
+              &:hover {
+                cursor: pointer;
+              }
               .img {
                 width: 25%;
                 height: 100%;
@@ -153,7 +157,7 @@
                 flex-direction: column;
                 justify-content: center;
                 margin-left: 2%;
-                width: 70%;
+                width: 60%;
                 h3 {
                   height: 30%;
                   font-size: 100%;
@@ -173,6 +177,13 @@
                   color: #a59894;
                   font-weight: 600;
                   font-size: 1.2rem;
+                }
+              }
+              button {
+                width: 7%;
+                background-color: transparent;
+                img {
+                  width: 100%;
                 }
               }
             }

@@ -37,27 +37,27 @@ function Albums() {
     },
     {
       author: "Quân A.P",
-      cover: image.min,
+      cover: image.quanap,
     },
     {
       author: "G-DRAGON",
-      cover: image.min,
+      cover: image.gdragon,
     },
     {
       author: "BIGBANG",
-      cover: image.min,
+      cover: image.bigbang,
     },
     {
       author: "Bảo Anh",
-      cover: image.min,
+      cover: image.baoanh,
     },
     {
       author: "ERIK",
-      cover: image.min,
+      cover: image.erik,
     },
     {
       author: "Bích Phương",
-      cover: image.min,
+      cover: image.bichphuong,
     },
   ];
   return (
