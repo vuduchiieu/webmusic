@@ -25,6 +25,8 @@ function Content() {
     again,
     treding,
     recommend,
+    weLike,
+    easySleep,
     user,
     libraryUpload,
     handleBack,
@@ -32,7 +34,7 @@ function Content() {
     closeModal,
     isMobile,
     like,
-    allSongs,
+    vibrant,
     openAlbum,
     play,
     handleSongs,
@@ -174,19 +176,28 @@ function Content() {
                 <Songs songs={again} />
               </div>
             )}
-
             {recommend && recommend.length > 0 && (
               <div className={cx("recommend")}>
                 <h2>Có thể bạn sẽ thích</h2>
                 <Songs songs={recommend} />
               </div>
             )}
-            {allSongs && (
-              <div className={cx("albums")}>
-                <h2>Nghệ sĩ</h2>
-                <Albums />
-              </div>
-            )}
+            <div className={cx("albums")}>
+              <h2>Nghệ sĩ</h2>
+              <Albums />
+            </div>
+            <div className={cx("albumMore")}>
+              <h2>Chúng tôi thích</h2>
+              <Songs songs={weLike} />
+            </div>
+            <div className={cx("albumMore")}>
+              <h2>Dễ ngủ</h2>
+              <Songs songs={easySleep} />
+            </div>
+            <div className={cx("albumMore")}>
+              <h2>Sôi động</h2>
+              <Songs songs={vibrant} />
+            </div>
           </div>
         )}
       </main>

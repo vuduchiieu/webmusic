@@ -37,6 +37,15 @@ const Contexts = ({ children }) => {
   // State cho danh sách nhạc đề xuất
   const [recommend, setRecommend] = useState([]);
 
+  // State cho danh sách chúng tôi thích
+  const [weLike, setWeLike] = useState([]);
+
+  // State cho danh sách dễ ngủ
+  const [easySleep, setEasySleep] = useState([]);
+
+  // State dành cho danh sách sôi động
+  const [vibrant, setVibrant] = useState([]);
+
   // State cho tất cả các bài hát
   const [allSongs, setAllSongs] = useState([]);
 
@@ -221,6 +230,58 @@ const Contexts = ({ children }) => {
             .map((song) => ({ ...song, source: "allSong" }))
             .filter((song) => song["status"] === "approved")
         );
+        setWeLike(
+          Object.values(decodedToken)
+            .map((song) => ({ ...song, source: "welike" }))
+            .filter(
+              (song) =>
+                song.title === "Cao Ốc 20" ||
+                song.title === "Diễn viên tồi" ||
+                song.title === "Ex’s Hate Me (Part 2)" ||
+                song.title === "KHÔNG SAO MÀ EM ĐÂY RỒI" ||
+                song.title === "Luôn yêu đời (remix)" ||
+                song.title === "Rồi Em Sẽ Gặp Một Chàng Trai Khác" ||
+                song.title === "Xin Em" ||
+                song.title === "ĐỪNG YÊU NỮA, EM MỆT RỒI" ||
+                song.title === "ANH ƠI Ở LẠI" ||
+                song.title === "Lặng Yên"
+            )
+        );
+        setEasySleep(
+          Object.values(decodedToken)
+            .map((song) => ({ ...song, source: "easySleep" }))
+            .filter(
+              (song) =>
+                song.title === "‘3107’ full album" ||
+                song.title === "Anh Biết Em Cũng Biết" ||
+                song.title === "Vì Anh Đâu Có Biết" ||
+                song.title === "072019" ||
+                song.title === "CHẠM ĐÁY NỖI ĐAU" ||
+                song.title === "Chuyện Đôi Ta" ||
+                song.title === "Duyên Do Trời, Phận Tại Ta" ||
+                song.title === "Khi mà" ||
+                song.title === "LỜI XIN LỖI VỤNG VỀ" ||
+                song.title === "Nàng Thơ"
+            )
+        );
+        setVibrant(
+          Object.values(decodedToken)
+            .map((song) => ({ ...song, source: "vibrant" }))
+            .filter(
+              (song) =>
+                song.title === "CROOKED" ||
+                song.title === "CRAYON(크레용)" ||
+                song.title ===
+                  "Đôi mắt, Chạy, Tiền nhiều để làm gì, The right journey" ||
+                song.title === "Gene" ||
+                song.title === "Một cú lừa" ||
+                song.title === "Một triệu like" ||
+                song.title === "Ôi Bạn Ơi" ||
+                song.title === "SAY EM" ||
+                song.title === "Simple Cypher, ok" ||
+                song.title === "Simple Cypher, okeokeoke"
+            )
+        );
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       } finally {
@@ -326,6 +387,9 @@ const Contexts = ({ children }) => {
         setRecommend,
         allSongs,
         setAllSongs,
+        easySleep,
+        vibrant,
+        weLike,
         refreshData,
         setRefreshData,
         user,

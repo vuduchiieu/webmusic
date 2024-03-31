@@ -64,8 +64,8 @@
       }
       .play {
         img {
-          width: 32px;
-          height: 32px;
+          height: 85%;
+          width: 38px;
           filter: var(--filter-white);
         }
       }
@@ -160,7 +160,7 @@
   .next-song {
     position: absolute;
     right: 5%;
-    width: 20%;
+    width: 23%;
     height: 75%;
     overflow-x: scroll;
   }

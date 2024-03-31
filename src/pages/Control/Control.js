@@ -28,6 +28,9 @@ function Control() {
     detail,
     setDetail,
     album,
+    weLike,
+    easySleep,
+    vibrant,
   } = useAppContext();
 
   const videoRef = useRef(null);
@@ -136,6 +139,9 @@ function Control() {
     listUpload,
     listLike,
     album,
+    weLike,
+    easySleep,
+    vibrant,
   ].find((array) => array && array.some((song) => song.source === play.source));
   const indexSong = currentArray?.map((item) => item._id).indexOf(play._id);
 
