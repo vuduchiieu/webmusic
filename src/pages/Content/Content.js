@@ -38,6 +38,7 @@ function Content() {
     openAlbum,
     play,
     handleSongs,
+    allSongs,
   } = useAppContext();
 
   const [searchValue, setSearchValue] = useState("");
@@ -182,22 +183,30 @@ function Content() {
                 <Songs songs={recommend} />
               </div>
             )}
-            <div className={cx("albums")}>
-              <h2>Nghệ sĩ</h2>
-              <Albums />
-            </div>
-            <div className={cx("albumMore")}>
-              <h2>Chúng tôi thích</h2>
-              <Songs songs={weLike} />
-            </div>
-            <div className={cx("albumMore")}>
-              <h2>Dễ ngủ</h2>
-              <Songs songs={easySleep} />
-            </div>
-            <div className={cx("albumMore")}>
-              <h2>Sôi động</h2>
-              <Songs songs={vibrant} />
-            </div>
+            {allSongs && allSongs.length > 0 && (
+              <div className={cx("albums")}>
+                <h2>Nghệ sĩ</h2>
+                <Albums />
+              </div>
+            )}
+            {weLike && weLike.length > 0 && (
+              <div className={cx("albumMore")}>
+                <h2>Chúng tôi thích</h2>
+                <Songs songs={weLike} />
+              </div>
+            )}
+            {easySleep && easySleep.length > 0 && (
+              <div className={cx("albumMore")}>
+                <h2>Dễ ngủ</h2>
+                <Songs songs={easySleep} />
+              </div>
+            )}
+            {vibrant && vibrant.length > 0 && (
+              <div className={cx("albumMore")}>
+                <h2>Sôi động</h2>
+                <Songs songs={vibrant} />
+              </div>
+            )}
           </div>
         )}
       </main>

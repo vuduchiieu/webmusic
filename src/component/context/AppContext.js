@@ -274,11 +274,11 @@ const Contexts = ({ children }) => {
                 song.title ===
                   "Đôi mắt, Chạy, Tiền nhiều để làm gì, The right journey" ||
                 song.title === "Gene" ||
-                song.title === "Một cú lừa" ||
-                song.title === "Một triệu like" ||
+                song.title === "THE BOX ft NÀNG" ||
+                song.title === "Hai triệu năm" ||
                 song.title === "Ôi Bạn Ơi" ||
                 song.title === "SAY EM" ||
-                song.title === "Simple Cypher, ok" ||
+                song.title === "BANG BANG BANG" ||
                 song.title === "Simple Cypher, okeokeoke"
             )
         );
