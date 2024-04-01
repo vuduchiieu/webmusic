@@ -11,7 +11,7 @@ function App() {
     document.title =
       play.title && play.author
         ? `${play.title} - ${play.author}`
-        : "Stave - Web để nghe nhạc";
+        : "Stave - web để nghe nhạc";
   }, [play]);
   return (
     <div
