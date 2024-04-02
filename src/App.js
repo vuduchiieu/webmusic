@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classNames from "classnames/bind";
-import Pages from "~/pages/Pages.js";
+import Pages from "~/pages/Pages.jsx";
 import { useAppContext } from "./component/context/AppContext";
 
 const cx = classNames.bind();
