@@ -30,7 +30,6 @@
     "redux-persist": "^6.0.0",
     "sass": "^1.70.0",
     "scss": "^0.2.4",
-    "typescript": "^5.4.3",
     "url-loader": "^4.1.1",
     "web-vitals": "^2.1.0"
   },

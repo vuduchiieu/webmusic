@@ -3,8 +3,8 @@ import Content from "./Content/Content";
 import Navbar from "./Navbar/Navbar";
 import classNames from "classnames/bind";
 import styles from "./pages.module.scss";
-import Control from "./Control/Control";
 import { useAppContext } from "~/component/context/AppContext";
+import Control from "./Control/Control";
 
 const cx = classNames.bind(styles);
 
