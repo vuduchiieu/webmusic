@@ -287,7 +287,7 @@ function Control() {
       className={cx("control", { detail: detail })}
     >
       {detail && !isMobile && (
-        <div className={cx("next-song")}>
+        <div style={audioVideo ? { right: 0 } : {}} className={cx("next-song")}>
           <Songs songs={nextSongArr} nextSong={nextSong} />
         </div>
       )}
@@ -341,7 +341,10 @@ function Control() {
               preload="auto"
               ref={videoRef}
             >
-              <source src={play.song?.url} type="video/mp4"></source>
+              <source
+                src={play.song?.video || play.song?.url}
+                type="video/mp4"
+              ></source>
             </video>
           ) : (
             <img src={play.image?.url} alt={play.title} />
@@ -357,7 +360,10 @@ function Control() {
           </div>
         )}
       </div>
-      <div className={cx("control-audio")}>
+      <div
+        style={audioVideo && detail ? { marginTop: "60%" } : {}}
+        className={cx("control-audio")}
+      >
         <div className={cx("control-bar")}>
           <button onClick={handleRandom}>
             <img
