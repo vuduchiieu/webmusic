@@ -288,7 +288,7 @@ function Control() {
     >
       {detail && !isMobile && (
         <div
-          style={play.song.video && audioVideo && detail ? { right: 0 } : {}}
+          style={play.song?.video && audioVideo && detail ? { right: 0 } : {}}
           className={cx("next-song")}
         >
           <Songs songs={nextSongArr} nextSong={nextSong} />
@@ -362,7 +362,7 @@ function Control() {
       </div>
       <div
         style={
-          play.song.video && audioVideo && detail ? { marginTop: "60%" } : {}
+          play.song?.video && audioVideo && detail ? { marginTop: "60%" } : {}
         }
         className={cx("control-audio")}
       >
