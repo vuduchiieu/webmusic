@@ -15,7 +15,7 @@ const AppContext = createContext();
 
 const Contexts = ({ children }) => {
   // Lấy thông tin người dùng từ Redux
-  const user = useSelector((state) => state.auth.login.currentUser);
+  const user = useSelector((state) => state.auth.login?.currentUser);
 
   // Ref cho audio
   const audioRef = useRef(null);

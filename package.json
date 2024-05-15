@@ -34,7 +34,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "env react-app-rewired start",
+    "start": "react-app-rewired start",
     "build": "webpack --mode production",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"

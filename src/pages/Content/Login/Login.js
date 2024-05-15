@@ -12,9 +12,9 @@ const cx = classNames.bind(styles);
 function Login() {
   const { login, setLogin, setRefreshData } = useAppContext();
 
-  const loading = useSelector((state) => state.auth.login.isFetching);
+  const loading = useSelector((state) => state.auth.login?.isFetching);
   const loadingRegister = useSelector(
-    (state) => state.auth.register.isFetching
+    (state) => state.auth.register?.isFetching
   );
 
   const [signUp, setSignUp] = useState(false);
